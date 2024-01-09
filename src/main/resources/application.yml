@@ -1,7 +1,18 @@
 spring:
-  profiles:
-    active: local
-  #front 설정
+  config:
+    use-legacy-processing: true
+    activate:
+      on-profile: 'local'
+
+#spring:
+#  profiles:
+#    active: local
+
+
+
+
+
+#front 설정
   thymeleaf:
     servlet:
       content-type: text/html
@@ -17,6 +28,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
 #        use_sql_comments: true
 
 
