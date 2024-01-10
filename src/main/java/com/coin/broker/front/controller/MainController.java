@@ -14,6 +14,16 @@ public class MainController {
     public ModelAndView index(){
 
 //        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("index");
+        log.info("main <<");
+
+        return mv;
+    }
+
+    @GetMapping("/error")
+    public ModelAndView error(){
+
+//        ModelAndView mv = new ModelAndView("index");
         ModelAndView mv = new ModelAndView("error");
         log.info("main <<");
 
