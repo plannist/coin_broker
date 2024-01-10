@@ -11206,3 +11206,16 @@ header.masthead .masthead-heading {
     margin-bottom: 4rem;
   }
 }
+
+/* 사용자 추가 CSS */
+.wb {
+  word-break: auto-phrase;
+}
+
+.krFont {
+  font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+.lineH {
+  line-height: normal !important;
+}

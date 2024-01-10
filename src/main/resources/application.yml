@@ -6,6 +6,12 @@ spring:
 
 
 #front 설정
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: false
+
   thymeleaf:
     servlet:
       content-type: text/html
