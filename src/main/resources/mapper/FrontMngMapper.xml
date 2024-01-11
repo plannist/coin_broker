@@ -4,7 +4,7 @@
 
 	<select id="findFrontMngInfo" resultType="com.coin.broker.front.model.FrontMng">
 		SELECT
-			idx, title, contents, reg_dttm
+			idx, title, contents, mtn_yn, reg_dttm
 		FROM
 			front_mng
 		WHERE

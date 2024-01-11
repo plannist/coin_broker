@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coin.broker.front.mapper.FrontMngMapper">
+
+	<update id="insert" >
+		insert into trans_req_mas (
+		   	reqno,
+			coin_type,
+		    charge_cd,
+			req_amt,
+			charge_amt,
+			tot_req_amt,
+			send_coin,
+			to_wallet_addr,
+			dstnt_tag,
+			depos_nm,
+			phone_no,
+			rsn_ctnt,
+			device_type,
+			referer_url,
+			mod_dttm,
+			prcs_cd,
+		    reg_dttm
+		)
+		values (
+			#{reqno},
+			#{coinType      },
+			#{chargeCd      },
+			#{reqAmt       },
+			#{chargeAmt     },
+			#{totReqAmt     },
+			#{sendCoin      },
+			#{toWalletAddr  },
+			#{dstntTag      },
+			#{deposNm       },
+			#{phoneNo       },
+			#{rsnCtnt       },
+			#{deviceType    },
+			#{refererUrl    },
+			#{modDttm       },
+			#{prcsCd        },
+			now()
+		)
+	</update>
+
+</mapper>
