@@ -32,12 +32,12 @@
 <!--                        <h1 class="display-1 lh-1 mb-3">-->
 
 <!--                        </h1>-->
-                        <p class="lead fw-normal text-muted mb-5">
+                        <p class="lead fw-normal text-muted mb-5 krFont">
                             리플(XRP), 이더리움(ETH), 비트코인(BTC) <br>
                             암호화폐 구매 및 전송 소액 전문 대행 업체
                         </p>
 
-                        <p class="xl-small">
+                        <p class="l-small krFont">
                             암호화폐 거래소 이용이 어렵거나, 지갑 이용이 어려워
                             코인으로 사이트 결제를 하지 못하는 분들께
                             대행을 통하여 도움을 드립니다.
@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-outline-dark py-3 px-4 rounded-pill" data-bs-toggle="modal" data-bs-target="#feedbackModal">구매대행 신청하기</button>
+                <button class="btn btn-outline-dark py-3 px-4 rounded-pill krFont" data-bs-toggle="modal" data-bs-target="#feedbackModal">구매대행 신청하기</button>
 
             </div>
         </div>
@@ -58,9 +58,10 @@
 
     <!-- Quote/testimonial aside-->
     <aside class="text-center bg-gradient-primary-to-secondary">
-        <div class="container px-5">
-            <div class="row gx-5 justify-content-center">
-                <div class="col-xl-8">
+<!--        <div class="container px-5">-->
+<!--            <div class="row gx-5 justify-content-start">-->
+<!--                <div class="col-xl-8">-->
+                <div class="container">
 <!--                    <a class="btn btn-outline-dark py-3 px-4 rounded-pill" href="https://startbootstrap.com/theme/new-age" target="_blank">구매대행 신청하기</a>-->
 <!--                    <div class="h2 fs-1 text-white mb-4">-->
 <!--                        리플(XRP), 이더리움(ETH), 비트코인(BTC) <br>-->
@@ -73,13 +74,64 @@
 <!--                    </p>-->
 
 <!--                    <img src="/image/tnw-logo.svg" alt="..." style="height: 3rem" />-->
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <img src="/image/ic/bitcoin_ic.png" style="height:70px;"></img>
+                            <h4 class="my-3">Bit-Coin</h4>
+                            <p class="text-muted text-white-50 krFont"> 6500만원</p>
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <img src="/image/ic/ethereum_ic.png" style="width:70px;">
+                            <h4 class="my-3">Ethereum</h4>
+                            <p class="text-muted text-white-50 krFont"> 50만원</p>
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <img src="/image/ic/ripple_ic.png" style="width:70px;">
+                            <h4 class="my-3">Ripple</h4>
+                            <p class="text-muted text-white-50 krFont"> 100만원</p>
+                        </div>
+
+                    </div>
+
+
+
+
                 </div>
-            </div>
-        </div>
+<!--            </div>-->
+<!--        </div>-->
     </aside>
 
     <!-- Test Table aside-->
     <aside class="text-center">
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Launch static backdrop modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--<table class="table table-striped">
         <table class="table table-primary">
         <table class="table table-secondary">
@@ -233,12 +285,13 @@
     </section>
     <!-- Footer-->
     <footer th:insert="~{layout/footer :: footer}"></footer>
+
     <!-- Feedback Modal-->
-    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal fade" id="feedbackModal" tabindex="-1"  aria-labelledby="feedbackModalLabel" aria-hidden="true" role="dialog"  data-bs-backdrop='static' data-bs-keyboard="false" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-gradient-primary-to-secondary p-4">
-                    <h5 class="modal-title font-alt text-white" id="feedbackModalLabel">Send feedback</h5>
+                    <h5 class="modal-title font-alt text-white krFont" id="feedbackModalLabel">구매 및 전송대행 신청하기</h5>
                     <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body border-0 p-4">
@@ -299,6 +352,11 @@
             </div>
         </div>
     </div>
+
+
+
+
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
@@ -307,6 +365,13 @@
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<!--    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>-->
+
+        <script type="text/javascript">
+            $('#feedbackModal').on('show.bs.modal', function(){
+                console.log("123");
+            })
+
+        </script>
     </body>
 </html>
