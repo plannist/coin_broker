@@ -5,7 +5,7 @@
 <springProperty scope="context" name="LOG_LEVEL" source="logging.level.root"/>
  <!-- log file path --> 
  <springProfile name="local">
- 	<property name="LOG_PATH" value="C:/login/log/"/>
+ 	<property name="LOG_PATH" value="C:/login/log"/>
  </springProfile>
  <springProfile name="dev">
  	<property name="LOG_PATH" value="/deploy/account/log/dev"/>

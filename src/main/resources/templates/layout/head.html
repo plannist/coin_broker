@@ -55,12 +55,16 @@
         /*사용 기기 체크*/
         var uAgent = navigator.userAgent.toLowerCase();
         var isMobile = false;
+        var DEVICE_TYPE = "PC";
+        var REFERER_URL = "";
+
         // 아래는 모바일 장치들의 모바일 페이지 접속을위한 스크립트
         var mobilePhones = new Array('iphone', 'ipod', 'ipad', 'android', 'blackberry', 'windows ce','nokia', 'webos', 'opera mini', 'sonyericsson', 'opera mobi', 'iemobile', 'mozilla/5.0 applewebkit/535.19 chrome/56.0.0 mobile safari/535.19');
         for (var i = 0; i < mobilePhones.length; i++){
             if (uAgent.indexOf(mobilePhones[i]) != -1){
                 console.log("brawzer : ", mobilePhones[i]);
                 isMobile = true;
+                DEVICE_TYPE =  mobilePhones[i];
             }
         }
 

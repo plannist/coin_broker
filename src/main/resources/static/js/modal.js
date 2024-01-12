@@ -30,10 +30,16 @@ $('#transReqModal').on('hidden.bs.modal', function(evt){
 });
 
 $('#submitButton').on('click', function(evt){
+
+    // transVo.chargeCd = $('input[name=chargeCd]:checked').val();
+    console.log("onSubmit >>DEVICE_TYPE >>", DEVICE_TYPE);
+    console.log("onSubmit >>REFERER_URL >>", REFERER_URL);
+
+    $('#deviceType').val(DEVICE_TYPE);
+    $('#refererUrl').val(REFERER_URL);
+
+    //Valid
     let inputs = $('#transReqModal input, textarea');
-
-    transVo.chargeCd = $('input[name=chargeCd]:checked').val();
-
     //$('.invalid-feedback').show()
     //is-invalid
     for(let el of inputs){

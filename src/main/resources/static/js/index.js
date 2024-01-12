@@ -1,3 +1,6 @@
+REFERER_URL = document.referrer;
+
+
 
 let title = `공지사항`;
 
@@ -15,3 +18,5 @@ alertNotice(title, html, ()=>{
         alertNotice(title, html2);
 
 });
+
+
