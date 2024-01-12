@@ -11227,3 +11227,26 @@ header.masth .masthead-heading {
 .xl-small {
   font-size: 0.6em;
 }
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: #00000077;
+  display: none;
+}
+.loading .loader {
+  position: fixed;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  z-index: 9999;
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}

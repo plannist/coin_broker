@@ -1,0 +1,158 @@
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="modal">
+
+<!--(1) TransReq Modal-->
+<div class="modal fade" id="transReqModal" tabindex="-1"  aria-labelledby="transReqModalLabel" aria-hidden="true" role="dialog"  data-bs-backdrop='static' data-bs-keyboard="false" >
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+    <div class="modal-content">
+        <div class="modal-header bg-gradient-primary-to-secondary p-4">
+            <h5 class="modal-title font-alt text-white krFont" id="transReqModalLabel">구매 및 전송 대행 신청하기</h5>
+            <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body border-0 p-4">
+
+            <!-- 코인선택 -->
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <div class="row">
+                        <p class="krFont">구매 및 전송할 코인 종류를 선택해주세요.</p>
+                        <div class="col-4 col-sm-2">
+                            <button class="btn btn-light  krFont" type="button" >리플(XRP)</button>
+                        </div>
+                        <div class="col-4 col-sm-2">
+                            <button class="btn btn-light  krFont" type="button" >비트코인(BTC)</button>
+                        </div>
+                        <div class="col-4 col-sm-2">
+                            <button class="btn btn-light  krFont" type="button" >이더리움(ETH)</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 수수료방식 선택 -->
+            <div class="row mb-3">
+                <p class="krFont">수수료 방식을 선택해주세요.&nbsp;&nbsp;<a href="#"> <span class="xl-small">수수료 방식 자세히보기</span></a></p>
+                <div class="col-sm-4">
+<!--                    <div class="form-check form-check-inline">-->
+<!--                        <input class="form-check-input" type="radio" name="accType" id="inlineRadio1" value="" checked>-->
+<!--                        <label class="form-check-label krFont" for="inlineRadio1">아래의 수수료 계산 방식을 선택해주세요.</label>-->
+<!--                    </div>-->
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="accType" id="inlineRadio2" value="I">
+                        <label class="form-check-label krFont" for="inlineRadio2">수수료 별도 (신청금액코인전송+수수료=입금금액) 방식</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="accType" id="inlineRadio3" value="E">
+                        <label class="form-check-label krFont" for="inlineRadio3">수수료 포함 ((신청금액=입금금액)-수수료=전송코인) 방식</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- 입력내용 -->
+            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                <!-- 신청금액 -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="name" type="text" placeholder="신청금액을 입력해주세요." data-sb-validations="required" />
+                    <label for="name" class="krFont">신청금액을 입력해주세요.</label>
+                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                </div>
+                <!-- 수수료금액 -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="email" type="email" placeholder=">수수료 금액입니다." data-sb-validations="required,email" />
+                    <label for="email" class="krFont">수수료 금액입니다.</label>
+                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                </div>
+                <!-- 총 입금액 -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="phone" type="tel" placeholder="" data-sb-validations="required" />
+                    <label for="phone" class="krFont">입금하셔야할 금액입니다.</label>
+                    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                    <span class="krFont xl-small text-bg-primary fst-italic">※ 수수료 별도시 신청금액과  입금해야할 금액은 다르므로 꼭 확인해주세요.</span>
+                </div>
+
+
+                <!-- 전송코인 예상수량 -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="phone1" type="tel" placeholder="" data-sb-validations="required" />
+                    <label for="phone1" class="krFont">전송되는 코인의 예상수량입니다.</label>
+                    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                    <span class="krFont xl-small fst-italic">※ 시세 변동에 따라 수량은 달라질 수 있습니다.</span>
+                </div>
+
+                <!-- 지갑주소 -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="phone2" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                    <label for="phone2" class="krFont">선택된 코인명(심볼명)$의 지갑주소를 입력해주세요.</label>
+                    <div class="invalid-feedback" data-sb-feedback="phone:required">지갑주소는 필수입력값입니다.</div>
+                    <span class="krFont xl-small fst-italic">rNxp4h~~~ 리플지갑의 첫문자는 r 로 시작합니다.</span>
+
+                </div>
+
+                <!-- 데스티네이션 태그 -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="phone3" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                    <label for="phone3" class="krFont">데스티네이션 태그(MEMO)를 입력해주세요.</label>
+                    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                    <span class="krFont xl-small fst-italic">
+                        ※ 리플은 지갑주소와 태그(숫자4~10자리)는 보통 지갑주소 바로 밑에 표시됩니다.
+                        지갑주소만 있고 태그가 없는 경우는 “없음”으로 입력해주세요.
+                    </span>
+
+                </div>
+
+                <!-- 입금자명 -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="phone4" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                    <label for="phone4" class="krFont">입금자명을 입력해주세요.</label>
+                    <div class="invalid-feedback" data-sb-feedback="phone:required">입금자명은 필수입력값입니다.</div>
+                    <span class="krFont xl-small fst-italic">※ 계좌이체시 명의인과 입금자명이 동일해야합니다.(무통장&ATM입금제외)</span>
+                </div>
+
+                <!-- 휴대폰번호 -->
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="phone5" type="tel" placeholder="" data-sb-validations="required" />
+                    <label for="phone5" class="krFont">휴대폰 번호를 입력해주세요.</label>
+                    <div class="invalid-feedback" data-sb-feedback="phone:required">휴대폰번호는 필수 입력값입니다.</div>
+                    <span class="krFont xl-small fst-italic">※ 진행사항을 문자로 안내드립니다.</span>
+                </div>
+
+                <!-- 목적, 기타 내용 -->
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                    <label for="message" class="krFont">구매 대행의 목적 또는 기타 내용이 있으시면 입력해주세요.</label>
+                    <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                </div>
+                <!-- Submit success message-->
+                <!---->
+                <!-- This is what your users will see when the form-->
+                <!-- has successfully submitted-->
+                <div class="d-none" id="submitSuccessMessage">
+                    <div class="text-center mb-3">
+                        <div class="fw-bolder">Form submission successful!</div>
+                        To activate this form, sign up at
+                        <br />
+                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                    </div>
+                </div>
+                <!-- Submit error message-->
+                <!---->
+                <!-- This is what your users will see when there is-->
+                <!-- an error submitting the form-->
+                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                <!-- Submit Button-->
+<!--                <div class="d-grid"><button class="btn btn-primary rounded-pill btn-lg disabled" id="submitButton">Submit</button></div>-->
+                <div class="d-grid"><div class="btn btn-primary rounded-pill btn-lg" id="submitButton">Submit</div></div>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
