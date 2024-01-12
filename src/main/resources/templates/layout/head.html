@@ -26,61 +26,17 @@
     <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <!-- loadash -->
+    <script th:src="@{/lib/lodash/lodash.js}"></script>
+
+    <!-- sweet alert 2 -->
+    <script th:src="@{/lib/sweetalert/sweetalert.js}"></script>
+
+
     <script>
-        /*<![CDATA[*/
-        var headerName = '[[${_csrf.headerName}]]';
-        var token = '[[${_csrf.token}]]';
-        /*]]>*/
-
-        $.ajaxPrefilter(function (options) {
-
-
-            if (options.method === 'POST' || options.method === 'post'|| options.type === 'post' || options.type === 'POST') {
-                console.log("csrf 해더 설정 인입: "+headerName);
-                options.headers = options.headers || {};
-                options.headers[headerName] = token;
-                //			options.headers = options.headers || {};
-                //			options.headers['Authorization'] = "Bearer "+accessToken;
-            }
-        });
-
-        //Add a request interceptor
-        axios.interceptors.request.use(function (config) {
-            $('.loading').show();
-
-
-
-            console.log("axios header 설정 인입");
-            config.headers.headerName =  token;
-            config.headers[headerName] = token;
-
-            return config;
-        });
-        /*
-        2. 응답 인터셉터
-        2개의 콜백 함수를 받습니다.
-        */
-        axios.interceptors.response.use(
-            function (response) {
-                /*
-                    http status가 200인 경우
-                    응답 성공 직전 호출됩니다.
-                    .then() 으로 이어집니다.
-                */
-                $('.loading').hide();
-                return response;
-            },
-
-            function (error) {
-                /*
-                    http status가 200이 아닌 경우
-                    응답 에러 직전 호출됩니다.
-                    .catch() 으로 이어집니다.
-                */
-                $('.loading').hide();
-                return Promise.reject(error);
-            }
-        );
+        /**
+         * csrf 설정영역
+         * */
 
 
         /*로딩 전역 변수*/

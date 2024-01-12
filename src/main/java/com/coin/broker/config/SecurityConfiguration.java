@@ -32,12 +32,12 @@ public class SecurityConfiguration  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/", "/error", "/hidden", "/image/**", "/css/**", "/js/**").permitAll();
+            auth.requestMatchers("/", "/error", "/hidden", "/transReq", "/image/**", "/css/**", "/js/**", "/lib/**").permitAll();
         })
-//        .csrf(AbstractHttpConfigurer::disable)
-        .csrf(e -> {
-            e.ignoringRequestMatchers("/");
-        })
+        .csrf(AbstractHttpConfigurer::disable)
+//        .csrf(e -> {
+//            e.ignoringRequestMatchers("/", "/hidden");
+//        })
         .cors(withDefaults());
 
         return http.build();

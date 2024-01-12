@@ -42,6 +42,11 @@ public class MainController {
     @ResponseBody
     public ResponseEntity<?> transReq(TransReqMas param){
         Response<?> res = new Response<>();
+        param.setReqAmt(param.getReqAmt().replaceAll(",", ""));
+        param.setChargeAmt(param.getChargeAmt().replaceAll(",", ""));
+        param.setTotReqAmt(param.getTotReqAmt().replaceAll(",", ""));
+
+
         int cnt = transReqMasService.insert(param);
         if(cnt > 0)
             res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
@@ -68,6 +73,6 @@ public class MainController {
     @GetMapping("/hidden")
     public ModelAndView hiddenPg(){
 
-        return new ModelAndView("/index");
+        return new ModelAndView("index");
     }
 }
