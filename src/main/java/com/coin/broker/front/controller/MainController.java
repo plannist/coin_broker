@@ -1,18 +1,26 @@
 package com.coin.broker.front.controller;
 
+import com.coin.broker.front.model.CoinPrice;
 import com.coin.broker.front.model.FrontMng;
 import com.coin.broker.front.model.TransReqMas;
 import com.coin.broker.front.service.FrontMngService;
 import com.coin.broker.front.service.TransReqMasService;
+import com.coin.broker.front.service.UpbitService;
 import com.coin.broker.util.Response;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,6 +31,19 @@ public class MainController {
 
     final TransReqMasService transReqMasService;
 
+    final UpbitService upbitService;
+
+    final Environment env;
+
+    @PostConstruct
+    public void init()  {
+        String profile = env.getActiveProfiles()[0];
+        log.info("================================");
+        log.info("======={}=======", profile);
+        log.info("================================");
+
+    }
+
     @GetMapping("/")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView();
@@ -32,9 +53,6 @@ public class MainController {
         }else{
             mv.setViewName("index");
         }
-
-        log.info("main frontMng >>>> {}", frontMng);
-
         return mv;
     }
 
@@ -74,5 +92,21 @@ public class MainController {
     public ModelAndView hiddenPg(){
 
         return new ModelAndView("index");
+    }
+
+    @PostMapping("/api/coinPrice")
+    @ResponseBody
+    public ResponseEntity<?> coinPrice(TransReqMas param){
+        Response<List<CoinPrice>> res = new Response<>();
+        try {
+            List<CoinPrice> list = upbitService.getCoinPrice();
+            log.info("Coin Price ::: {}", list);
+            res.setData(list);
+        } catch (IOException e) {
+            res.setStatusCode(Response.ResultCode.FAIL.getCode());
+        }
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
+        return ResponseEntity.ok(res);
     }
 }

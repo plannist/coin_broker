@@ -55,7 +55,10 @@ mybatis:
     #return-instance-for-empty-row: true
     default-enum-type-handler: org.apache.ibatis.type.StringTypeHandler
 
-
+#upbit 설정
+upbit:
+  access-key: tW35LlxEgeMK3sADn849Th6k64UC3h4DCxoDxfjj
+  secret-key: S4tgCUPLvlnFRJi1NQpeNN8YrEkQcYDJ0wUW6BRN
 
 ---
 ##################################################### LOCAL ###########################################################
@@ -69,30 +72,9 @@ spring:
     url: jdbc:log4jdbc:mysql://211.47.75.102:3306/dbcoin
     username: coin
     password: pjh871107!
-#  h2:
-#    console:
-#      enabled: true
-#      path: /DB
-#  datasource:
-#    hikari:
-#      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-#      #jdbc-url: jdbc:h2:./data/testdb # ./ Project root
-#      jdbc-url: jdbc:log4jdbc:h2:tcp://3.38.35.11:9094/PUBLIC;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;
-#      username: test
-#      password: 1234
-#      maximum-pool-size: 50
-#      minimum-idle: 10
 
 server:
   port: 8080
-#  port: 443
-#  ssl:
-#    enabled: true
-#    key-store: C:/dev/ssl/keystore.p12
-#    key-store-password: 'pjh871107'
-#    key-password: 'pjh871107'
-
-
   error:
     path: /erro
 
@@ -126,37 +108,10 @@ spring:
     password: pjh871107!
 
 server:
-#  port: 8080
-  port: 443
-  ssl:
-    enabled: true
-    key-store: /deploy/ssl/2023-07-30/keystore.p12
-    key-store-password: 'pjh871107'
+  port: 8080
   error:
     path: /erro
 
-#KCP 연동
-kcp:
-  conf:
-    log:
-      dir: /deploy/log/kcp/log
-      level: 3
-    gw:
-      url: testpaygw.kcp.co.kr
-      port: 8090
-    js:
-      url: https://testpay.kcp.co.kr/plugin/payplus_web.jsp
-    server: false
-    site:
-      cd: T0000
-      key: 3grptw1.zW0GSo4PQdaGvsF__
-      name: KCP TEST SHOP
-    module:
-      type: 01
-    tx:
-      mode: 0
-    return:
-      url: https://account-book.link/pay/mo/progressPayment
 
 #Multipart
 file:

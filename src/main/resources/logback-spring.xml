@@ -5,16 +5,16 @@
 <springProperty scope="context" name="LOG_LEVEL" source="logging.level.root"/>
  <!-- log file path --> 
  <springProfile name="local">
- 	<property name="LOG_PATH" value="C:/login/log"/>
+ 	<property name="LOG_PATH" value="${user.home}/logs/coin"/>
  </springProfile>
  <springProfile name="dev">
- 	<property name="LOG_PATH" value="/deploy/account/log/dev"/>
+ 	<property name="LOG_PATH" value="/web/log/"/>
  </springProfile>
 
  <!-- log file name --> 
- <property name="LOG_FILE_NAME" value="account_log"/>
+ <property name="LOG_FILE_NAME" value="info_log"/>
  <!-- err log file name --> 
- <property name="ERR_LOG_FILE_NAME" value="account_err_log"/>
+ <property name="ERR_LOG_FILE_NAME" value="error_log"/>
  <!-- pattern -->
 <!--	<property name="LOG_PATTERN" value="%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n"/>-->
 	<property name="LOG_PATTERN" value="%d{ISO8601} %highlight(%-5level) [%t] %yellow(%logger{36}.%M:%line): %msg%n%throwable" />

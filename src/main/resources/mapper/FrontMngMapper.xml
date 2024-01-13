@@ -3,6 +3,7 @@
 <mapper namespace="com.coin.broker.front.mapper.FrontMngMapper">
 
 	<select id="findFrontMngInfo" resultType="com.coin.broker.front.model.FrontMng">
+		/*점검관리정보 조회*/
 		SELECT
 			idx, title, contents, mtn_yn, reg_dttm
 		FROM

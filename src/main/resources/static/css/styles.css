@@ -11255,3 +11255,50 @@ header.masth .masthead-heading {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* sweet alert */
+.swal2-popup {
+  padding: 20px 0 0 !important;
+  max-width: 600px !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+.swal2-content {
+  padding: 0 20px !important;
+  font-size:14px !important;
+}
+.swal2-actions {
+  margin: 20px 0 0 !important;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.2) !important;
+}
+.swal2-title {
+  font-size: 16px !important;
+  color: #191F28 !important;
+  font-weight: bold !important;
+}
+.swal2-actions button {
+  height: 100%;
+  color: #9D5EEC !important;
+  font-weight: bold;
+  font-size: 14px !important;
+  padding: 10px 0 !important;
+  border: none;
+  background-color: transparent !important;
+  flex: 1 0 0%;
+  margin: 0 !important;
+  border-right: 0.5px solid rgba(0, 0, 0, 0.2) !important;
+  border-radius: 0 !important;
+  outline: 0;
+}
+.swal2-actions button:focus {
+  outline: 0 !important;
+  box-shadow: none;
+}
+.swal2-actions button:last-child {
+  border: none !important;
+}
+.swal2-actions:not(.swal2-loading) .swal2-styled:active,
+.swal2-actions:not(.swal2-loading) .swal2-styled:hover {
+  background-image: none !important;
+  outline: 0 !important;
+}

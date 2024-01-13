@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-outline-dark py-3 px-4 rounded-pill krFont" data-bs-toggle="modal" data-bs-target="#transReqModal">구매대행 신청하기</button>
+                <button class="btn btn-outline-dark py-3 px-4 rounded-pill krFont" onclick="contact();">구매대행 신청하기</button>
                 <div th:insert="~{layout/modal :: modal}"></div>
             </div>
         </div>
@@ -80,19 +80,19 @@
                         <div class="col-md-4">
                             <img src="/image/ic/bitcoin_ic.png" style="height:70px;"></img>
                             <h4 class="my-3">Bit-Coin</h4>
-                            <p class="text-muted text-white-50 krFont"> 6500만원</p>
+                            <p class="text-muted text-white-50 krFont" id="KRW-BTC"> - 원</p>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <img src="/image/ic/ethereum_ic.png" style="width:70px;">
                             <h4 class="my-3">Ethereum</h4>
-                            <p class="text-muted text-white-50 krFont"> 50만원</p>
+                            <p class="text-muted text-white-50 krFont" id="KRW-ETH"> - 원</p>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <img src="/image/ic/ripple_ic.png" style="width:70px;">
                             <h4 class="my-3">Ripple</h4>
-                            <p class="text-muted text-white-50 krFont"> 100만원</p>
+                            <p class="text-muted text-white-50 krFont" id="KRW-XRP"> - 원</p>
                         </div>
 
                     </div>
