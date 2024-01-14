@@ -77,6 +77,9 @@ server:
   port: 8080
   error:
     path: /erro
+  servlet:
+    session:
+      timeout: 2
 
 
 #Multipart
@@ -111,6 +114,9 @@ server:
   port: 8080
   error:
     path: /erro
+  servlet:
+    session:
+      timeout: 60
 
 
 #Multipart

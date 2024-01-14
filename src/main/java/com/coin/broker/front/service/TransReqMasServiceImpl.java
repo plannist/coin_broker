@@ -14,4 +14,9 @@ public class TransReqMasServiceImpl implements TransReqMasService{
     public int insert(TransReqMas param) {
         return transReqMasMapper.insert(param);
     }
+
+    @Override
+    public int findRecentReqList(TransReqMas param) {
+        return transReqMasMapper.findRecentReqList(param);
+    }
 }

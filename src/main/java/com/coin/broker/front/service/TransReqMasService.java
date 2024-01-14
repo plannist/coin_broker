@@ -4,4 +4,6 @@ import com.coin.broker.front.model.TransReqMas;
 
 public interface TransReqMasService {
     int insert(TransReqMas param);
+
+    int findRecentReqList(TransReqMas param);
 }

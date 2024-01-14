@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -28,13 +29,46 @@ public class SecurityConfiguration  {
 
     final AuthenticationConfiguration config;
 
+    final MyAuthenticationProvider authenticationProvider;
+
+    final LoginSuccessHandler loginSuccessHandler;
+
+    final LoginFailureHandler loginFailureHandler;
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
-        http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/", "/error", "/hidden", "/transReq", "/api/**", "/image/**", "/css/**", "/js/**", "/lib/**").permitAll();
-        })
-        .csrf(AbstractHttpConfigurer::disable)
+        http
+            .csrf(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests(auth -> {
+                auth.requestMatchers("/", "/error","map",
+                        "/login", "/hidden", "/transReq",
+                        "/api/**", "/image/**", "/css/**",
+                        "/js/**", "/lib/**")
+                .permitAll()
+                .requestMatchers("/admin/**").authenticated();
+            })
+            .formLogin(login -> {
+                login.loginPage("/login")
+                        .successHandler(loginSuccessHandler)
+                        .failureHandler(loginFailureHandler)
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/loginProcess")
+                        .permitAll()
+                ;
+
+            })
+            .logout(logout ->{
+                logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/")
+                        .permitAll();
+
+            })
+
+
+
 //        .csrf(e -> {
 //            e.ignoringRequestMatchers("/", "/hidden");
 //        })
@@ -47,6 +81,15 @@ public class SecurityConfiguration  {
     public AuthenticationManager authenticationManager()
             throws Exception {
         return config.getAuthenticationManager();
+
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers("/resources/**");
+
+    }
+
 
 }

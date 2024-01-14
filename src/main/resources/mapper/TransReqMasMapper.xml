@@ -43,4 +43,13 @@
 		)
 	</update>
 
+	<select id="findRecentReqList" resultType="Integer">
+		select count(*)
+		from trans_req_mas
+		where phone_no = ${phoneNo}
+	  	and (prcs_cd is null or prcs_cd not in ('6', '7'))
+		order by reg_dttm desc
+		limit 10
+	</select>
+
 </mapper>

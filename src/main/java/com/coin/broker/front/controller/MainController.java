@@ -1,19 +1,15 @@
 package com.coin.broker.front.controller;
 
-import com.coin.broker.front.model.CoinMas;
-import com.coin.broker.front.model.CoinPrice;
-import com.coin.broker.front.model.FrontMng;
-import com.coin.broker.front.model.TransReqMas;
-import com.coin.broker.front.service.CoinMasService;
-import com.coin.broker.front.service.FrontMngService;
-import com.coin.broker.front.service.TransReqMasService;
-import com.coin.broker.front.service.UpbitService;
+import com.coin.broker.front.model.*;
+import com.coin.broker.front.service.*;
 import com.coin.broker.util.Response;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +33,11 @@ public class MainController {
 
     final CoinMasService coinMasService;
 
+    final AdminService adminService;
+
     final Environment env;
+
+    final BCryptPasswordEncoder encoder;
 
     @PostConstruct
     public void init()  {
@@ -68,12 +68,16 @@ public class MainController {
         param.setChargeAmt(param.getChargeAmt().replaceAll(",", ""));
         param.setTotReqAmt(param.getTotReqAmt().replaceAll(",", ""));
 
+        int cnt = transReqMasService.findRecentReqList(param);
+        if(cnt > 0){
+            res.setStatusMessage("이미 처리중인 대행 신청건이 있습니다. 처리중인 신청건이 완료된 후 이용해주세요.");
+            res.setStatusCode(Response.ResultCode.FAIL.getCode());
+            return ResponseEntity.ok(res);
+        }
+
         try{
-            int cnt = transReqMasService.insert(param);
-            if(cnt > 0)
-                res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
-            else
-                res.setStatusCode(Response.ResultCode.FAIL.getCode());
+            transReqMasService.insert(param);
+            res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
             return ResponseEntity.ok(res);
         }catch(Exception e){
             return ResponseEntity.internalServerError().body(res);
@@ -92,12 +96,22 @@ public class MainController {
     }
 
     @GetMapping("/map")
-    public ResponseEntity<?> map(){
+    public ResponseEntity<?> map(AdminMas param){
+
+        param.setId("admin");
+        param.setName("테스트관리자");
+        param.setAuth("관리자");
+        param.setPassword(encoder.encode("qwer1234"));
+
+        adminService.insertAdmin(param);
+
+
         return ResponseEntity.ok("1234");
     }
 
     @GetMapping("/hidden")
-    public ModelAndView hiddenPg(){
+    public ModelAndView hiddenPg(@AuthenticationPrincipal AdminMas adminMas){
+        log.info("adminMas >>{}", adminMas);
 
         return new ModelAndView("index");
     }

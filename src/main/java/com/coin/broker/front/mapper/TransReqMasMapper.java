@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TransReqMasMapper {
     int insert(TransReqMas param);
+
+    int findRecentReqList(TransReqMas param);
 }

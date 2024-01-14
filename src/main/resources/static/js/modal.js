@@ -116,7 +116,7 @@ $('#submitButton').on('click', function(evt){
                         location.href = "/";
                     })
                 }else{
-                    alertNotice(null, '대행 신청 접수가 실패하였습니다. 다시 신청하시거나 상담 신청해주세요.', ()=>{
+                    alertNotice(null, res.statusMessage, ()=>{
                         location.href = "/";
                     })
                 }
