@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coin.broker.front.mapper.CoinMasMapper">
+
+	<resultMap id="coinMas" type="com.coin.broker.front.model.CoinMas">
+		<result property="coinType" column="coin_type"/>
+		<result property="maxAmt" column="max_amt"/>
+		<result property="minIAmt" column="min_i_amt"/>
+		<result property="minTAmt" column="min_t_amt"/>
+		<collection property="chargeMngs" resultMap="chargeMngs"/>
+
+	</resultMap>
+
+	<resultMap id="chargeMngs" type="com.coin.broker.front.model.CoinChargeMng">
+		<result property="coinType" column="coin_type"/>
+		<result property="rangeIdx" column="range_idx"/>
+		<result property="chargeAmt" column="charge_amt"/>
+	</resultMap>
+
+	<select id="getCoinInfo" resultMap="coinMas">
+		/*코인설정정보 조회*/
+		select
+			a.coin_type, max_amt, min_i_amt, min_t_amt, b.range_idx , b.charge_amt
+		from
+			coin_mas a inner join coin_charge_mng b on a.coin_type = b.coin_type
+		where
+			a.coin_type = #{coinType}
+
+	</select>
+
+</mapper>

@@ -19,12 +19,13 @@
 			referer_url,
 			mod_dttm,
 			prcs_cd,
+			trade_price,
 		    reg_dttm
 		)
 		values (
 			#{coinType      },
 			#{chargeCd      },
-			#{reqAmt       },
+			#{reqAmt        },
 			#{chargeAmt     },
 			#{totReqAmt     },
 			#{sendCoin      },
@@ -37,6 +38,7 @@
 			#{refererUrl    },
 			#{modDttm       },
 			#{prcsCd        },
+			#{tradePrice    },
 			now()
 		)
 	</update>

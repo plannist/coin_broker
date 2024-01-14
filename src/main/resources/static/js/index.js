@@ -25,6 +25,17 @@ let contactMsg = `
     주의사항을 읽고 대행신청 및 진행에 대한 책임은 신청자 본인에게 있음을 동의합니다.
 `;
 
+var tradePrice = {
+    'KRW-BTC' : '',
+    'KRW-ETH' : '',
+    'KRW-XRP' : ''
+};
+
+let timmer = setInterval(()=>{
+    LOAD_YN = false;
+    getCoinPrice();
+}, 10000);
+
 $(document).ready(function(){
     REFERER_URL = document.referrer;
 
@@ -48,6 +59,8 @@ function contact(){
     alertConfirm('유의사항', contactMsg, '확인했습니다',()=>{
         // $('#contactForm').reset();
         document.getElementById("contactForm").reset();
+        LOAD_YN = true;
+        clearInterval(timmer);
         $("#transReqModal").modal('show');
     })
 
@@ -55,6 +68,7 @@ function contact(){
 }
 
 function getCoinPrice(){
+
     $.ajax({
         url : "/api/coinPrice",
         type: 'POST',
@@ -64,16 +78,24 @@ function getCoinPrice(){
             if(res.statusCode === 'S001'){
                 for(let data of res.data){
                     $('#'+data.coinType).text(comma(data.amt).concat(" 원"));
+                    tradePrice[data.coinType] = data.amt;
+                    // if(data.coinType === 'KRW-BTC'){
+                    //     tradePrice.BTC = data.amt;
+                    // }else if(data.contentType === 'KRW-ETH'){
+                    //     tradePrice.ETH = data.amt;
+                    // }else{
+                    //     tradePrice.XRP = data.amt;
+                    // }
                 }
+
+                console.log("tradePrice >>" , tradePrice);
             }
         }
         , error : function(res){
 
         }
     })
+
 }
-
-
-
 
 

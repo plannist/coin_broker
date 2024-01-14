@@ -40,14 +40,16 @@
 
 
         /*로딩 전역 변수*/
+        var LOAD_YN = true;
         (function($) {
             $(document).ajaxStart(function(e){
-                console.log("AjaxStart");
-                $('.loading').show();
+                // console.log("AjaxStart");
+                if(LOAD_YN )
+                    $('.loading').show();
             });
 
             $(document).ajaxStop(function(e){
-                console.log("AjaxStop");
+                // console.log("AjaxStop");
                 $('.loading').hide();
             });
         }(jQuery));
@@ -70,36 +72,7 @@
 
         var isChrome = uAgent.indexOf("chrome") ? true : false;
 
-        /*로그아웃*/
-        function logout(){
-            const accessToken = Kakao.Auth.getAccessToken();
-            console.log("logout >> kakao accessToken :", accessToken);
 
-        }
-
-        function kkoLogout(){
-
-            Kakao.Auth.logout(function(res) {
-                if(res){
-                    location.href = "/";
-                }
-            });
-
-        }
-
-        function kkoDisconnect(){
-            /*로그인 기록 제거 다시 아이디 입력 및 동의 필요*/
-            Kakao.API.request({
-                url: '/v1/user/unlink',
-                success: function(response) {
-                    console.log("kkoLogout success: ", response);
-                },
-                fail: function(error) {
-                    console.log("kkoLogout error: ", error);
-                },
-            });
-
-        }
 
     </script>
 </head>

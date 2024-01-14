@@ -60,7 +60,7 @@ public class UpbitServiceImpl implements UpbitService{
 
             Response res = client.newCall(request).execute();
             String result = res.body().string();
-            log.info("coin price >> {}", result);
+            log.info("coin price >> {}", result.length());
 
 //            JsonObject job = JsonParser.parseString(res.body().string()).getAsJsonObject();
             try{

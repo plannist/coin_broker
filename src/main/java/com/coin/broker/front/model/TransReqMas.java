@@ -21,5 +21,6 @@ public class TransReqMas {
     private String          regDttm;
     private String          modDttm;
     private String          prcsCd;
+    private String          tradePrice;
 
 }

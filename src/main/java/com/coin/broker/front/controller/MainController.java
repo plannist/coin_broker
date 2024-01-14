@@ -1,8 +1,10 @@
 package com.coin.broker.front.controller;
 
+import com.coin.broker.front.model.CoinMas;
 import com.coin.broker.front.model.CoinPrice;
 import com.coin.broker.front.model.FrontMng;
 import com.coin.broker.front.model.TransReqMas;
+import com.coin.broker.front.service.CoinMasService;
 import com.coin.broker.front.service.FrontMngService;
 import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.front.service.UpbitService;
@@ -32,6 +34,8 @@ public class MainController {
     final TransReqMasService transReqMasService;
 
     final UpbitService upbitService;
+
+    final CoinMasService coinMasService;
 
     final Environment env;
 
@@ -64,13 +68,17 @@ public class MainController {
         param.setChargeAmt(param.getChargeAmt().replaceAll(",", ""));
         param.setTotReqAmt(param.getTotReqAmt().replaceAll(",", ""));
 
+        try{
+            int cnt = transReqMasService.insert(param);
+            if(cnt > 0)
+                res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+            else
+                res.setStatusCode(Response.ResultCode.FAIL.getCode());
+            return ResponseEntity.ok(res);
+        }catch(Exception e){
+            return ResponseEntity.internalServerError().body(res);
+        }
 
-        int cnt = transReqMasService.insert(param);
-        if(cnt > 0)
-            res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
-        else
-            res.setStatusCode(Response.ResultCode.FAIL.getCode());
-        return ResponseEntity.ok(res);
     }
 
     @GetMapping("/error")
@@ -105,6 +113,19 @@ public class MainController {
         } catch (IOException e) {
             res.setStatusCode(Response.ResultCode.FAIL.getCode());
         }
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
+        return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/api/getCoinMas")
+    @ResponseBody
+    public ResponseEntity<?> getCoinMas(CoinMas param){
+        Response<CoinMas> res = new Response<>();
+
+        CoinMas coinMas = coinMasService.getCoinInfo(param);
+
+        res.setData(coinMas);
         res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
 
         return ResponseEntity.ok(res);
