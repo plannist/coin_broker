@@ -32,6 +32,10 @@ function getCoinPrice(){
                     $('#alarm').text(newRequestCnt +""+ "+")
                     // $('#audio').show();
                     // document.querySelector("audio").play();
+                    let src = $('#audio').attr('src');
+                    let audio = new Audio(src);
+                    audio.play();
+
 
                 }
 
@@ -103,6 +107,13 @@ const DataTableBasic = function(){
                 targets: 2,
                 render: function(data, type, full) {
                     _data = `<a href="/member/detail.do?mgtId=` + data + `"><ins>` + comma(data) + `</ins></a>`;
+                    return _data;
+                },
+            },
+            {
+                targets: 4,
+                render: function(data, type, full) {
+                    _data = data.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
                     return _data;
                 },
             },
