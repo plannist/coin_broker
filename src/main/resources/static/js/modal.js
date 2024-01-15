@@ -38,8 +38,7 @@ $('#transReqModal').on('show.bs.modal', function(evt){
 
 $('#transReqModal').on('hidden.bs.modal', function(evt){
     console.log("transReqModal is hidden >", evt);
-    LOAD_YN = false;
-    getCoinPrice();
+    pollingStart();
 });
 
 
@@ -239,7 +238,7 @@ function changeAmtListener(el){
 
         }else if(val * 1 > coinMas.maxAmt * 1){ //11만원 초과 체크
             $(el).addClass('is-invalid');
-            $(el).next().next().text(`신청 가능금액은 ${comma(coinMas.minTAmt)} 부터 ${comma(coinMas.maxAmt)} 원 까지입니다. 초과는 타업체 이용바랍니다.`).show();
+            $(el).next().next().text(`신청 가능금액은 ${comma(coinMas.minIAmt)} 부터 ${comma(coinMas.maxAmt)} 원 까지입니다. 초과는 타업체 이용바랍니다.`).show();
             $(el).val(null);
             return false;
         }else{

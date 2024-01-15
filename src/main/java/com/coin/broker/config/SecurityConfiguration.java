@@ -45,7 +45,7 @@ public class SecurityConfiguration  {
                 auth.requestMatchers("/", "/error","map",
                         "/login", "/hidden", "/transReq",
                         "/api/**", "/image/**", "/css/**",
-                        "/js/**", "/lib/**")
+                        "/js/**", "/lib/**", "/fontwesome/**")
                 .permitAll()
                 .requestMatchers("/admin/**").authenticated();
             })

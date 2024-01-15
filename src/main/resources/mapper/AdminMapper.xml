@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.coin.broker.front.mapper.AdminMapper">
+<mapper namespace="com.coin.broker.admin.mapper.AdminMapper">
 
 
 
-	<insert id="insertAdmin" parameterType="com.coin.broker.front.model.AdminMas">
+	<insert id="insertAdmin" parameterType="com.coin.broker.admin.model.AdminMas">
 		INSERT INTO admin_mas
 			(id, password, name, auth, reg_dttm, mod_dttm)
 		VALUES(#{id}, #{password}, #{name}, #{auth}, now(), null);
@@ -12,7 +12,7 @@
 
 	</insert>
 
-	<select id="findById" resultType="com.coin.broker.front.model.AdminMas">
+	<select id="findById" resultType="com.coin.broker.admin.model.AdminMas">
 		SELECT * FROM admin_mas where id = #{id}
 	</select>
 

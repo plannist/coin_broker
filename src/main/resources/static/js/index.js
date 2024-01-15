@@ -31,10 +31,7 @@ var tradePrice = {
     'KRW-XRP' : ''
 };
 
-let timmer = setInterval(()=>{
-    LOAD_YN = false;
-    getCoinPrice();
-}, 10000);
+let timmer;
 
 $(document).ready(function(){
     REFERER_URL = document.referrer;
@@ -51,6 +48,7 @@ $(document).ready(function(){
     });
 
     getCoinPrice();
+    pollingStart();
 });
 
 
@@ -59,8 +57,7 @@ function contact(){
     alertConfirm('유의사항', contactMsg, '확인했습니다',()=>{
         // $('#contactForm').reset();
         document.getElementById("contactForm").reset();
-        LOAD_YN = true;
-        clearInterval(timmer);
+        pollingEnd();
         $("#transReqModal").modal('show');
     })
 
@@ -98,4 +95,15 @@ function getCoinPrice(){
 
 }
 
+function pollingStart(){
+    LOAD_YN = false;
+    timmer = setInterval(()=>{
+        getCoinPrice();
+    }, 10000);
+}
+
+function pollingEnd(){
+    clearInterval(timmer);
+    LOAD_YN = true;
+}
 

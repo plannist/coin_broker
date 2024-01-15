@@ -1,7 +1,7 @@
 package com.coin.broker.config;
 
-import com.coin.broker.front.model.AdminMas;
-import com.coin.broker.front.service.AdminService;
+import com.coin.broker.admin.model.AdminMas;
+import com.coin.broker.admin.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
