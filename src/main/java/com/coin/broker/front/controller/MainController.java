@@ -123,6 +123,10 @@ public class MainController {
         Response<List<CoinPrice>> res = new Response<>();
         try {
             List<CoinPrice> list = upbitService.getCoinPrice();
+            int cnt = transReqMasService.findNewRequest();
+
+            //admin 현재 보고있는 요청 건수
+            res.setTotalCount(cnt);
             log.info("Coin Price ::: {}", list);
             res.setData(list);
         } catch (IOException e) {

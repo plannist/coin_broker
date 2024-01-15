@@ -5,6 +5,8 @@ import com.coin.broker.front.model.TransReqMas;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TransReqMasServiceImpl implements TransReqMasService{
@@ -18,5 +20,20 @@ public class TransReqMasServiceImpl implements TransReqMasService{
     @Override
     public int findRecentReqList(TransReqMas param) {
         return transReqMasMapper.findRecentReqList(param);
+    }
+
+    @Override
+    public List<TransReqMas> findAdminTransReqList(TransReqMas param) {
+        return transReqMasMapper.findAdminTransReqList(param);
+    }
+
+    @Override
+    public int findAdminTransReqCnt(TransReqMas param) {
+        return transReqMasMapper.findAdminTransReqCnt(param);
+    }
+
+    @Override
+    public int findNewRequest() {
+        return transReqMasMapper.findNewRequest();
     }
 }

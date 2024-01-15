@@ -37,6 +37,8 @@ public class Response<T> implements Serializable{
 	private T data;
 	private String statusMessage= ResultCode.FAIL.name();
 	private String statusCode = ResultCode.FAIL.getCode();
+
+	private int totalCount;
 	
 	public Object getData() {
 		return data;
@@ -49,6 +51,8 @@ public class Response<T> implements Serializable{
 			setStatusMessage(ResultCode.SUCCESS.name());
 		}
 	}
+
+
 	
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
@@ -69,6 +73,14 @@ public class Response<T> implements Serializable{
 	public void settingResultCdMsg(String code, String msg) {
 		this.statusCode = code;
 		this.statusMessage = msg;
+	}
+
+	public void setTotalCount(int totalCount){
+		this.totalCount = totalCount;
+	}
+
+	public int getTotalCount(){
+		return this.totalCount;
 	}
 	
 	

@@ -1,9 +1,12 @@
 package com.coin.broker.front.model;
 
+import com.coin.broker.admin.model.Pagination;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class TransReqMas {
+public class TransReqMas extends Pagination {
     private String          reqno;
     private String          coinType;
     private String          chargeCd;

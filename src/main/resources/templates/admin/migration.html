@@ -2,10 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
 >
-<head th:insert="~{layout/head :: head}"></head>
-<head>
-    <link rel="stylesheet" th:href="@{/css/sb-admin-2.css}" type="text/css"/>
-</head>
+<head th:insert="~{layout/head-admin :: head}"></head>
+
 <style>
     .modal-body::-webkit-scrollbar{display: none}
 </style>
@@ -199,7 +197,8 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw"></i>
                             <!-- Counter - Alerts -->
-                            <span class="badge badge-danger badge-counter">3+</span>
+                            <span class="badge badge-danger badge-counter" id="alarm">3+</span>
+                            <iframe th:src="@{/image/audio/alarm.mp3}" allow="autoplay" id="audio" style="display: none"></iframe>
                         </a>
                         <!-- Dropdown - Alerts -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -312,13 +311,14 @@
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" sec:authorize="isAuthenticated()"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item dropdown no-arrow" style="min-width: 60px;">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <!--                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>-->
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" sec:authentication="principal.name"></span>
-<!--                            <img th:if="${ #strings.isEmpty(#authentication.Principal.profileImg)}"    class="img-profile rounded-circle" style="height: 3rem;width: 3rem;"    src="/assets/img/undraw_profile.svg" alt="...">-->
-<!--                            <img th:if="${!#strings.isEmpty(#authentication.Principal.profileImg)}"   class="img-profile rounded-circle" style="height: 3rem;width: 3rem;" th:src="${#authentication.Principal.profileImg}" alt="...">-->
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"  sec:authentication="principal.name"></span>
+                            <img class="img-profile rounded-circle" style="height: 3rem;width: 3rem;"
+                                 th:src="@{/image/sb/undraw_profile.svg}" alt="..."
+                            >
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -336,7 +336,8 @@
                                 Activity Log
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+<!--                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">-->
+                            <a class="dropdown-item" href="/logout">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
@@ -351,17 +352,17 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-black-50">Summary</h1>
+                    <h1 class="h3 mb-0 text-black-50 krFont">시세정보</h1>
                     <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                              class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
 
-                    <!-- 추가 -->
-                    <div class="input-group input-group-joined" id="pickerArea" style="width: 16.5rem;">
-                          <span class="input-group-text bg-light">
-                            <i data-feather="calendar"></i>
-                          </span>
-                        <input class="form-control bg-light border-0 small" id="monthPicker" placeholder="Select data range..." style="padding-left: 0 !important;border: none;"/>
-                    </div>
+                    <!-- 추가 MONTH PICKER-->
+<!--                    <div class="input-group input-group-joined" id="pickerArea" style="width: 16.5rem;">-->
+<!--                          <span class="input-group-text bg-light">-->
+<!--                            <i data-feather="calendar"></i>-->
+<!--                          </span>-->
+<!--                        <input class="form-control bg-light border-0 small" id="monthPicker" placeholder="Select data range..." style="padding-left: 0 !important;border: none;"/>-->
+<!--                    </div>-->
 
                 </div>
 
@@ -372,15 +373,16 @@
 
                 <!-- Content Row -->
                 <div class="row">
-                    <!-- Earnings (Monthly) Card Example -->
+
+                    <!-- 비트코인 시세 -->
                     <div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            수입 (Monthly)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="incomeAmtSum">$</div>
+                                            비트코인 (KWR-BTC)</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="KRW-BTC">$</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-hand-holding fa-2x text-gray-300"></i>
@@ -390,15 +392,15 @@
                         </div>
                     </div>
 
-                    <!-- 총 지출금액 -->
+                    <!--이더리움 시세 -->
                     <div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-success shadow h-100 py-2" id="allSelect">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            지출 (Monthly)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="expendAmtSum">$</div>
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1" >
+                                            이더리움 (KWR-ETH)</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="KRW-ETH">$</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -410,15 +412,15 @@
 
 
 
-                    <!-- 현금 사용금액 -->
+                    <!--리플 시세 -->
                     <div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-danger shadow h-100 py-2" id="cashSelect">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Cash Expending</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="cashAmt">18</div>
+                                            리플 (KWR-XRP)</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="KRW-XRP">$</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>
@@ -428,246 +430,61 @@
                         </div>
                     </div>
 
-                    <!-- 카드 사용금액 -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2" id="cardSelect">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Credit Card Expending</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="cardAmt">18</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-credit-card fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4" onclick="location.href='https://payrok.page.link/dGhB6YCXUMYUSwYz5'">
-                        <div class="card border-left-info shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">수입대비 지출 %
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="percent-text">%</div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar" id="percent-img"
-                                                         style="width: 0%" aria-valuenow="10" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <!--              <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>-->
-                                        <i class="fas fa-percentage fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <!--  <form id="excelFrom" name="excelFrom" action="/expends/upload" enctype="multipart/form-data" method="POST">-->
-<!--                <div class="row" sec:authorize="hasRole('ROLE_관리자')">-->
-<!--                    &lt;!&ndash; Content Column &ndash;&gt;-->
-<!--                    <div class="col-lg-12 mb-4">-->
-<!--                        &lt;!&ndash; Project Card Example &ndash;&gt;-->
-<!--                        <div class="card shadow mb-4">-->
-<!--                            <div class="card-header py-3">-->
-<!--                                <div class="form-group row" >-->
-
-<!--                                    <div class="col-sm-4 mb-3 mb-sm-0">-->
-<!--                                        <h6 class="m-0 font-weight-bold text-primary">엑셀 등록</h6>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="col-sm-4 mb-3 mb-sm-0" id="excelInfo">-->
-<!--                                        <a href="#" th:text="${files.fileName}"></a>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="col-sm-4">-->
-<!--                                        <label for="excelFile" class="btn btn-primary" style="width:100%">엑셀업로드</label>-->
-<!--                                        <input class="btn btn-primary" type="file" id="excelFile" accept=".xls, .xlsx" name="excelFile" style="display:none" />-->
-<!--                                    </div>-->
-
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-                <!--  </form>-->
-
-                <!-- Content Row -->
-                <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-lg-12 mb-4">
-                        <!-- Project Card Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-8 mb-3 mb-sm-0">
-                                        <h6 class="m-0 font-weight-bold text-primary">수입내역</h6>
-                                    </div>
-                                    <!-- 신규 수입 등록 -->
-                                    <div class="col-sm-4" id="dtlRegister">
-                                        <a class="btn btn-primary"  data-toggle="modal" data-target="#accountDtlModal" data-type="INSERT" data-schema="I" href="#" style="width: 100%">등록</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-body" id="incomeArea">
-                                <!-- 수입목록 -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!-- Content Column -->
-                    <div class="col-lg-12 mb-0">
-                        <!-- Project Card Example -->
-                        <div class="card shadow mb-1">
-                            <div class="card-header py-3">
-                                <div class="form-group row">
-                                    <div class="col-sm-8 mb-3 mb-sm-0">
-                                        <h6 class="m-0 font-weight-bold text-primary">지출내역</h6>
-                                    </div>
-                                    <!-- 신규 지출 등록 -->
-                                    <div class="col-sm-4" id="dtlRegister">
-                                        <a class="btn btn-primary"  data-toggle="modal" data-target="#accountDtlModal" data-type="INSERT" data-schema="E" href="#" style="width: 100%">등록</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-<!--                    <div class="col-lg-12 mb-0" th:each="division : ${divisions}">-->
-<!--                        &lt;!&ndash; Project Card Example &ndash;&gt;-->
-<!--                        <div class="card shadow mb-1">-->
-<!--                            <div class="card-header py-3">-->
-<!--                                <div class="form-group row">-->
-<!--                                    <div class="col-sm-8 mb-3 mb-sm-0">-->
-<!--                                        <h6 class="m-0 font-weight-bold text-secondary" th:text="${division.divisionName}"></h6>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="card-body" name="expendArea" th:id="'expendArea-'+${division.divisionCd}">-->
-<!--                                &lt;!&ndash; 지출목록 &ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
 
 
-                <div class="row">
-                    <div class="col-lg-12 mb-4">
+                <!-- Page Heading -->
+                <div class="card-body">
+                <h1 class="h3 mb-2 text-gray-800">대행주문목록</h1>
+                <p class="mb-4">
+                    DataTables is a third party plugin that is used to generate the demo table below.
+                    For more information about DataTables, please visit the
+                    <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.
+                </p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
                         <div class="card-body">
-                            <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Customer Database <span
-                                    class="float-right">60%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar" role="progressbar" style="width: 60%"
-                                     aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Payout Details <span
-                                    class="float-right">80%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                     aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Account Setup <span
-                                    class="float-right">Complete!</span></h4>
-                            <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>번호</th>
+                                            <th>코인</th>
+                                            <th>신청금액</th>
+                                            <th>입금자명</th>
+                                            <th>전화번호</th>
+                                            <th>현재단계</th>
+                                            <th>등록일시</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+<!--                                    <tr>-->
+<!--                                        <td>1</td>-->
+<!--                                        <td>BTC</td>-->
+<!--                                        <td>100,000</td>-->
+<!--                                        <td>박박박</td>-->
+<!--                                        <td>010-8844-1223</td>-->
+<!--                                        <td>투자투자투자투자투자</td>-->
+<!--                                        <td>신규신청</td>-->
+<!--                                    </tr>-->
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
-                <!-- Content Row -->
-                <div class="row">
+            </div>
 
-                    <!-- Area Chart -->
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary" id="areaChartTitle"></h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                         aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Pie Chart -->
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary" id="pieChartTitle"></h6>
-                                <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                         aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-pie pt-4 pb-2">
-                                    <canvas id="myPieChart"></canvas>
-                                </div>
-                                <div class="mt-4 text-center small" id="pieLabel">
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
@@ -687,10 +504,6 @@
     </div>
 
 
-</div>
-
-
-
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -700,8 +513,17 @@
 
 <!-- Page level custom scripts -->
 <!-- Custom scripts for all pages-->
+<script th:src="@{/js/common.js}"></script>
 <script th:src="@{/js/sb-admin-2.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/lib/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/lib/datatables/dataTables.bootstrap4.js}"></script>
+
+
 <script th:src="@{/js/admin/main.js}"></script>
+
+
 
 </body>
 </html>

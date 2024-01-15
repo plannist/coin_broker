@@ -52,4 +52,16 @@
 		limit 10
 	</select>
 
+	<select id="findAdminTransReqList" resultType="com.coin.broker.front.model.TransReqMas">
+		SELECT * FROM trans_req_mas ORDER BY reg_dttm DESC limit #{length} offset #{start}
+	</select>
+
+	<select id="findAdminTransReqCnt" resultType="Integer">
+		SELECT count(1) FROM trans_req_mas
+	</select>
+
+	<select id="findNewRequest" resultType="Integer">
+		select count(1) from trans_req_mas where prcs_cd = '1'
+	</select>
+
 </mapper>
