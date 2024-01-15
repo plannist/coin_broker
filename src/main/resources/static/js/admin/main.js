@@ -34,7 +34,21 @@ function getCoinPrice(){
                     // document.querySelector("audio").play();
                     let src = $('#audio').attr('src');
                     let audio = new Audio(src);
-                    audio.play();
+                    // audio.play();
+                    let promise = audio.play();
+                    if(promise !== undefined) {
+                        promise.then(() => {
+                            // Autoplay started
+                        }).catch(error => {
+                            // Autoplay was prevented.
+                            audio.muted = true;
+                            audio.play();
+                        });
+                    }
+
+                    // $(document).on('mousemove', function(){
+                    //     audio.play();
+                    // })
 
 
                 }
