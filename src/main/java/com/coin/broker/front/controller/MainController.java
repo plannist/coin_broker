@@ -5,7 +5,9 @@ import com.coin.broker.admin.service.AdminService;
 import com.coin.broker.front.model.*;
 import com.coin.broker.front.service.*;
 import com.coin.broker.util.Response;
+import com.coin.broker.util.Utils;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
@@ -63,7 +65,7 @@ public class MainController {
 
     @PostMapping("/transReq")
     @ResponseBody
-    public ResponseEntity<?> transReq(TransReqMas param){
+    public ResponseEntity<?> transReq(TransReqMas param, HttpServletRequest request){
         Response<?> res = new Response<>();
         param.setReqAmt(param.getReqAmt().replaceAll(",", ""));
         param.setChargeAmt(param.getChargeAmt().replaceAll(",", ""));
@@ -76,6 +78,30 @@ public class MainController {
             res.setStatusCode(Response.ResultCode.FAIL.getCode());
             return ResponseEntity.ok(res);
         }
+
+        String ip = "";
+        String firstIp = request.getHeader("X-FORWARDED-FOR");
+        String proxyIp = request.getHeader("Proxy-Client-IP");
+        String proxyIp2 = request.getHeader("WL-Proxy-Client-IP");
+        log.info("firstIp :: >>>> {}", firstIp);
+        log.info("proxyIp :: >>>> {}", proxyIp);
+        log.info("proxyIp2 :: >>> {}", proxyIp2);
+
+        //proxy 환경일 경우
+        if (Utils.isEmpty(firstIp)) {
+            ip = proxyIp;
+        }
+
+        //웹로직 서버일 경우
+        if (Utils.isEmpty(proxyIp)) {
+            ip = proxyIp2;
+        }
+
+        if (Utils.isEmpty(proxyIp2)) {
+            ip = request.getRemoteAddr() ;
+        }
+        log.info("final ip :: >>> {}", ip);
+        param.setClientIp(ip);
 
         try{
             transReqMasService.insert(param);

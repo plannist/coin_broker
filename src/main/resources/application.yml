@@ -80,7 +80,7 @@ server:
   servlet:
     session:
       timeout: 20
-
+  forward-headers-strategy: native
 
 #Multipart
 file:
@@ -117,7 +117,7 @@ server:
   servlet:
     session:
       timeout: 60
-
+  forward-headers-strategy: native
 
 #Multipart
 file:

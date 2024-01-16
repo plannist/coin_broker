@@ -74,6 +74,7 @@ function getCoinPrice(){
     $.ajax({
         url : "/api/coinPrice",
         type: 'POST',
+        global: false,
         contentType : 'application/json',
         data: {coinType : 'FRONT'},
         success : function(res){

@@ -21,6 +21,7 @@ function getCoinPrice(){
         url : "/api/coinPrice",
         type: 'POST',
         contentType : 'application/json',
+        global: false,
         data: {coinType : 'ADMIN'},
         success : function(res){
             console.log("res >>", res);
@@ -246,5 +247,6 @@ $(document).ready(function(){
 
 function goDetail(reqNo){
     console.log("reqNo: >>", reqNo);
+    reqno = reqNo;
     $("#transDtlModal").modal('show');
 }
