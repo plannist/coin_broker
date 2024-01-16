@@ -54,11 +54,16 @@ $(document).ready(function(){
 
 function contact(){
 
-    alertConfirm('유의사항', contactMsg, '확인했습니다',()=>{
-        // $('#contactForm').reset();
-        document.getElementById("contactForm").reset();
-        pollingEnd();
-        $("#transReqModal").modal('show');
+    alertConfirm('유의사항', contactMsg, '확인했습니다',(res)=>{
+        console.log("res: ", res);
+        if(res.isConfirmed){
+            // $('#contactForm').reset();
+            document.getElementById("contactForm").reset();
+            pollingEnd();
+            $("#transReqModal").modal('show');
+        }
+        return false;
+
     })
 
 
@@ -70,6 +75,7 @@ function getCoinPrice(){
         url : "/api/coinPrice",
         type: 'POST',
         contentType : 'application/json',
+        data: {coinType : 'FRONT'},
         success : function(res){
             console.log("res >>", res);
             if(res.statusCode === 'S001'){

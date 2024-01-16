@@ -68,6 +68,7 @@ public class MainController {
         param.setReqAmt(param.getReqAmt().replaceAll(",", ""));
         param.setChargeAmt(param.getChargeAmt().replaceAll(",", ""));
         param.setTotReqAmt(param.getTotReqAmt().replaceAll(",", ""));
+        param.setPhoneNo(param.getPhoneNo().replaceAll("-", ""));
 
         int cnt = transReqMasService.findRecentReqList(param);
         if(cnt > 0){
@@ -123,10 +124,12 @@ public class MainController {
         Response<List<CoinPrice>> res = new Response<>();
         try {
             List<CoinPrice> list = upbitService.getCoinPrice();
-            int cnt = transReqMasService.findNewRequest();
+            if("ADMIN".equals(param.getCoinType())){
+                int cnt = transReqMasService.findNewRequest();
+                //admin 현재 보고있는 요청 건수
+                res.setTotalCount(cnt);
+            }
 
-            //admin 현재 보고있는 요청 건수
-            res.setTotalCount(cnt);
             log.info("Coin Price ::: {}", list);
             res.setData(list);
         } catch (IOException e) {

@@ -141,10 +141,12 @@ function cointTypeSelect(el, type){
     $('#totReqAmt').val(null);
 
     let name= $(el).attr('name');
-    $('button[name='+name+']').removeClass('bg-success');
+    $('button[name='+name+']').removeClass('btn-primary');
+    $('button[name='+name+']').addClass('btn-light');
     transVo.coinType = type;
     $('#coinType').val(type);
-    $(el).addClass('bg-success');
+    $(el).removeClass('btn-light');
+    $(el).addClass('btn-primary');
 
     let flag = !!$('input[name=chargeCd]:checked').val();
     if(flag){
@@ -373,10 +375,18 @@ function changeNameListener(el){
     $(el).find('.invalid-feedback').hide();
 }
 
+/* 휴대폰번호 입력 */
 function changePhoneListener(el){
-
+    let data = $(el).val();
+    data = data.replaceAll("-", "");
+    if(data.length > 11){
+        $(el).val(null);
+        return false;
+    }
     $(el).removeClass('is-invalid');
     $(el).find('.invalid-feedback').hide();
+
+    $(el).val(data.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
 }
 
 

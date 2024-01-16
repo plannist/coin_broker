@@ -1,4 +1,4 @@
-<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="modal">
@@ -16,14 +16,14 @@
             <!-- 코인선택 -->
             <div class="row btn-group">
                 <p class="krFont">구매 및 전송할 코인 종류를 선택해주세요.</p>
-                <div class="col-4 col-sm-4">
-                    <button name="coinType" class="btn btn-light  krFont" type="button" onclick="cointTypeSelect(this, 'KRW-XRP');">리플(XRP)</button>
+                <div class="col-4">
+                    <button name="coinType" class="btn btn-light col-12 krFont" type="button" style="min-height: 70px;" onclick="cointTypeSelect(this, 'KRW-XRP');">리플(XRP)</button>
                 </div>
-                <div class="col-4 col-sm-4">
-                    <button name="coinType" class="btn btn-light  krFont" type="button" onclick="cointTypeSelect(this, 'KRW-BTC');">비트코인(BTC)</button>
+                <div class="col-4">
+                    <button name="coinType" class="btn btn-light  col-12 krFont" type="button" style="min-height: 70px;" onclick="cointTypeSelect(this, 'KRW-BTC');">비트코인(BTC)</button>
                 </div>
-                <div class="col-4 col-sm-4">
-                    <button name="coinType" class="btn btn-light  krFont" type="button" onclick="cointTypeSelect(this, 'KRW-ETH');">이더리움(ETH)</button>
+                <div class="col-4">
+                    <button name="coinType" class="btn btn-light  col-12 krFont" type="button" style="min-height: 70px;" onclick="cointTypeSelect(this, 'KRW-ETH');">이더리움(ETH)</button>
                 </div>
             </div>
 
@@ -157,10 +157,10 @@
                         <span class="krFont xl-small fst-italic">※ 계좌이체시 명의인과 입금자명이 동일해야합니다.(무통장&ATM입금제외)</span>
                     </div>
 
-                    <!-- 휴대폰번호 -->
+                    <!-- 휴대폰번호 maxlength="11" -->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="phoneNo" name="phoneNo" inputmode="numeric"
-                               type="text" maxlength="11" placeholder="" data-sb-validations="required" onkeyup="changePhoneListener(this);"/>
+                               type="text"  placeholder="" data-sb-validations="required" onkeyup="changePhoneListener(this);"/>
                         <label for="phoneNo" class="krFont">휴대폰 번호를 입력해주세요.</label>
                         <div class="invalid-feedback" data-sb-feedback="phone:required">휴대폰번호는 필수 입력값입니다.</div>
                         <span class="krFont xl-small fst-italic">※ 진행사항을 문자로 안내드립니다.</span>
@@ -184,7 +184,7 @@
                             법인계좌에서의 입금은 받지 않으니 입금자명 바꾸어 입금시도를 하지 마시기 바랍니다.
                             암호화페는 전송후에는 취소나 변경이 안되는 방식입니다. 확실한 거래만 신청하세요
                         </span>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline row">
                             <input class="form-check-input" type="checkbox" name="prcsCd" id="inlineRadio4" value="1" onclick="agreeAll(this);">
                             <label class="form-check-label krFont" for="inlineRadio4">주의사항을 읽고 대행신청 및 진행에 대한 책임은 신청자 본인에게 있음을 동의합니다.</label>
                         </div>

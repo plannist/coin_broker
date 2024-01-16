@@ -21,6 +21,7 @@ function getCoinPrice(){
         url : "/api/coinPrice",
         type: 'POST',
         contentType : 'application/json',
+        data: {coinType : 'ADMIN'},
         success : function(res){
             console.log("res >>", res);
             if(res.statusCode === 'S001'){
@@ -109,7 +110,7 @@ const DataTableBasic = function(){
                 {data: 'reqAmt'},
                 {data: 'deposNm'},
                 {data: 'phoneNo'},
-                {data: 'prcsCd'},
+                {data: 'prcsNm'},
                 {data: 'regDttm'},
         ];
 
@@ -124,7 +125,8 @@ const DataTableBasic = function(){
             {
                 targets: 2,
                 render: function(data, type, full) {
-                    _data = `<a href="/member/detail.do?mgtId=` + data + `"><ins>` + comma(data) + `</ins></a>`;
+                    let reqno = full.reqno;
+                    _data = `<a href="#" onclick='goDetail(${reqno})'><ins>` + comma(data) + `</ins></a>`;
                     return _data;
                 },
             },
@@ -195,16 +197,24 @@ const DataTableBasic = function(){
 
 
 var spiker;
+var constraints;
 $(document).ready(function(){
     navigator.mediaDevices.enumerateDevices().then(devices => {
-        console.log("device info >> ", devices);
+        console.log("devices [] >> ", devices);
         spiker = devices.find(function(device) {
+            console.log("device info >> ", device);
             return device.kind === "audiooutput";
         });
+        const audioSource = '';
+        const videoSource = '';
+        constraints = {
+            audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
+            video: {deviceId: videoSource ? {exact: videoSource} : undefined}
+        };
         console.log("spiker 11>> ", spiker);
     }).then(()=>{
         console.log("spiker 22>> ", spiker);
-        navigator.mediaDevices.getUserMedia({audio : spiker}).then(()=>{
+        navigator.mediaDevices.getUserMedia(constraints).then(()=>{
             AudioContext = window.AudioContext ;
             audioContext = new AudioContext();
             getCoinPrice();
@@ -214,6 +224,14 @@ $(document).ready(function(){
             getCoinPrice();
         });
     })
+
+    // const audioSource = audioInputSelect.value;
+    // const videoSource = videoSelect.value;
+    // const constraints = {
+    //     audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
+    //     video: {deviceId: videoSource ? {exact: videoSource} : undefined}
+    // };
+    // navigator.mediaDevices.getUserMedia(constraints).then(gotStream).then(gotDevices).catch(handleError);
 
 
 
@@ -225,3 +243,8 @@ $(document).ready(function(){
 
     // DataTableBasic.init('dataTable', null, 10);
 });
+
+function goDetail(reqNo){
+    console.log("reqNo: >>", reqNo);
+    $("#transDtlModal").modal('show');
+}

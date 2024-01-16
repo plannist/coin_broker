@@ -46,14 +46,14 @@ public class SecurityConfiguration  {
             })
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers("/", "/error","map", "/hidden", "/transReq",
+                auth.requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login",
                         "/api/**", "/image/**", "/css/**",
                         "/js/**", "/lib/**", "/fontwesome/**")
                 .permitAll()
                 .requestMatchers("/admin/**").authenticated();
             })
             .formLogin(login -> {
-                login.loginPage("/api/income")
+                login.loginPage("/login")
                         .successHandler(loginSuccessHandler)
                         .failureHandler(loginFailureHandler)
                         .usernameParameter("email")

@@ -26,4 +26,7 @@ public class TransReqMas extends Pagination {
     private String          prcsCd;
     private String          tradePrice;
 
+    //admin 표시
+    private String          prcsNm;
+
 }

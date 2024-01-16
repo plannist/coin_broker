@@ -20,10 +20,17 @@ import java.io.IOException;
 public class LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
+        String defaultFailerUrl = "/login";
+        String uri = request.getRequestURI();
+
+        if(!uri.contains("admin")){
+            defaultFailerUrl = "/";
+        }
+
         String email = request.getParameter("email");
         String pwd = request.getParameter("pwd");
         String restCd = "5";
-        String defaultFailerUrl = "/login";
+
 
         log.debug("login fail email: "+email+", pwd: "+pwd);
 
@@ -44,7 +51,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 //		forword.forward(request, response);
         Cookie cookie = new Cookie("restCd", restCd);
         cookie.setMaxAge(60); //1분
-        cookie.setPath("/login");
+        cookie.setPath(defaultFailerUrl);
 //		cookie.setSecure(true);
         response.addCookie(cookie);
         response.sendRedirect(defaultFailerUrl);

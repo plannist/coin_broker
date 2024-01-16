@@ -1,0 +1,115 @@
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="transDtlModal">
+    <div class="modal fade" id="transDtlModal" tabindex="-1"  aria-labelledby="transDtlModalLabel" aria-hidden="true" role="dialog"  data-bs-backdrop='static' data-bs-keyboard="false" >
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+            <div class="modal-content w-100">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="accountDtlModalLabel"> Detail Payment</h5>
+                    <button class="close" type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" id="modalBody">
+                    <form id="modalAccountDlt">
+                        <div class="form-group row">
+                            <div class="col-sm-4 mb-3 mb-sm-0">
+                                <span>수입, 지출</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="accType" id="inlineRadio1" value="I">
+                                    <label class="form-check-label" for="inlineRadio1">수입</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="accType" id="inlineRadio2" value="E">
+                                    <label class="form-check-label" for="inlineRadio2">지출</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- 고정 지출  -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="staticYn" id="staticYn" value="Y">
+                                    <label class="form-check-label" for="staticYn">고정 지출</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3 mb-sm-0">
+                            <div class="col-sm-2 bg-gray-100 mb-1">
+                                <p>코인(종류)</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="form-select mb-3" id="expendSeq" , name="expend.expendSeq" style="font-size: 0.8rem;">
+                                    <option style="background-color: white" value="">선택해주세요</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-2 bg-gray-100 mb-1">
+                                <p class="krFont">계산방식</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="form-select mb-3" id="expendSeq1" , name="expend.expendSeq" style="font-size: 0.8rem;">
+                                    <option style="background-color: white" value="">선택해주세요</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-2 bg-gray-100 mb-1">
+                                <p>신청자명</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="amt", name="amt" placeholder="금액">
+                            </div>
+
+                            <div class="col-sm-2 bg-gray-100 mb-1">
+                                <p>휴대폰번호</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="amt", name="amt" placeholder="금액">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-2 bg-gray-100 mb-1">
+                                <p>신청시간</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="amt", name="amt" placeholder="금액">
+                            </div>
+
+                            <div class="col-sm-2 bg-gray-100 mb-1">
+                                <p>접속기록</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="amt", name="amt" placeholder="금액">
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+                    </form>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+</html>

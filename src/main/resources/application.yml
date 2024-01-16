@@ -79,7 +79,7 @@ server:
     path: /erro
   servlet:
     session:
-      timeout: 2
+      timeout: 20
 
 
 #Multipart

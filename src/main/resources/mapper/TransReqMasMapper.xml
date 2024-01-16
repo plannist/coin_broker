@@ -53,7 +53,29 @@
 	</select>
 
 	<select id="findAdminTransReqList" resultType="com.coin.broker.front.model.TransReqMas">
-		SELECT * FROM trans_req_mas ORDER BY reg_dttm DESC limit #{length} offset #{start}
+		SELECT
+			reqno,
+			coin_type,
+			charge_cd,
+			req_amt,
+			charge_amt,
+			tot_req_amt,
+			send_coin,
+			to_wallet_addr,
+			dstnt_tag,
+			depos_nm,
+			phone_no,
+			rsn_ctnt,
+			device_type,
+			referer_url,
+			mod_dttm,
+			prcs_cd,
+			trade_price,
+			reg_dttm,
+			(select com_nm from com_cd_mas z where z.com_cd = a.prcs_cd and z.group_cd = 'prcs_cd') as prcs_nm
+		FROM trans_req_mas a
+		ORDER BY reg_dttm DESC
+			limit #{length} offset #{start}
 	</select>
 
 	<select id="findAdminTransReqCnt" resultType="Integer">
