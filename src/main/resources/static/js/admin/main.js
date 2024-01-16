@@ -247,6 +247,6 @@ $(document).ready(function(){
 
 function goDetail(reqNo){
     console.log("reqNo: >>", reqNo);
-    reqno = reqNo;
+    param.reqno = reqNo+"";
     $("#transDtlModal").modal('show');
 }
