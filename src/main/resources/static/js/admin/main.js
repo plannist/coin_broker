@@ -10,6 +10,10 @@ let timer;
 
 let newRequestCnt =0;
 
+var AudioContext;
+
+var audioContext;
+
 
 function getCoinPrice(){
 
@@ -190,8 +194,30 @@ const DataTableBasic = function(){
 }();
 
 
+var spiker;
 $(document).ready(function(){
-    getCoinPrice();
+    navigator.mediaDevices.enumerateDevices().then(devices => {
+        console.log("device info >> ", devices);
+        spiker = devices.find(function(device) {
+            return device.kind === "audiooutput";
+        });
+        console.log("spiker 11>> ", spiker);
+    }).then(()=>{
+        console.log("spiker 22>> ", spiker);
+        navigator.mediaDevices.getUserMedia({audio : spiker}).then(()=>{
+            AudioContext = window.AudioContext ;
+            audioContext = new AudioContext();
+            getCoinPrice();
+        }).catch(e => {
+            console.error(`Audio permissions denied:`, e);
+
+            getCoinPrice();
+        });
+    })
+
+
+
+
     // pollingStart();
 
 

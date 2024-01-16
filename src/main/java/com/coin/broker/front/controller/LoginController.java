@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 public class LoginController {
 
-    @GetMapping("/login")
+    @GetMapping("/api/income")
     public ModelAndView login(){
 
         ModelAndView mv = new ModelAndView("login");
