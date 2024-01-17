@@ -75,7 +75,8 @@ function getCoinPrice(){
         url : "/api/coinPrice",
         type: 'POST',
         global: false,
-        contentType : 'application/json',
+        dataType : 'json',
+        // contentType : 'application/json',
         data: {coinType : 'FRONT'},
         success : function(res){
             console.log("res >>", res);
@@ -103,7 +104,7 @@ function getCoinPrice(){
 }
 
 function pollingStart(){
-    LOAD_YN = false;
+    // LOAD_YN = false;
     timmer = setInterval(()=>{
         getCoinPrice();
     }, 10000);
@@ -111,6 +112,6 @@ function pollingStart(){
 
 function pollingEnd(){
     clearInterval(timmer);
-    LOAD_YN = true;
+    // LOAD_YN = true;
 }
 

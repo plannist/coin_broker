@@ -36,4 +36,14 @@ public class TransReqMasServiceImpl implements TransReqMasService{
     public int findNewRequest() {
         return transReqMasMapper.findNewRequest();
     }
+
+    @Override
+    public TransReqMas findTransReqDtl(TransReqMas param) {
+        return transReqMasMapper.findTransReqDtl(param);
+    }
+
+    @Override
+    public TransReqMas findCusTransCnt(TransReqMas param) {
+        return transReqMasMapper.findCusTransCnt(param);
+    }
 }

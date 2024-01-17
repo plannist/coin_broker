@@ -14,4 +14,8 @@ public interface TransReqMasService {
     int findAdminTransReqCnt(TransReqMas param);
 
     int findNewRequest();
+
+    TransReqMas findTransReqDtl(TransReqMas param);
+
+    TransReqMas findCusTransCnt(TransReqMas param);
 }

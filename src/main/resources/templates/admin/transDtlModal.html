@@ -15,45 +15,29 @@
 
                 <div class="modal-body" id="modalBody">
                     <form id="transDtlForm">
-                        <div class="form-group row">
-                            <div class="col-sm-4 mb-3 mb-sm-0">
-                                <span>수입, 지출</span>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="accType" id="inlineRadio1" value="I">
-                                    <label class="form-check-label" for="inlineRadio1">수입</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="accType" id="inlineRadio2" value="E">
-                                    <label class="form-check-label" for="inlineRadio2">지출</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <!-- 고정 지출  -->
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="staticYn" id="staticYn" value="Y">
-                                    <label class="form-check-label" for="staticYn">고정 지출</label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="form-group row mb-3 mb-sm-0">
-                            <div class="col-sm-2 bg-gray-100 mb-1">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>코인(종류)</p>
                             </div>
                             <div class="col-sm-4">
-                                <select class="form-select mb-3" id="expendSeq" , name="expend.expendSeq" style="font-size: 0.8rem;">
+                                <select class="form-select mb-3" id="coinType" name="coinType" style="font-size: 0.8rem;">
                                     <option style="background-color: white" value="">선택해주세요</option>
+                                    <option style="background-color: white" value="KRW-BTC">비트코인(BTC)</option>
+                                    <option style="background-color: white" value="KRW-ETH">이더리움(ETH)</option>
+                                    <option style="background-color: white" value="KRW-XRP">리플(XRP)</option>
                                 </select>
+
                             </div>
 
-                            <div class="col-sm-2 bg-gray-100 mb-1">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p class="krFont">계산방식</p>
                             </div>
                             <div class="col-sm-4">
-                                <select class="form-select mb-3" id="expendSeq1" , name="expend.expendSeq" style="font-size: 0.8rem;">
+                                <select class="form-select mb-3" id="chargeCd" name="chargeCd" style="font-size: 0.8rem;">
                                     <option style="background-color: white" value="">선택해주세요</option>
+                                    <option style="background-color: white" value="I">수수료별도</option>
+                                    <option style="background-color: white" value="T">수수료포함</option>
                                 </select>
                             </div>
 
@@ -61,47 +45,289 @@
 
                         <div class="form-group row">
 
-                            <div class="col-sm-2 bg-gray-100 mb-1">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>신청자명</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="amt", name="amt" placeholder="금액">
+                                <input type="text" class="form-control form-control-user" id="deposNm" name="deposNm" placeholder="신청자명" disabled>
                             </div>
 
-                            <div class="col-sm-2 bg-gray-100 mb-1">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>휴대폰번호</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="amt", name="amt" placeholder="금액">
+                                <div class="input-group">
+                                <input type="text" class="form-control form-control-user" id="phoneNo" name="phoneNo" placeholder="휴대폰번호" value="" disabled>
+                                <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
+                                </div>
                             </div>
 
                         </div>
 
                         <div class="form-group row">
 
-                            <div class="col-sm-2 bg-gray-100 mb-1">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>신청시간</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="amt", name="amt" placeholder="금액">
+                                <input type="text" class="form-control form-control-user" id="regDttm" name="regDttm" placeholder="신청시간">
                             </div>
 
-                            <div class="col-sm-2 bg-gray-100 mb-1">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>접속기록</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="amt", name="amt" placeholder="금액">
+                                <input type="text" class="form-control form-control-user" id="clientIp" name="clientIp" placeholder="접속기록">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>완료횟수/최종완료</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="prcsCd6Cnt" name="prcsCd6Cnt" placeholder="금액">
+                            </div>
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>레퍼러</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="refererUrl" name="refererUrl" placeholder="접속경로">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
+                                <p>신청금액</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control form-control-user" id="reqAmt" name="reqAmt" placeholder="금액">
+                            </div>
+
+                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
+                                <p>수수료</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control form-control-user" id="chargeAmt" name="chargeAmt" placeholder="접속경로">
+                            </div>
+
+                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
+                                <p>입금금액</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control form-control-user" id="totReqAmt" name="totReqAmt" placeholder="접속경로">
+                            </div>
+
+                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
+                                <p>접속기기</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control form-control-user" id="deviceType" name="deviceType" placeholder="접속경로">
                             </div>
 
                         </div>
 
 
+                        <div class="form-group row">
+
+                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
+                                <p>현재시세</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control form-control-user" id="nowPrice" name="nowPrice" placeholder="지금코인시세">
+                            </div>
+
+                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
+                                <p>적용시세</p> <!-- 요청당시 코인시세금액 -->
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control form-control-user" id="tradePrice" name="tradePrice" placeholder="요청당시시세">
+                            </div>
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>보낼코인양 가치확인</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="calcPrice" name="calcPrice" placeholder="">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>변경하기</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="accType" id="inlineRadio1" value="N">
+                                        <label class="form-check-label" for="inlineRadio1">현재시세</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="accType" id="inlineRadio2" checked value="R">
+                                        <label class="form-check-label" for="inlineRadio2">적용시세</label>
+                                    </div>
+                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="sendingCoinCalc();">계산실행</button>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>보낼코인양</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-user" id="transCoin" name="transCoin" placeholder="보낼코인양">
+                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>지갑주소</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-user" id="toWalletAddr" name="toWalletAddr" disabled placeholder="지갑주소">
+                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row" id="memoArea" style="display: none">
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>메모</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control form-control-user" id="memo" name="memo" placeholder="메모">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>데스티네이션 태그</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-user" id="dstntTag" name="dstntTag" placeholder="데스티네이션 태그">
+                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>트랜젝션 ID</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-control-user" id="transactionId" name="transactionId" placeholder="트랜젝션 ID">
+                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>주문메모</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <textarea class="form-control form-control-user" id="rsnCtnt" name="rsnCtnt" placeholder="지갑주소"></textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>현재단계</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="prcsCd" placeholder="금액">
+                                <input type="hidden" name="prcsCd">
+                            </div>
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>처리시각</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="modDttm" name="modDttm" placeholder="처리시각">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>업무처리</p>
+                            </div>
+                            <div class="col-sm-10">
+                               <div class="btn-group">
+                                   <button class="btn btn-primary" id="prcs_cd_1" name="prcsCds" type="button" >신규신청</button>
+                                   <button class="btn btn-primary" id="prcs_cd_2" name="prcsCds" type="button" >입금기업</button>
+                                   <button class="btn btn-primary" id="prcs_cd_3" name="prcsCds" type="button" >입금우리</button>
+                                   <button class="btn btn-primary" id="prcs_cd_4" name="prcsCds" type="button" >입금농협</button>
+                                   <button class="btn btn-primary" id="prcs_cd_5" name="prcsCds" type="button" >코인전송</button>
+                                   <button class="btn btn-primary" id="prcs_cd_6" name="prcsCds" type="button" >처리완료</button>
+                                   <button class="btn btn-primary" id="prcs_cd_7" name="prcsCds" type="button" >취소완료</button>
+                                   <button class="btn btn-primary" id="prcs_cd_8" name="prcsCds" type="button" >TXID</button>
+                                   <button class="btn btn-primary" id="prcs_cd_9" name="prcsCds" type="button" >인증요구</button>
+                               </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>문자생성</p>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="btn-group">
+                                <select class="form-select mb-3" id="mmsFormat" name="mmsFormat" style="font-size: 0.8rem;">
+                                    <option style="background-color: white" value="" selected>현재단계</option>
+
+                                </select>
+                                <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="createMms(this)">생성하기</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                    <p>문자내용</p>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="input-group-append">
+                                        <textarea class="form-control form-control-user" id="mmsContents" name="mmsContents" placeholder="문자내용"></textarea>
+                                        <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="createMms(this)">생성하기</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
 
 
-
+                        </div>
 
 
                     </form>
+
+                    <div class="row">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="submit" type="button" onclick="save();">변경사항 저장하기</button>
+                            <button class="btn btn-secondary" id="prcs_cd_2" type="button" onclick="cancel();">취소</button>
+                        </div>
+                    </div>
+
                 </div>
 
 

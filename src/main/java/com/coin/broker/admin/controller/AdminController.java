@@ -6,6 +6,7 @@ import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.util.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,18 @@ public class AdminController {
 
 
         return res;
+    }
+
+    @PostMapping("/transReqDtl")
+    @ResponseBody
+    public ResponseEntity<?>  transReqDtl (TransReqMas param){
+        Response<Object> res = new Response<>();
+        TransReqMas result = transReqMasService.findTransReqDtl(param);
+        TransReqMas cntInfo = transReqMasService.findCusTransCnt(result);
+        result.setPrcsCd6Cnt(cntInfo.getPrcsCd6Cnt());
+        result.setLstRcptDttm(cntInfo.getLstRcptDttm());
+        res.setData(result);
+        return ResponseEntity.ok(res);
     }
 
 

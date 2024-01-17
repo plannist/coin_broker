@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @MapperScan(value = "com.coin.broker.**.mapper")
-@ServletComponentScan(basePackages = {"com.coin.broker.filter"})
+//@ServletComponentScan(basePackages = {"com.coin.broker.filter"})
 public class CoinBrokerApplication {
 
 	public static void main(String[] args) {

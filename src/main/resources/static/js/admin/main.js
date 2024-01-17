@@ -1,10 +1,12 @@
 console.log("관리자메인페이지")
 
-var tradePrice = {
+var nowCoinPrice = {
     'KRW-BTC' : '',
     'KRW-ETH' : '',
     'KRW-XRP' : ''
 };
+
+var isModalOpen = false;
 
 let timer;
 
@@ -20,18 +22,22 @@ function getCoinPrice(){
     $.ajax({
         url : "/api/coinPrice",
         type: 'POST',
-        contentType : 'application/json',
+        // contentType : 'application/json',
         global: false,
         data: {coinType : 'ADMIN'},
+        dataType : 'json',
         success : function(res){
-            console.log("res >>", res);
+            // console.log("getCoinPrice res >>", res);
             if(res.statusCode === 'S001'){
                 for(let data of res.data){
                     $('#'+data.coinType).text('$'+comma(data.amt).concat(" 원"));
-                    tradePrice[data.coinType] = data.amt;
+                    nowCoinPrice[data.coinType] = data.amt;
+                    if(isModalOpen){
+                        lookingForNowCoinPrice();
+                    }
                 }
 
-                console.log("tradePrice >>" , tradePrice);
+                console.log("nowCoinPrice >>" , nowCoinPrice);
                 if(newRequestCnt < res.totalCount){
                     newRequestCnt = res.totalCount;
                     //TODO: 알람
@@ -52,10 +58,6 @@ function getCoinPrice(){
                         });
                     }
 
-                    // $(document).on('mousemove', function(){
-                    //     audio.play();
-                    // })
-
 
                 }
 
@@ -70,15 +72,16 @@ function getCoinPrice(){
 }
 
 function pollingStart(){
-    LOAD_YN = false;
+    // LOAD_YN = false;
     timmer = setInterval(()=>{
+
         getCoinPrice();
     }, 10000);
 }
 
 function pollingEnd(){
     clearInterval(timmer);
-    LOAD_YN = true;
+    // LOAD_YN = true;
 }
 
 /**
@@ -99,7 +102,7 @@ function pollingEnd(){
  * regDttm;
  * modDttm;
  * prcsCd;
- * tradePrice;
+ * nowCoinPrice;
  *
  * */
 const DataTableBasic = function(){
@@ -203,7 +206,7 @@ $(document).ready(function(){
     navigator.mediaDevices.enumerateDevices().then(devices => {
         console.log("devices [] >> ", devices);
         spiker = devices.find(function(device) {
-            console.log("device info >> ", device);
+            // console.log("device info >> ", device);
             return device.kind === "audiooutput";
         });
         const audioSource = '';
@@ -212,9 +215,9 @@ $(document).ready(function(){
             audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
             video: {deviceId: videoSource ? {exact: videoSource} : undefined}
         };
-        console.log("spiker 11>> ", spiker);
+        // console.log("spiker 11>> ", spiker);
     }).then(()=>{
-        console.log("spiker 22>> ", spiker);
+        // console.log("spiker 22>> ", spiker);
         navigator.mediaDevices.getUserMedia(constraints).then(()=>{
             AudioContext = window.AudioContext ;
             audioContext = new AudioContext();
@@ -236,8 +239,8 @@ $(document).ready(function(){
 
 
 
-
-    // pollingStart();
+    //TODO: 최종반영시 주석해제
+    pollingStart();
 
 
     DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);

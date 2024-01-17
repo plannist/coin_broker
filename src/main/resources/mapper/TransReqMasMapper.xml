@@ -96,4 +96,50 @@
 		select count(1) from trans_req_mas where prcs_cd = '1'
 	</select>
 
+	<select id="findTransReqDtl" resultType="com.coin.broker.front.model.TransReqMas">
+		SELECT
+			a.reqno,
+			coin_type,
+			charge_cd,
+			req_amt,
+			charge_amt,
+			tot_req_amt,
+			send_coin,
+			to_wallet_addr,
+			dstnt_tag,
+			depos_nm,
+			phone_no,
+			rsn_ctnt,
+			device_type,
+			referer_url,
+			a.mod_dttm,
+			prcs_cd,
+			trade_price,
+			a.reg_dttm,
+			(select com_nm from com_cd_mas z where z.com_cd = a.prcs_cd and z.group_cd = 'prcs_cd') as prcs_nm,
+			transaction_id,
+			c.memo,
+			trans_coin,
+			client_ip,
+            bank_cd,
+            bank_account,
+            trans_dttm
+		FROM trans_req_mas a
+		LEFT OUTER JOIN trans_rcpt_mas b
+		ON a.reqno = b.reqno
+		LEFT OUTER JOIN wlt_addr_mng c
+		ON a.to_wallet_addr = c.wlt_addr
+		WHERE
+		    a.reqno = #{reqno}
+	</select>
+
+	<select id="findCusTransCnt" resultType="com.coin.broker.front.model.TransReqMas">
+		select
+		    count(*) as prcs_cd6_cnt
+			, max(mod_dttm) as lst_rcpt_dttm
+		from trans_req_mas
+		where prcs_cd = '6' -- 거래완료
+		  and phone_no = #{phoneNo}
+	</select>
+
 </mapper>

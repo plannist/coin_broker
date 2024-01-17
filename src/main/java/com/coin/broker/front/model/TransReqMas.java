@@ -29,5 +29,35 @@ public class TransReqMas extends Pagination {
 
     //admin 표시
     private String          prcsNm;
+    private int             prcsCd6Cnt; //거래완료 건수
+    private String          lstRcptDttm; //최종거래완료 시각
 
+
+    /**
+     * trans_rcpt_mas 항목
+     * */
+    private String transactionId;
+    private String transCoin;
+    private String transDttm;
+
+    /**
+     * wlt_addr_mng 항목
+     * */
+    private String wltAddr;
+    private String memo;
+
+
+    /**
+     * nowPrice
+     * calcPrice
+     * accType inlineRadio1, inlineRadio2
+     * mmsFormat
+     *
+     *   // input에 담긴 데이터를 선택
+     *     $('#data-area').select();
+     *
+     *     //  clipboard에 데이터 복사
+     *     var copy = document.execCommand('copy');
+     *
+     * */
 }
