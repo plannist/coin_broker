@@ -45,7 +45,8 @@ function getCoinPrice(){
                     $('#alarm').text(newRequestCnt +""+ "+")
                     // $('#audio').show();
                     // document.querySelector("audio").play();
-                    let src = $('#audio').attr('src');
+                    // let src = $('#audio').attr('src');
+                    let src = "/image/audio/alarm.mp3";
                     let audio = new Audio(src);
                     // audio.play();
                     let promise = audio.play();
