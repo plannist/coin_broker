@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -177,5 +179,28 @@ public class MainController {
         res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
 
         return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/api/isOpeningTime")
+    @ResponseBody
+    public ResponseEntity<?> isOpeningTime(@AuthenticationPrincipal AdminMas admin){
+        Response<Object> res = new Response<>();
+        LocalTime time = LocalTime.now();
+        int hour = time.getHour();
+        log.info("hour: >>{}", hour);
+        if(Utils.isEmpty(admin)){
+            if(hour < 8){
+                res.setStatusCode(Response.ResultCode.FAIL.getCode());
+
+            }else{
+                res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+            }
+        }else{
+            res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+        }
+
+
+        return ResponseEntity.ok(res);
+
     }
 }

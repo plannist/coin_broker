@@ -54,18 +54,30 @@ $(document).ready(function(){
 
 function contact(){
 
-    alertConfirm('유의사항', contactMsg, '확인했습니다',(res)=>{
-        console.log("res: ", res);
-        if(res.isConfirmed){
-            // $('#contactForm').reset();
-            document.getElementById("contactForm").reset();
-            pollingEnd();
-            $("#transReqModal").modal('show');
+    $.ajax({
+        url : "/api/isOpeningTime",
+        type: 'POST',
+        dataType : 'json',
+        success : function(res){
+            if(res.statusCode != 'S001'){
+                alertNotice("영업종료", "죄송합니다. 지금은 영업시간이 종료 되었습니다.", ()=>{
+                    return false;
+                })
+            }else{
+                alertConfirm('유의사항', contactMsg, '확인했습니다',(res)=>{
+                    console.log("res: ", res);
+                    if(res.isConfirmed){
+                        // $('#contactForm').reset();
+                        document.getElementById("contactForm").reset();
+                        pollingEnd();
+                        $("#transReqModal").modal('show');
+                    }
+                    return false;
+
+                })
+            }
         }
-        return false;
-
     })
-
 
 }
 

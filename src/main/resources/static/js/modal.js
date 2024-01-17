@@ -104,29 +104,45 @@ $('#submitButton').on('click', function(evt){
         console.log("save!! form data: ", form);
 
         $.ajax({
-            url : "/transReq",
+            url : "/api/isOpeningTime",
             type: 'POST',
             dataType : 'json',
-            data : form,
             success : function(res){
-                console.log("res >>", res);
-                if(res.statusCode == 'S001'){
-                    alertNotice(null, '대행 신청이 정상 접수되었습니다. 진행사항은 문자로 안내 예정입니다.', ()=>{
+                if(res.statusCode != 'S001'){
+                    alertNotice("영업종료", "죄송합니다. 지금은 영업시간이 종료 되었습니다.", ()=>{
                         location.href = "/";
                     })
                 }else{
-                    alertNotice(null, res.statusMessage, ()=>{
-                        location.href = "/";
-                    })
-                }
+                    $.ajax({
+                        url : "/transReq",
+                        type: 'POST',
+                        dataType : 'json',
+                        data : form,
+                        success : function(res){
+                            console.log("res >>", res);
+                            if(res.statusCode == 'S001'){
+                                alertNotice(null, '대행 신청이 정상 접수되었습니다. 진행사항은 문자로 안내 예정입니다.', ()=>{
+                                    location.href = "/";
+                                })
+                            }else{
+                                alertNotice(null, res.statusMessage, ()=>{
+                                    location.href = "/";
+                                })
+                            }
 
-            },error(res){
-                console.log("error:  >>> 저장실패 ", res);
-                alertNotice(null, '대행 신청 접수가 실패하였습니다. 다시 신청하시거나 상담 신청해주세요.', ()=>{
-                    location.href = "/";
-                })
+                        },error(res){
+                            console.log("error:  >>> 저장실패 ", res);
+                            alertNotice(null, '대행 신청 접수가 실패하였습니다. 다시 신청하시거나 상담 신청해주세요.', ()=>{
+                                location.href = "/";
+                            })
+                        }
+                    })
+
+                }
             }
         })
+
+
     }
 
 
@@ -172,6 +188,8 @@ function cointTypeSelect(el, type){
         success : function(res){
             console.log("getCoinMas res >>", res);
             coinMas = res.data;
+
+            $('#toWalletAddr').next('label').text("선택된"+$(el).text()+"의 지갑주소를 입력해주세요.");
         }
     })
 
