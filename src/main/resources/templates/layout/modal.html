@@ -68,7 +68,7 @@
                                onkeyup="changeAmtListener(this);"
                         />
                         <label for="reqAmt" class="krFont">신청금액을 입력해주세요.</label>
-                        <div class="invalid-feedback" data-sb-feedback="name:required"></div>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">신청금액은 필수값 입니다.</div>
                     </div>
                     <!-- 수수료금액 -->
                     <div class="form-floating mb-3">
@@ -77,8 +77,6 @@
                                disabled
                         />
                         <label for="chargeAmt" class="krFont">수수료 금액입니다.</label>
-                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                     </div>
                     <!-- 총 입금액 -->
                     <div class="form-floating mb-3">
@@ -87,7 +85,6 @@
                                 disabled
                         />
                         <label for="totReqAmt" class="krFont">입금하셔야할 금액입니다.</label>
-                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
                         <span class="krFont xl-small text-bg-primary fst-italic">※ 수수료 별도시 신청금액과  입금해야할 금액은 다르므로 꼭 확인해주세요.</span>
                     </div>
 
@@ -99,14 +96,13 @@
                                disabled
                         />
                         <label for="sendCoin" class="krFont">전송되는 코인의 예상수량입니다.</label>
-                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
                         <!-- 원화가치환산 -->
                         <div class="row input-group mt-2 ms-1">
                             <div class="col-5 col-sm-2">
                                 <span class="krFont x-small">원화로 가치환산시</span>
                             </div>
                             <div class="col-6 col-sm-2">
-                                <span id="krwChange" class="krFont x-small">112000 원</span>
+                                <span id="krwChange" class="krFont x-small">0 원</span>
                             </div>
                         </div>
                         <span class="krFont xl-small fst-italic">※ 시세 변동에 따라 수량은 달라질 수 있습니다.</span>
@@ -140,7 +136,7 @@
                         <input class="form-control" id="dstntTag" name="dstntTag" type="text"
                                placeholder="" data-sb-validations="required" onkeyup="changeDstntListener(this);"/>
                         <label for="dstntTag" class="krFont">데스티네이션 태그(MEMO)를 입력해주세요.</label>
-                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">데스티네이션 태그는 필수값입니다.</div>
                         <span class="krFont xl-small fst-italic">
                             ※ 리플은 지갑주소와 태그(숫자4~10자리)는 보통 지갑주소 바로 밑에 표시됩니다.
                             지갑주소만 있고 태그가 없는 경우는 “없음”으로 입력해주세요.
@@ -170,7 +166,6 @@
                     <div class="form-floating mb-3">
                         <textarea class="form-control" id="rsnCtnt" name="rsnCtnt" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
                         <label for="rsnCtnt" class="krFont">구매 대행의 목적 또는 기타 내용이 있으시면 입력해주세요.</label>
-                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                     </div>
 
                     <!-- 주의사항 -->
@@ -184,9 +179,13 @@
                             법인계좌에서의 입금은 받지 않으니 입금자명 바꾸어 입금시도를 하지 마시기 바랍니다.
                             암호화페는 전송후에는 취소나 변경이 안되는 방식입니다. 확실한 거래만 신청하세요
                         </span>
+                        <br>
                         <div class="form-check form-check-inline row">
-                            <input class="form-check-input" type="checkbox" name="prcsCd" id="inlineRadio4" value="1" onclick="agreeAll(this);">
-                            <label class="form-check-label krFont" for="inlineRadio4">주의사항을 읽고 대행신청 및 진행에 대한 책임은 신청자 본인에게 있음을 동의합니다.</label>
+                            <div class="col-auto">
+                                <input class="form-check-input d-lg-inline-flex" type="checkbox" name="prcsCd" id="inlineRadio4" value="1" onclick="agreeAll(this);">
+                                <label class="form-check-label d-lg-inline-flex text-break krFont small" for="inlineRadio4">주의사항을 읽고 대행신청 및 진행에 대한 책임은 신청자 본인에게 있음을 동의합니다.</label>
+
+                            </div>
                         </div>
                     </div>
                 </div>

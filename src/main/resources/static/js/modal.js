@@ -79,7 +79,7 @@ $('#submitButton').on('click', function(evt){
     //is-invalid
     let flag = true;
     for(let el of inputs){
-        if(!$(el).val()){
+        if(!$(el).val() && !$(el).prop('disabled')){
             $(el).addClass('is-invalid');
             $(el).find('.invalid-feedback').show();
             flag = false;
@@ -210,7 +210,7 @@ function chargeTypeSelect(){
  * 신청금액 입력 이벤트
  * */
 function changeAmtListener(el){
-
+    $(el).removeClass('is-invalid');
     $('#chargeAmt').val(null)
     $('#totReqAmt').val(null)
 

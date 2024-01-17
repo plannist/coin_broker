@@ -138,13 +138,13 @@ const DataTableBasic = function(){
                     return _data;
                 },
             },
-            {
-                targets: 4,
-                render: function(data, type, full) {
-                    _data = data.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-                    return _data;
-                },
-            },
+            // {
+            //     targets: 4,
+            //     render: function(data, type, full) {
+            //         // _data = data.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+            //         return _data;
+            //     },
+            // },
         ];
 
         const table = $('#'+id);

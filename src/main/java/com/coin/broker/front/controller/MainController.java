@@ -126,7 +126,7 @@ public class MainController {
     @GetMapping("/map")
     public ResponseEntity<?> map(AdminMas param){
 
-        param.setId("admin");
+        param.setId("admin2");
         param.setName("테스트관리자");
         param.setAuth("관리자");
         param.setPassword(encoder.encode("qwer1234"));

@@ -103,7 +103,8 @@ function draw(data){
 	vo.chargeCd = data.chargeCd;
 
 	$('#deposNm').val(data.deposNm);
-	$('#phoneNo').val(data.phoneNo.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
+	// $('#phoneNo').val(data.phoneNo.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
+	$('#phoneNo').val(data.phoneNo);
 	$('#regDttm').val(data.regDttm);
 	$('#clientIp').val(data.clientIp);
 	if(data.prcsCd6Cnt*1 > 0){
