@@ -27,18 +27,17 @@ public class TransReqMas extends Pagination {
     private String          tradePrice;
     private String          clientIp;
 
+    private String          finalSendCoin; //최종거래완료 시각
+    private String          rcptDttm;
+    private String          bankCd; //2:기업, 3:우리, 4:농협
+    private String          transactionId;
+
     //admin 표시
     private String          prcsNm;
     private int             prcsCd6Cnt; //거래완료 건수
     private String          lstRcptDttm; //최종거래완료 시각
 
 
-    /**
-     * trans_rcpt_mas 항목
-     * */
-    private String transactionId;
-    private String transCoin;
-    private String transDttm;
 
     /**
      * wlt_addr_mng 항목

@@ -62,6 +62,22 @@ public class AdminController {
         return ResponseEntity.ok(res);
     }
 
+    @PostMapping("/transReqSave")
+    @ResponseBody
+    public ResponseEntity<?> transReqSave(TransReqMas param){
+        param.setReqAmt(param.getReqAmt().replaceAll(",", ""));
+        param.setChargeAmt(param.getChargeAmt().replaceAll(",", ""));
+        param.setTotReqAmt(param.getTotReqAmt().replaceAll(",", ""));
+        param.setPhoneNo(param.getPhoneNo().replaceAll("-", ""));
+
+        transReqMasService.insert(param);
+
+        Response<Object> res = new Response<>();
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
+        return ResponseEntity.ok(res);
+    }
+
 
 
 

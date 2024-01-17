@@ -37,7 +37,7 @@ function getCoinPrice(){
                     }
                 }
 
-                console.log("nowCoinPrice >>" , nowCoinPrice);
+                // console.log("nowCoinPrice >>" , nowCoinPrice);
                 if(newRequestCnt < res.totalCount){
                     newRequestCnt = res.totalCount;
                     //TODO: 알람

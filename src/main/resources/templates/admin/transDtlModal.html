@@ -7,7 +7,7 @@
             <div class="modal-content w-100">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="accountDtlModalLabel"> Detail Payment</h5>
+                    <h5 class="modal-title" id="accountDtlModalLabel"> 대행신청관리 상세</h5>
                     <button class="close" type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -15,6 +15,11 @@
 
                 <div class="modal-body" id="modalBody">
                     <form id="transDtlForm">
+                        <input type="hidden" id="reqno"     name="reqno">
+                        <input type="hidden" id="sendCoin"  name="sendCoin">
+                        <input type="hidden" id="prcsCd"    name="prcsCd">
+                        <input type="hidden" id="rcptDttm"  name="rcptDttm">
+                        <input type="hidden" id="bankCd"    name="bankCd">
 
                         <div class="form-group row mb-3 mb-sm-0">
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
@@ -88,7 +93,7 @@
                                 <p>완료횟수/최종완료</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="prcsCd6Cnt" name="prcsCd6Cnt" placeholder="금액">
+                                <input type="text" class="form-control form-control-user" id="prcsCd6Cnt" name="prcsCd6Cnt" value="0">
                             </div>
 
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
@@ -254,8 +259,7 @@
                                 <p>현재단계</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="prcsCd" placeholder="금액">
-                                <input type="hidden" name="prcsCd">
+                                <input type="text" class="form-control form-control-user" id="prcsNm" placeholder="현재단계">
                             </div>
 
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
@@ -273,15 +277,15 @@
                             </div>
                             <div class="col-sm-10">
                                <div class="btn-group">
-                                   <button class="btn btn-primary" id="prcs_cd_1" name="prcsCds" type="button" >신규신청</button>
-                                   <button class="btn btn-primary" id="prcs_cd_2" name="prcsCds" type="button" >입금기업</button>
-                                   <button class="btn btn-primary" id="prcs_cd_3" name="prcsCds" type="button" >입금우리</button>
-                                   <button class="btn btn-primary" id="prcs_cd_4" name="prcsCds" type="button" >입금농협</button>
-                                   <button class="btn btn-primary" id="prcs_cd_5" name="prcsCds" type="button" >코인전송</button>
-                                   <button class="btn btn-primary" id="prcs_cd_6" name="prcsCds" type="button" >처리완료</button>
-                                   <button class="btn btn-primary" id="prcs_cd_7" name="prcsCds" type="button" >취소완료</button>
-                                   <button class="btn btn-primary" id="prcs_cd_8" name="prcsCds" type="button" >TXID</button>
-                                   <button class="btn btn-primary" id="prcs_cd_9" name="prcsCds" type="button" >인증요구</button>
+                                   <button class="btn btn-light" id="prcs_cd_1" name="prcsCds" type="button" >신규신청</button>
+                                   <button class="btn btn-light" id="prcs_cd_2" name="prcsCds" type="button" >입금기업</button>
+                                   <button class="btn btn-light" id="prcs_cd_3" name="prcsCds" type="button" >입금우리</button>
+                                   <button class="btn btn-light" id="prcs_cd_4" name="prcsCds" type="button" >입금농협</button>
+                                   <button class="btn btn-light" id="prcs_cd_5" name="prcsCds" type="button" >코인전송</button>
+                                   <button class="btn btn-light" id="prcs_cd_6" name="prcsCds" type="button" >처리완료</button>
+                                   <button class="btn btn-light" id="prcs_cd_7" name="prcsCds" type="button" >취소완료</button>
+                                   <button class="btn btn-light" id="prcs_cd_8" name="prcsCds" type="button" >TXID</button>
+                                   <button class="btn btn-light" id="prcs_cd_9" name="prcsCds" type="button" >인증요구</button>
                                </div>
                             </div>
 
