@@ -4,6 +4,7 @@
 
 	<update id="insert" parameterType="com.coin.broker.front.model.TransReqMas">
 		insert into trans_req_mas (
+		    reqno,
 			coin_type,
 		    charge_cd,
 			req_amt,
@@ -32,6 +33,7 @@
 			reg_dttm
 		)
 		values (
+			#{reqno},
 			#{coinType      },
 			#{chargeCd      },
 			#{reqAmt        },
@@ -59,7 +61,7 @@
 		)
 		ON DUPLICATE KEY UPDATE
 			coin_type = 	#{coinType      },
-			charge_cd= 		#{coinType      },
+			charge_cd= 		#{chargeCd      },
 			req_amt= 		#{reqAmt        },
 			charge_amt=		#{chargeAmt     },
 			tot_req_amt=	#{totReqAmt     },

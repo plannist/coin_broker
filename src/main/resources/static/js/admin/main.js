@@ -39,6 +39,7 @@ function getCoinPrice(){
 
                 // console.log("nowCoinPrice >>" , nowCoinPrice);
                 if(newRequestCnt < res.totalCount){
+
                     newRequestCnt = res.totalCount;
                     //TODO: 알람
                     $('#alarm').text(newRequestCnt +""+ "+")
@@ -57,6 +58,8 @@ function getCoinPrice(){
                             audio.play();
                         });
                     }
+
+                    DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
 
 
                 }
