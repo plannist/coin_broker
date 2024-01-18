@@ -34,7 +34,7 @@ public class TransReqMas extends Pagination {
 
     //admin 표시
     private String          prcsNm;
-    private int             prcsCd6Cnt; //거래완료 건수
+    private Integer         prcsCd6Cnt; //거래완료 건수
     private String          lstRcptDttm; //최종거래완료 시각
 
 

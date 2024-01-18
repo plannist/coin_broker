@@ -213,6 +213,10 @@ function save(){
 	//trans_rcpt_mas merge 항목
 
 	$('#transDtlForm input, textarea').prop('disabled', false);
+
+	//prcsCd6Cnt 만 예외
+	$('#prcsCd6Cnt').val(null);
+
 	const myForm = document.getElementById("transDtlForm");
 	const formData = new FormData(myForm);
 	const formVo = Object.fromEntries(formData.entries());

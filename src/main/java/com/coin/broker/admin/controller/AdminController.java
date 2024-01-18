@@ -33,6 +33,17 @@ public class AdminController {
         return mv;
     }
 
+    @GetMapping("/service-mms")
+    public ModelAndView mms(@AuthenticationPrincipal AdminMas adminMas){
+        ModelAndView mv = new ModelAndView("admin/mms");
+
+
+        log.info("service-mms 관리자 접속정보:: >>{}", adminMas);
+
+        return mv;
+    }
+
+
     @PostMapping("/transReqList")
     @ResponseBody
     public Response<?> transReqList(TransReqMas param){

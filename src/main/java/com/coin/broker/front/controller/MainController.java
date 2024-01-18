@@ -157,13 +157,13 @@ public class MainController {
                 //admin 현재 보고있는 요청 건수
                 res.setTotalCount(cnt);
             }
-
-            log.info("Coin Price ::: {}", list);
+//            log.info("Coin Price ::: {}", list);
             res.setData(list);
-        } catch (IOException e) {
+            res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+        } catch (Exception e) {
+            log.error("업비트 TOO MANY REQUEST");
             res.setStatusCode(Response.ResultCode.FAIL.getCode());
         }
-        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
 
         return ResponseEntity.ok(res);
     }

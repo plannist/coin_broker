@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UpbitService {
 
-    public List<CoinPrice> getCoinPrice() throws IOException;
+    public List<CoinPrice> getCoinPrice() throws Exception;
 }

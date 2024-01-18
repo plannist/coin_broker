@@ -38,7 +38,7 @@ public class UpbitServiceImpl implements UpbitService{
     private String [] coinCds = {"KRW-BTC", "KRW-ETH", "KRW-XRP"};
 
     @Override
-    public List<CoinPrice> getCoinPrice() throws IOException {
+    public List<CoinPrice> getCoinPrice() throws Exception {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         String jwtToken = JWT.create()
                 .withClaim("access_key", accessKey)
@@ -58,25 +58,20 @@ public class UpbitServiceImpl implements UpbitService{
                     .addHeader("accept", "application/json")
                     .build();
 
+
             Response res = client.newCall(request).execute();
             String result = res.body().string();
-            log.info("coin price >> {}", result.length());
 
-//            JsonObject job = JsonParser.parseString(res.body().string()).getAsJsonObject();
-            try{
-                JsonObject job = JsonParser.parseString(result).getAsJsonArray().get(0).getAsJsonObject();
-                String price = job.get("trade_price").getAsString();
+            JsonObject job = JsonParser.parseString(result).getAsJsonArray().get(0).getAsJsonObject();
+            String price = job.get("trade_price").getAsString();
 
-                //형식
-                price = price.substring(0, price.indexOf("."));
+            //형식
+            price = price.substring(0, price.indexOf("."));
 
-                CoinPrice coinPrice = new CoinPrice();
-                coinPrice.setCoinType(cd);
-                coinPrice.setAmt(price);
-                list.add(coinPrice);
-            }catch (Exception e){
-                log.error(e.getMessage(), e);
-            }
+            CoinPrice coinPrice = new CoinPrice();
+            coinPrice.setCoinType(cd);
+            coinPrice.setAmt(price);
+            list.add(coinPrice);
 
 
 //            Gson gson = new Gson();

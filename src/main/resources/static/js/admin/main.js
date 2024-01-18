@@ -10,7 +10,7 @@ var isModalOpen = false;
 
 let timer;
 
-let newRequestCnt =0;
+let newRequestCnt =-1;
 
 var AudioContext;
 
@@ -37,33 +37,27 @@ function getCoinPrice(){
                     }
                 }
 
-                // console.log("nowCoinPrice >>" , nowCoinPrice);
-                if(newRequestCnt < res.totalCount){
+                if(newRequestCnt < 0){
+                    newRequestCnt = res.totalCount * 1;
+                    return false;
+                }else{
+                    if(newRequestCnt < res.totalCount){
 
-                    newRequestCnt = res.totalCount;
-                    //TODO: 알람
-                    $('#alarm').text(newRequestCnt +""+ "+")
-                    // $('#audio').show();
-                    // document.querySelector("audio").play();
-                    // let src = $('#audio').attr('src');
-                    let src = "/image/audio/alarm-new.mp3";
-                    let audio = new Audio(src);
-                    // audio.play();
-                    let promise = audio.play();
-                    if(promise !== undefined) {
-                        promise.then(() => {
-                            // Autoplay started
-                        }).catch(error => {
-                            // Autoplay was prevented.
-                            audio.muted = true;
-                            audio.play();
-                        });
+                        newRequestCnt = res.totalCount * 1;
+                        // 알람
+                        $('#alarm').text(newRequestCnt +""+ "+")
+                        let src = "/image/audio/alarm-new.mp3";
+                        let audio = new Audio(src);
+                        audio.play();
+
+                        DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
+
+
                     }
 
-                    DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
-
-
                 }
+
+                // console.log("nowCoinPrice >>" , nowCoinPrice);
 
 
             }
