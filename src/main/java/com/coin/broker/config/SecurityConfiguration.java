@@ -1,12 +1,14 @@
 package com.coin.broker.config;
 
 import com.coin.broker.filter.CustomCorsFilter;
+import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -50,11 +52,10 @@ public class SecurityConfiguration  {
             })
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login", "/erro",
-                        "/api/**", "/image/**", "/css/**",
-                        "/js/**", "/lib/**", "/fontwesome/**")
-                .permitAll()
-                .requestMatchers("/admin/**").authenticated();
+                auth
+                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                    .requestMatchers("/admin/**", "/hidden").authenticated()
+                    .anyRequest().permitAll();
             })
             .formLogin(login -> {
                 login
@@ -67,31 +68,34 @@ public class SecurityConfiguration  {
                     .permitAll()
                 ;
 
-            })
+            }).httpBasic(AbstractHttpConfigurer::disable)
             .addFilterBefore(customCorsFilter, AnonymousAuthenticationFilter.class)
             .logout(logout ->{
-                logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/")
-                        .permitAll();
+                logout
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/")
+                    .permitAll();
 
             })
-
+            .cors(withDefaults())
 
 
 //        .csrf(e -> {
 //            e.ignoringRequestMatchers("/", "/hidden");
 //        })
-        .cors(withDefaults());
+
+//            .cors(AbstractHttpConfigurer::disable)
+        ;
 
         return http.build();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager()
-            throws Exception {
-        return config.getAuthenticationManager();
-
-    }
+//    @Bean
+//    public AuthenticationManager authenticationManager()
+//            throws Exception {
+//        return config.getAuthenticationManager();
+//
+//    }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
