@@ -1,5 +1,6 @@
 package com.coin.broker.front.service;
 
+import com.coin.broker.admin.model.MmsFormatMas;
 import com.coin.broker.front.model.TransReqMas;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface TransReqMasService {
     TransReqMas findTransReqDtl(TransReqMas param);
 
     TransReqMas findCusTransCnt(TransReqMas param);
+
+    List<MmsFormatMas> findMmsFormats();
 }

@@ -1,5 +1,6 @@
 package com.coin.broker.front.mapper;
 
+import com.coin.broker.admin.model.MmsFormatMas;
 import com.coin.broker.front.model.TransReqMas;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,6 @@ public interface TransReqMasMapper {
     TransReqMas findTransReqDtl(TransReqMas param);
 
     TransReqMas findCusTransCnt(TransReqMas param);
+
+    List<MmsFormatMas> findMmsFormats();
 }

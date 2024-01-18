@@ -1,8 +1,11 @@
 package com.coin.broker.front.model;
 
+import com.coin.broker.admin.model.MmsFormatMas;
 import com.coin.broker.admin.model.Pagination;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -44,6 +47,8 @@ public class TransReqMas extends Pagination {
      * */
     private String wltAddr;
     private String memo;
+
+    List<MmsFormatMas> mmsFormatMasList;
 
 
     /**

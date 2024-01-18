@@ -1,5 +1,6 @@
 package com.coin.broker.front.service;
 
+import com.coin.broker.admin.model.MmsFormatMas;
 import com.coin.broker.front.mapper.TransReqMasMapper;
 import com.coin.broker.front.model.TransReqMas;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,10 @@ public class TransReqMasServiceImpl implements TransReqMasService{
     @Override
     public TransReqMas findCusTransCnt(TransReqMas param) {
         return transReqMasMapper.findCusTransCnt(param);
+    }
+
+    @Override
+    public List<MmsFormatMas> findMmsFormats() {
+        return transReqMasMapper.findMmsFormats();
     }
 }

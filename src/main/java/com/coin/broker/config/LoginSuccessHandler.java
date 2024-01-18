@@ -22,6 +22,10 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException, ServletException {
         HttpSession httpSession = request.getSession();
+        int timeout = httpSession.getMaxInactiveInterval();
+        log.info("session timeout: >>>> {}", timeout);
+
+
         String redirectUrl = "/admin/main";
         if(httpSession != null){
             String linkUrl = (String) httpSession.getAttribute("linkUrl");

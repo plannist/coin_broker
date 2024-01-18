@@ -21,6 +21,8 @@ $('#transDtlModal').on('show.bs.modal', function(evt){
 $('#transDtlModal').on('hidden.bs.modal', function(evt){
 	isModalOpen = false;
 	console.log("transDtlModal is hidden >", evt);
+
+	$('button[name=prcsCds]').removeClass('btn-primary').addClass('btn-light');
 });
 
 /* main.js 에서 pooling 시 modal 떠있으면 호출 */
@@ -52,7 +54,7 @@ $('button[name=prcsCds]').on('click', function (){
 
 /*텍스트 클립보드 복사*/
 function copyText(el){
-	let $input = $(el).prev('input');
+	let $input = $(el).prev('input, textarea');
 	let flag = false;
 	if($input.prop('disabled')){
 		$input.prop('disabled', false);
@@ -69,7 +71,12 @@ function copyText(el){
 
 /*MMS 조회*/
 function createMms(el){
-
+	let prcsCd = $('#mmsFormat').val();
+	let list = detailData.mmsFormatMasList;
+	console.log("prcsCd: ", prcsCd);
+	console.log("list: ", list)
+	let text = list[prcsCd * 1 - 1].mmsContents;
+	$('#mmsContents').val(text);
 }
 
 /*상세주문조회*/
@@ -129,9 +136,15 @@ function draw(data){
 	$('#rsnCtnt').val(data.rsnCtnt);
 	$('#prcsNm').val(data.prcsNm);
 	$('#prcsCd').val(data.prcsCd);
+	//업무처리 상태 버튼 view처리
+	$('button[name=prcsCds]').eq(data.prcsCd * 1 - 1).removeClass('btn-light').addClass('btn-primary');
 	$('#modDttm').val(data.modDttm);
 	$('#transactionId').val(data.transactionId);
 
+	//문자생성 셀렉트 박스 생성
+	$('#mmsFormat option').eq(0).val(data.prcsCd);
+	for(let obj of data.mmsFormatMasList)
+	$('#mmsFormat').append(`<option style="background-color: white" value="${obj.prcsCd}">${obj.mmsTitle}</option>`);
 
 }
 
@@ -230,9 +243,9 @@ function save(){
 		success: function (res) {
 			console.log("res >>", res);
 			if (res.statusCode == 'S001') {
-				alertNotice(null, '대행 신청이 정상 수정되었습니다.', () => {
+				// alertNotice(null, '대행 신청이 정상 수정되었습니다.', () => {
 					location.href = "/admin/main";
-				})
+				// })
 			} else {
 				alertNotice(null, res.statusMessage, () => {
 					location.href = "/admin/main";

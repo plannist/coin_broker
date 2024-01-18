@@ -79,7 +79,7 @@ server:
     path: /erro
   servlet:
     session:
-      timeout: 20
+      timeout: 86400
   forward-headers-strategy: native
 
 #Multipart
@@ -116,7 +116,7 @@ server:
     path: /erro
   servlet:
     session:
-      timeout: 60
+      timeout: 86400
 #  forward-headers-strategy: native
 
 #Multipart

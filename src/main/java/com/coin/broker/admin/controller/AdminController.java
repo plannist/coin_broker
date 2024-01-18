@@ -1,6 +1,7 @@
 package com.coin.broker.admin.controller;
 
 import com.coin.broker.admin.model.AdminMas;
+import com.coin.broker.admin.model.MmsFormatMas;
 import com.coin.broker.front.model.TransReqMas;
 import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.util.Response;
@@ -67,8 +68,10 @@ public class AdminController {
         Response<Object> res = new Response<>();
         TransReqMas result = transReqMasService.findTransReqDtl(param);
         TransReqMas cntInfo = transReqMasService.findCusTransCnt(result);
+        List<MmsFormatMas> mmsFormatMasList = transReqMasService.findMmsFormats();
         result.setPrcsCd6Cnt(cntInfo.getPrcsCd6Cnt());
         result.setLstRcptDttm(cntInfo.getLstRcptDttm());
+        result.setMmsFormatMasList(mmsFormatMasList);
         res.setData(result);
         return ResponseEntity.ok(res);
     }

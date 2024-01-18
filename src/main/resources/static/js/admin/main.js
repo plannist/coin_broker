@@ -37,25 +37,36 @@ function getCoinPrice(){
                     }
                 }
 
-                if(newRequestCnt < 0){
-                    newRequestCnt = res.totalCount * 1;
-                    return false;
-                }else{
-                    if(newRequestCnt < res.totalCount){
+                if(res.totalCount * 1 > 0){
+                    console.log("알람이 울립니다. ::", res.totalCount);
+                    // 알람
+                    $('#alarm').text(newRequestCnt +""+ "+")
+                    let src = "/image/audio/alarm-new.mp3";
+                    let audio = new Audio(src);
+                    audio.play();
 
-                        newRequestCnt = res.totalCount * 1;
-                        // 알람
-                        $('#alarm').text(newRequestCnt +""+ "+")
-                        let src = "/image/audio/alarm-new.mp3";
-                        let audio = new Audio(src);
-                        audio.play();
-
-                        DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
-
-
-                    }
-
+                    DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
                 }
+
+                // if(newRequestCnt < 0){
+                //     newRequestCnt = res.totalCount * 1;
+                //     return false;
+                // }else{
+                //     if(newRequestCnt < res.totalCount){
+                //
+                //         newRequestCnt = res.totalCount * 1;
+                //         // 알람
+                //         $('#alarm').text(newRequestCnt +""+ "+")
+                //         let src = "/image/audio/alarm-new.mp3";
+                //         let audio = new Audio(src);
+                //         audio.play();
+                //
+                //         DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
+                //
+                //
+                //     }
+                //
+                // }
 
                 // console.log("nowCoinPrice >>" , nowCoinPrice);
 
@@ -237,8 +248,14 @@ $(document).ready(function(){
 
 
 
-    //TODO: 최종반영시 주석해제
-    pollingStart();
+    //TODO: 개발자 모드
+    if(localStorage.getItem("developer") ){
+        pollingStart();
+        pollingEnd();
+    }else{
+        pollingStart();
+    }
+
 
 
     DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
