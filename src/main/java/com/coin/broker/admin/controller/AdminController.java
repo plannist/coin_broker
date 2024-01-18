@@ -2,6 +2,7 @@ package com.coin.broker.admin.controller;
 
 import com.coin.broker.admin.model.AdminMas;
 import com.coin.broker.admin.model.MmsFormatMas;
+import com.coin.broker.admin.service.MmsFormatMasService;
 import com.coin.broker.front.model.TransReqMas;
 import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.util.Response;
@@ -23,6 +24,8 @@ import java.util.Map;
 public class AdminController {
 
     final TransReqMasService transReqMasService;
+
+    final MmsFormatMasService mmsFormatMasService;
 
     @GetMapping("/main")
     public ModelAndView main(@AuthenticationPrincipal AdminMas adminMas){
@@ -68,7 +71,7 @@ public class AdminController {
         Response<Object> res = new Response<>();
         TransReqMas result = transReqMasService.findTransReqDtl(param);
         TransReqMas cntInfo = transReqMasService.findCusTransCnt(result);
-        List<MmsFormatMas> mmsFormatMasList = transReqMasService.findMmsFormats();
+        List<MmsFormatMas> mmsFormatMasList = mmsFormatMasService.findMmsFormatList();
         result.setPrcsCd6Cnt(cntInfo.getPrcsCd6Cnt());
         result.setLstRcptDttm(cntInfo.getLstRcptDttm());
         result.setMmsFormatMasList(mmsFormatMasList);
@@ -87,6 +90,42 @@ public class AdminController {
         transReqMasService.insert(param);
 
         Response<Object> res = new Response<>();
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
+        return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/transPrcsCdUpdate")
+    @ResponseBody
+    public ResponseEntity<?> transPrcsCdUpdate(TransReqMas param){
+
+        int vs = transReqMasService.transPrcsCdUpdate(param);
+
+        Response<Object> res = new Response<>();
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
+        return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/mmsFormatList")
+    @ResponseBody
+    public ResponseEntity<?> mmsFormatList(){
+        Response<Object> res = new Response<>();
+
+        List<MmsFormatMas> list = mmsFormatMasService.findMmsFormatList();
+
+        res.setData(list);
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
+        return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/mmsFormatSave")
+    @ResponseBody
+    public ResponseEntity<?> mmsFormatSave(MmsFormatMas param){
+        Response<Object> res = new Response<>();
+
+        mmsFormatMasService.insert(param);
         res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
 
         return ResponseEntity.ok(res);

@@ -64,6 +64,16 @@ function agreeAll(el){
  * */
 $('#submitButton').on('click', function(evt){
 
+    //지갑주소 선확인
+    let val = $('#toWalletAddr').val();
+    if(val.length < 18){
+        $('#toWalletAddr').find('.invalid-feedback').show();
+        $('#toWalletAddr').addClass('is-invalid');
+        $('#toWalletAddr').focus();
+        return false;
+    }
+
+
     // transVo.chargeCd = $('input[name=chargeCd]:checked').val();
     console.log("onSubmit >>DEVICE_TYPE >>", DEVICE_TYPE);
     console.log("onSubmit >>REFERER_URL >>", REFERER_URL);
@@ -71,6 +81,8 @@ $('#submitButton').on('click', function(evt){
     $('#deviceType').val(DEVICE_TYPE);
     $('#refererUrl').val(REFERER_URL ? REFERER_URL : "-");
     $('#tradePrice').val(tradePrice[$('#coinType').val()]);
+
+
 
     //Valid
     // let inputs = $('#transReqModal input, textarea');
@@ -376,7 +388,6 @@ function sendingCoinCalc(amt, type, chargeCd, chargeAmt){
 }
 
 function changeAddrListener(el){
-
     $(el).removeClass('is-invalid');
     $(el).find('.invalid-feedback').hide();
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coin.broker.admin.mapper.MmsFormatMasMapper">
+
+
+
+	<insert id="insert" parameterType="com.coin.broker.admin.model.MmsFormatMas">
+		insert into mms_format_mas(
+			prcs_cd,
+			mms_title,
+			mms_contents,
+			title_change_yn,
+			reg_dttm,
+			mod_dttm
+		)values(
+		   	#{prcsCd},
+			#{mmsTitle},
+			#{mmsContents},
+		    #{titleChangeYn},
+			now(),
+			now()
+	   )
+		ON DUPLICATE KEY UPDATE
+			mms_title = #{mmsTitle},
+			mms_contents = #{mmsContents},
+			title_change_yn = #{titleChangeYn},
+			mod_dttm = now()
+	</insert>
+
+	<select id="findMmsFormatList" resultType="com.coin.broker.admin.model.MmsFormatMas">
+		select
+			*
+		from
+			mms_format_mas
+		order by
+			length(prcs_cd),  prcs_cd
+	</select>
+
+</mapper>

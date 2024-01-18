@@ -196,4 +196,13 @@
 		    prcs_cd asc
 	</select>
 
+	<update id="transPrcsCdUpdate" parameterType="com.coin.broker.front.model.TransReqMas">
+		update trans_req_mas set
+			prcs_cd = #{prcsCd},
+			mod_dttm = now()
+		where
+			reqno = #{reqno}
+
+	</update>
+
 </mapper>

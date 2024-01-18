@@ -30,7 +30,7 @@ function getCoinPrice(){
             // console.log("getCoinPrice res >>", res);
             if(res.statusCode === 'S001'){
                 for(let data of res.data){
-                    $('#'+data.coinType).text('$'+comma(data.amt).concat(" 원"));
+                    $('#'+data.coinType).text(comma(data.amt));
                     nowCoinPrice[data.coinType] = data.amt;
                     if(isModalOpen){
                         lookingForNowCoinPrice();
@@ -256,6 +256,7 @@ $(document).ready(function(){
         pollingStart();
     }
 
+    $('#sidebarToggleTop').click();
 
 
     DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);

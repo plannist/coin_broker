@@ -52,4 +52,9 @@ public class TransReqMasServiceImpl implements TransReqMasService{
     public List<MmsFormatMas> findMmsFormats() {
         return transReqMasMapper.findMmsFormats();
     }
+
+    @Override
+    public int transPrcsCdUpdate(TransReqMas param) {
+        return transReqMasMapper.transPrcsCdUpdate(param);
+    }
 }

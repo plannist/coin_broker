@@ -29,7 +29,6 @@ $('#transDtlModal').on('hidden.bs.modal', function(evt){
 function lookingForNowCoinPrice(){
 	// console.log("lookingForNowCoinPrice ..", nowCoinPrice[vo.coinType]);
 	$('#nowPrice').val(comma(nowCoinPrice[vo.coinType]));
-	//TODO: 10초 카운터 구현
 
 }
 
@@ -37,18 +36,28 @@ function lookingForNowCoinPrice(){
 $('button[name=prcsCds]').on('click', function (){
 	let id = $(this).attr('id');
 	let prcsCd = $.trim(id.substring(id.lastIndexOf("_")+1));
+	let $this = $(this);
 
 	console.log("id : ", id);
 	console.log("prcsCd:",prcsCd);
 
-	$('#prcsCd').val(prcsCd);
+	//transPrcsCdUpdate
+	$.ajax({
+		url: "/admin/transPrcsCdUpdate",
+		type: 'POST',
+		dataType: 'json',
+		data: {reqno : $('#reqno').val(), prcsCd : prcsCd},
+		success: function (res) {
+			$('#prcsCd').val(prcsCd);
+			$('#mmsFormat option').eq(0).val(prcsCd);
+			if(['2', '3', '4'].indexOf(prcsCd) != -1 ){
+				$('#bankCd').val(prcsCd);
+			}
 
-	if(['2', '3', '4'].indexOf(prcsCd) != -1 ){
-		$('#bankCd').val(prcsCd);
-	}
-
-	$('button[name=prcsCds]').removeClass("btn-primary").addClass("btn-light");
-	$(this).removeClass("btn-light").addClass("btn-primary");
+			$('button[name=prcsCds]').removeClass("btn-primary").addClass("btn-light");
+			$this.removeClass("btn-light").addClass("btn-primary");
+		}
+	});
 
 })
 
@@ -267,13 +276,15 @@ function save(){
 
 /*취소*/
 function cancel(){
-	alertConfirm("주의"
-		, "저장하지않은 변경사항은 반영되지않습니다."
-		, "닫기", (res)=>{
-
-		if(res.isConfirmed){
-			$('#transDtlForm')[0].reset();
-			$('#transDtlModal').modal("hide");
-		}
-	})
+	$('#transDtlForm')[0].reset();
+	$('#transDtlModal').modal("hide");
+	// alertConfirm("주의"
+	// 	, "저장하지않은 변경사항은 반영되지않습니다."
+	// 	, "닫기", (res)=>{
+	//
+	// 	if(res.isConfirmed){
+	// 		$('#transDtlForm')[0].reset();
+	// 		$('#transDtlModal').modal("hide");
+	// 	}
+	// })
 }

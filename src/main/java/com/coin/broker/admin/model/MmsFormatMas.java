@@ -9,4 +9,7 @@ public class MmsFormatMas {
     private String          mmsContents;
     private String          regDttm;
     private String          modDttm;
+
+    /*타이틀 수정가능여부*/
+    private String          titleChangeYn;
 }

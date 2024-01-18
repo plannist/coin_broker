@@ -21,4 +21,6 @@ public interface TransReqMasService {
     TransReqMas findCusTransCnt(TransReqMas param);
 
     List<MmsFormatMas> findMmsFormats();
+
+    int transPrcsCdUpdate(TransReqMas param);
 }

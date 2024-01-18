@@ -251,7 +251,7 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-black-50 krFont">시세정보</h1>
+                    <h1 class="h4 mb-0 text-black-50 krFont">시세정보</h1>
 
 
                 </div>
@@ -261,36 +261,36 @@
                 <div class="row">
 
                     <!-- 비트코인 시세 -->
-                    <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="col-4 col-md-6 mb-4">
                         <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             비트코인 (KWR-BTC)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="KRW-BTC">$</div>
+                                        <div class="x-small mb-0 font-weight-bold text-gray-800" id="KRW-BTC"></div>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-hand-holding fa-2x text-gray-300"></i>
-                                    </div>
+<!--                                    <div class="col-auto">-->
+<!--                                        <i class="fas fa-hand-holding fa-2x text-gray-300"></i>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!--이더리움 시세 -->
-                    <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="col-4 col-md-6 mb-4">
                         <div class="card border-left-success shadow h-100 py-2" id="allSelect">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1" >
                                             이더리움 (KWR-ETH)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="KRW-ETH">$</div>
+                                        <div class="x-small mb-0 font-weight-bold text-gray-800" id="KRW-ETH"></div>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                    </div>
+<!--                                    <div class="col-auto">-->
+<!--                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -299,18 +299,18 @@
 
 
                     <!--리플 시세 -->
-                    <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="col-4 col-md-6 mb-4">
                         <div class="card border-left-danger shadow h-100 py-2" id="cashSelect">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                             리플 (KWR-XRP)</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="KRW-XRP">$</div>
+                                        <div class="x-small mb-0 font-weight-bold text-gray-800" id="KRW-XRP"></div>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>
-                                    </div>
+<!--                                    <div class="col-auto">-->
+<!--                                        <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -320,8 +320,7 @@
 
 
                 <!-- Page Heading -->
-                <div class="card-body">
-                <h1 class="h3 mb-2 text-gray-800">대행주문목록</h1>
+                <h1 class="h4 mb-0 text-black-50 krFont">대행주문목록</h1>
 
 
                     <!-- DataTales Example -->
@@ -366,7 +365,6 @@
                     </div>
 
 
-                </div>
 
                 <div th:insert="~{admin/transDtlModal :: transDtlModal}"></div>
             </div>
