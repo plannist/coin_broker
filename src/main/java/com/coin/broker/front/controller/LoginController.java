@@ -20,11 +20,18 @@ public class LoginController {
     public ModelAndView login(HttpServletRequest request){
         ModelAndView mv = new ModelAndView("login");
         String referer = request.getHeader("Referer");
+        String uri = request.getRequestURI();
+        String url = request.getRequestURL().toString();
+
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        log.info("uri :: >>> {}", uri);
+        log.info("url :: >>> {}", url);
         log.info("referer :: >>> {}", referer);
+        log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
 
-        if(Utils.isNotEmpty(referer)){
-            if(referer.toUpperCase().contains("BING")){
+        if (Utils.isNotEmpty(referer)) {
+            if (referer.toUpperCase().contains("BING")) {
                 mv.setView(new RedirectView("/"));
                 return mv;
             }

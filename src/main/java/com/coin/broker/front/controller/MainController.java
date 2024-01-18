@@ -125,6 +125,16 @@ public class MainController {
         return mv;
     }
 
+    @GetMapping("/erro")
+    public ModelAndView erro(){
+
+//        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("error");
+        log.info("main <<");
+
+        return mv;
+    }
+
     @GetMapping("/map")
     public ResponseEntity<?> map(AdminMas param){
 

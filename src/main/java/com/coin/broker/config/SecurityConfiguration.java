@@ -1,5 +1,6 @@
 package com.coin.broker.config;
 
+import com.coin.broker.filter.CustomCorsFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.stream.Stream;
@@ -37,6 +39,8 @@ public class SecurityConfiguration  {
     final LoginFailureHandler loginFailureHandler;
 
 
+    final CustomCorsFilter customCorsFilter;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
@@ -46,23 +50,25 @@ public class SecurityConfiguration  {
             })
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login",
+                auth.requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login", "/erro",
                         "/api/**", "/image/**", "/css/**",
                         "/js/**", "/lib/**", "/fontwesome/**")
                 .permitAll()
                 .requestMatchers("/admin/**").authenticated();
             })
             .formLogin(login -> {
-                login.loginPage("/login")
-                        .successHandler(loginSuccessHandler)
-                        .failureHandler(loginFailureHandler)
-                        .usernameParameter("email")
-                        .passwordParameter("password")
-                        .loginProcessingUrl("/loginProcess")
-                        .permitAll()
+                login
+                    .loginPage("/login")
+                    .successHandler(loginSuccessHandler)
+                    .failureHandler(loginFailureHandler)
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                    .loginProcessingUrl("/loginProcess")
+                    .permitAll()
                 ;
 
             })
+            .addFilterBefore(customCorsFilter, AnonymousAuthenticationFilter.class)
             .logout(logout ->{
                 logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/")

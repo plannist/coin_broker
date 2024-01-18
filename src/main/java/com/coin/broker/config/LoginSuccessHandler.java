@@ -26,6 +26,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         log.info("session timeout: >>>> {}", timeout);
 
 
+
         String redirectUrl = "/admin/main";
         if(httpSession != null){
             String linkUrl = (String) httpSession.getAttribute("linkUrl");
@@ -33,6 +34,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             if(Utils.isNotEmpty(linkUrl)){
                 redirectUrl = linkUrl;
                 httpSession.removeAttribute("linkUrl");
+
             }
         }
         log.info("로그인 성공시 redirect Url : {}", redirectUrl);

@@ -118,7 +118,7 @@
 	
 
 	<!-- root레벨 설정 --> 
-	<root level="INFO"> 
+	<root level="DEBUG">
 		<appender-ref ref="CONSOLE"/> 
 		<appender-ref ref="FILE"/> 
 		<appender-ref ref="Error"/>

@@ -5,6 +5,7 @@ const DataTableBasic = function(){
                 {data: 'prcsCd'}, //번호
                 {data: 'mmsTitle'},
                 {data: 'mmsContents'},
+                {data: 'prcsCd'}
             ];
 
         let _columnDefs = [
@@ -13,25 +14,24 @@ const DataTableBasic = function(){
                 width : '200px',
                 render: function(data, type, full) {
                     if(full.titleChangeYn == 'Y'){
-                        return `<input type="text" class="form-control form-control-user" placeholder="제목" value="${data}">`;
+                        return `<input id="title-${full.prcsCd}" type="text" class="form-control form-control-user" placeholder="제목" value="${data != 'null' ? data : ""}">`;
                     }
-                    return data != 'null' ? data : "";
+                    return data;
                 },
             },
             {
                 targets: 2,
                 width : '500px',
                 render: function(data, type, full) {
-                    return `<textarea class="form-control form-control-user" style="height: 350px;">${data != 'null' ? data : ''}</textarea>`
+                    return `<textarea id="contents-${full.prcsCd}" class="form-control form-control-user" style="height: 350px;">${data != 'null' ? data : ''}</textarea>`
                 },
             },
-            // {
-            //     targets: 4,
-            //     render: function(data, type, full) {
-            //         // _data = data.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-            //         return _data;
-            //     },
-            // },
+            {
+                targets: 3,
+                render: function(data, type, full) {
+                    return `<button class="btn btn-primary" id="${data}" name="${data}" type="button" onclick="mmsSave('${data}', '${full.titleChangeYn}');">저장</button>`;
+                },
+            },
         ];
 
         const table = $('#'+id);
@@ -91,5 +91,33 @@ const DataTableBasic = function(){
 }();
 
 $(document).ready(function(){
+    $('#sidebarToggleTop').click();
     DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
-})
+});
+
+function mmsSave(prcsCd, titleChangeYn){
+    console.log("prcsCd : ", prcsCd);
+    let title = '';
+
+    if(titleChangeYn === 'Y'){
+        title = $('#title-'+prcsCd).val();
+    }
+    let contents = $('#contents-'+prcsCd).val();
+
+    let param = {prcsCd: prcsCd, mmsTitle:title, mmsContents: contents, titleChangeYn:titleChangeYn}
+
+    console.log("param : ", param);
+
+
+    $.ajax({
+        url : "/admin/mmsFormatSave",
+        type: 'POST',
+        dataType : 'json',
+        data : param,
+        success : function(res){
+            DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
+        }
+    })
+
+
+}

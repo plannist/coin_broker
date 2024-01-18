@@ -20,7 +20,7 @@ import java.io.IOException;
 public class LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
-        String defaultFailerUrl = "/login";
+        String defaultFailerUrl = "/";
         String uri = request.getRequestURI();
 
         if(!uri.contains("admin")){
