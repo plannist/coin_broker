@@ -47,8 +47,7 @@ public class SecurityConfiguration  {
             .authorizeHttpRequests(auth -> {
                 auth
                     .requestMatchers("/", "/error","/map", "/hidden", "/transReq", "/login",
-                            "/api/**", "/image/**", "/css/**",
-                            "/js/**", "/lib/**", "/fontwesome/**").permitAll()
+                            "/api/**", "/assets/**").permitAll()
                     .requestMatchers("/admin/**", "/hidden").authenticated()
                     ;
             })
