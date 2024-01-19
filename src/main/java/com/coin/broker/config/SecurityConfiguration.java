@@ -53,9 +53,14 @@ public class SecurityConfiguration  {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> {
                 auth
-                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+//                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+
+                    .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login",
+                            "/api/**", "/image/**", "/css/**",
+                            "/js/**", "/lib/**", "/fontwesome/**").permitAll()
                     .requestMatchers("/admin/**", "/hidden").authenticated()
-                    .anyRequest().permitAll();
+//                    .anyRequest().permitAll()
+                    ;
             })
             .formLogin(login -> {
                 login
@@ -68,7 +73,8 @@ public class SecurityConfiguration  {
                     .permitAll()
                 ;
 
-            }).httpBasic(AbstractHttpConfigurer::disable)
+            })
+//            .httpBasic(AbstractHttpConfigurer::disable)
             .addFilterBefore(customCorsFilter, AnonymousAuthenticationFilter.class)
             .logout(logout ->{
                 logout

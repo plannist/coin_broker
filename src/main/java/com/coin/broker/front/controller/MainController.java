@@ -115,25 +115,16 @@ public class MainController {
 
     }
 
-    @GetMapping("/error")
-    public ModelAndView error(){
+//    @GetMapping("/error")
+//    public ModelAndView error(){
+//
+////        ModelAndView mv = new ModelAndView("index");
+//        ModelAndView mv = new ModelAndView("error");
+//        log.info("main <<");
+//
+//        return mv;
+//    }
 
-//        ModelAndView mv = new ModelAndView("index");
-        ModelAndView mv = new ModelAndView("error");
-        log.info("main <<");
-
-        return mv;
-    }
-
-    @GetMapping("/erro")
-    public ModelAndView erro(){
-
-//        ModelAndView mv = new ModelAndView("index");
-        ModelAndView mv = new ModelAndView("error");
-        log.info("main <<");
-
-        return mv;
-    }
 
     @GetMapping("/map")
     public ResponseEntity<?> map(AdminMas param){
@@ -199,7 +190,7 @@ public class MainController {
         int hour = time.getHour();
         log.info("hour: >>{}", hour);
         if(Utils.isEmpty(admin)){
-            if(hour < 8){
+            if(hour > 0 && hour < 8){
                 res.setStatusCode(Response.ResultCode.FAIL.getCode());
 
             }else{

@@ -217,5 +217,35 @@
     </div>
     </div>
 </div>
+
+
+    <div class="modal fade" id="loginFormModal" tabindex="-1"  aria-labelledby="loginFormModalLabel" aria-hidden="true" role="dialog"  data-bs-backdrop='static' data-bs-keyboard="false" >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-primary-to-secondary p-4">
+                    <h5 class="modal-title font-alt text-white krFont" id="loginFormModalLabel">로그인</h5>
+                    <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body border-0 p-4">
+                    <form id="loginFrm" class="user" method="post" action="/loginProcess">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="email" name="email" type="text" placeholder=""/>
+                            <label for="email" class="krFont">ID</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="password" name="password" type="password" placeholder=""/>
+                            <label for="password" class="krFont">PASSWORD</label>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary rounded-pill btn-lg" type="submit">login</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
 

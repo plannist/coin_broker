@@ -76,11 +76,11 @@ spring:
 server:
   port: 8080
   error:
-    path: /erro
+    path: /error
   servlet:
     session:
       timeout: 86400
-  forward-headers-strategy: native
+#  forward-headers-strategy: native
 
 #Multipart
 file:
