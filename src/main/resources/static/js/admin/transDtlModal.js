@@ -111,6 +111,9 @@ function getChangeText(text){
 	console.log("last>> ", last);
 
 	let id = $('#'+idName).val();
+	if(idName === 'transactionId'){
+		id = "\n"+id;
+	}
 	let result = start.concat(id).concat(last) ;
 	return result;
 }
