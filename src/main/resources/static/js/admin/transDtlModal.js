@@ -85,7 +85,34 @@ function createMms(el){
 	console.log("prcsCd: ", prcsCd);
 	console.log("list: ", list)
 	let text = list[prcsCd * 1 - 1].mmsContents;
+	let count = text.match(/{/g).filter(item => item !== '').length;
+	if(count > 0){
+
+		while(count > 0){
+			text = getChangeText(text);
+			console.log("text : ", text);
+			count --;
+		}
+	}
+
+
 	$('#mmsContents').val(text);
+}
+
+function getChangeText(text){
+	let startIdx = text.indexOf("{");
+	let lastIdx = text.indexOf("}");
+	let start = text.substring(0, startIdx-1);
+	let idName = text.substring(startIdx+1, lastIdx);
+	let last = text.substring(lastIdx+1);
+
+	console.log("start>> ", start);
+	console.log("idName>> ", idName);
+	console.log("last>> ", last);
+
+	let id = $('#'+idName).val();
+	let result = start.concat(id).concat(last) ;
+	return result;
 }
 
 /*상세주문조회*/

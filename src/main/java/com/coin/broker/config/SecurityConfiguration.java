@@ -1,28 +1,21 @@
 package com.coin.broker.config;
 
 import com.coin.broker.filter.CustomCorsFilter;
-import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.util.stream.Stream;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -53,13 +46,10 @@ public class SecurityConfiguration  {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> {
                 auth
-//                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-
-                    .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login",
+                    .requestMatchers("/", "/error","/map", "/hidden", "/transReq", "/login",
                             "/api/**", "/image/**", "/css/**",
                             "/js/**", "/lib/**", "/fontwesome/**").permitAll()
                     .requestMatchers("/admin/**", "/hidden").authenticated()
-//                    .anyRequest().permitAll()
                     ;
             })
             .formLogin(login -> {
@@ -74,7 +64,6 @@ public class SecurityConfiguration  {
                 ;
 
             })
-//            .httpBasic(AbstractHttpConfigurer::disable)
             .addFilterBefore(customCorsFilter, AnonymousAuthenticationFilter.class)
             .logout(logout ->{
                 logout
@@ -84,24 +73,11 @@ public class SecurityConfiguration  {
 
             })
             .cors(withDefaults())
-
-
-//        .csrf(e -> {
-//            e.ignoringRequestMatchers("/", "/hidden");
-//        })
-
-//            .cors(AbstractHttpConfigurer::disable)
+            .exceptionHandling(e-> e.accessDeniedPage("/"))
         ;
 
         return http.build();
     }
-
-//    @Bean
-//    public AuthenticationManager authenticationManager()
-//            throws Exception {
-//        return config.getAuthenticationManager();
-//
-//    }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {

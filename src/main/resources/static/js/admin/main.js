@@ -45,7 +45,7 @@ function getCoinPrice(){
                     let audio = new Audio(src);
                     audio.play();
 
-                    DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
+                    DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10, false);
                 }
 
                 // if(newRequestCnt < 0){
@@ -115,7 +115,7 @@ function pollingEnd(){
  *
  * */
 const DataTableBasic = function(){
-    const initTable = function(id, order, length) {
+    const initTable = function(id, order, length, global) {
         let _columns =
             [
                 {data: 'reqno'}, //번호
@@ -174,6 +174,7 @@ const DataTableBasic = function(){
                     console.log("param >>", param);
                 },
                 type: 'POST',
+                global : global,
                 dataFilter: function(data) {
                     const json = jQuery.parseJSON( data );
                     console.log("res.json  >>>", json);
@@ -202,8 +203,8 @@ const DataTableBasic = function(){
     }
 
     return {
-        init : function(id, order, length){
-            initTable(id, order, length);
+        init : function(id, order, length, global){
+            initTable(id, order, length, global);
         }
     }
 }();

@@ -40,7 +40,7 @@ const DataTableBasic = function(){
             pagingType:'full_numbers',
             autoWidth: false,
             responsive: true,
-            paging: true,
+            paging: false,
             searching: false,
             info: true,
             destroy: true,
@@ -118,6 +118,19 @@ function mmsSave(prcsCd, titleChangeYn){
             DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
         }
     })
+
+
+}
+
+function copyText(el){
+    let val = $(el).text();
+    const textArea = document.createElement('textarea');
+    document.body.appendChild(textArea);
+    textArea.value = val;
+
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
 
 
 }
