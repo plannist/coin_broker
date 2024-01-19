@@ -51,22 +51,20 @@ public class SecurityConfigurationProc {
                 .authorizeHttpRequests(auth -> {
                     auth
 //                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-
-                            .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login",
-                                    "/api/**", "/assets/**").permitAll()
+                        .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login", "/api/**", "/assets/**").permitAll()
 //                    .requestMatchers("/admin/**", "/hidden").authenticated()
-                            .anyRequest().authenticated()
+                        .anyRequest().authenticated()
                     ;
                 })
                 .formLogin(login -> {
                     login
-                            .loginPage("/login")
-                            .successHandler(loginSuccessHandler)
-                            .failureHandler(loginFailureHandler)
-                            .usernameParameter("email")
-                            .passwordParameter("password")
-                            .loginProcessingUrl("/loginProcess")
-                            .permitAll()
+                        .loginPage("/login")
+                        .successHandler(loginSuccessHandler)
+                        .failureHandler(loginFailureHandler)
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/loginProcess")
+                        .permitAll()
                     ;
 
                 })
