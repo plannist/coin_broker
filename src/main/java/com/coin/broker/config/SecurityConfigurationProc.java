@@ -19,10 +19,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 @RequiredArgsConstructor
-//@Slf4j
+@Slf4j
 public class SecurityConfigurationProc {
 
     final AuthenticationConfiguration config;
@@ -53,8 +53,7 @@ public class SecurityConfigurationProc {
 //                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
 
                             .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login",
-                                    "/api/**", "/image/**", "/css/**",
-                                    "/js/**", "/lib/**", "/fontwesome/**").permitAll()
+                                    "/api/**", "/assets/**").permitAll()
 //                    .requestMatchers("/admin/**", "/hidden").authenticated()
                             .anyRequest().authenticated()
                     ;

@@ -41,7 +41,7 @@ function getCoinPrice(){
                     console.log("알람이 울립니다. ::", res.totalCount);
                     // 알람
                     $('#alarm').text(newRequestCnt +""+ "+")
-                    let src = "/image/audio/alarm-new.mp3";
+                    let src = "/assets/image/audio/alarm-new.mp3";
                     let audio = new Audio(src);
                     audio.play();
 
