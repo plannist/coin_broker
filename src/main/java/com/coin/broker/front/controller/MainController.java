@@ -141,8 +141,8 @@ public class MainController {
 
         TransReqMas transReqMas = new TransReqMas();
         transReqMas.setDeposNm("테스터");
-        transReqMas.setPhoneNo("010-1234-1235");
-        transReqMas.setTotReqAmt("100000");
+        transReqMas.setPhoneNo("01012341235");
+        transReqMas.setReqAmt("100000");
         transReqMas.setCoinType("KRW-BTC");
 
         try{

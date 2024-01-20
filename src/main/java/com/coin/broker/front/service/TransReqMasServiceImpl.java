@@ -71,29 +71,40 @@ public class TransReqMasServiceImpl implements TransReqMasService{
     public void telegramSendMessage(TransReqMas param)throws Exception {
         String url = "https://api.telegram.org/bot6480356284:AAGKEwpiX4qt4XQD_JvCs6dOzqorX2rPZHk/sendMessage";
 
+        String phoneNo = param.getPhoneNo();
+        phoneNo = phoneNo.replaceAll("^[\\d]{11}+$", "-");
+
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("신청자: ".concat(param.getDeposNm()));
+        sb.append("연락처: ".concat(param.getPhoneNo()));
+        sb.append("신청코인: ".concat(phoneNo));
+        sb.append("신청금액: ".concat(param.getReqAmt()));
+
+        log.info("sb >> {}", sb.toString());
 
         TelegramMessage telegramMessage = new TelegramMessage();
-        telegramMessage.setText(param.getDeposNm()+"님에게서 신규신청건이 도착했습니다. \n핸드폰번호: "+param.getPhoneNo()+"\n요청코인: "+param.getCoinType()+"\n신청금액: "+param.getTotReqAmt() );
+        telegramMessage.setText(sb.toString());
 
-        Gson gson = new Gson();
-        String json = gson.toJson(telegramMessage);
-
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), json);
-
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .addHeader("accept", "application/json")
-                .build();
-
-
-
-        Response res = client.newCall(request).execute();
-        assert res.body() != null;
-        String result = res.body().string();
-
-        log.info("result :: >> {}" , result);
+//        Gson gson = new Gson();
+//        String json = gson.toJson(telegramMessage);
+//
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), json);
+//
+//        OkHttpClient client = new OkHttpClient();
+//        Request request = new Request.Builder()
+//                .url(url)
+//                .post(requestBody)
+//                .addHeader("accept", "application/json")
+//                .build();
+//
+//
+//
+//        Response res = client.newCall(request).execute();
+//        assert res.body() != null;
+//        String result = res.body().string();
+//
+//        log.info("result :: >> {}" , result);
 
     }
 }
