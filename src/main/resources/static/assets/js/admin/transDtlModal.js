@@ -193,11 +193,18 @@ function draw(data){
  * */
 function sendingCoinCalc(){
 
-	let amt = uncomma($('#reqAmt').val());
-	let coinType = $('#coinType :selected').val();
-	let accType = $('[name=accType]:checked').val();
-	let chargeCd = $('#chargeCd :selected').val();
-	let chargeAmt = uncomma($('#chargeAmt').val());
+	//변경가능 항목들
+	let reqAmt = uncomma($('#reqAmt').val()) * 1;            //신청금액
+	let coinType = $('#coinType :selected').val();      //코인종류
+	let accType = $('[name=accType]:checked').val();    //현재시세: N, 적용시세: R
+	let chargeCd = $('#chargeCd :selected').val();      //수수료방식 수수료별도 : I, 수수료 포함 : T
+	let chargeAmt = uncomma($('#chargeAmt').val()) * 1;     //수수료
+
+	//계산하기 버튼 클릭시 변경 되는 필드들
+	let $sendCoin = $('#sendCoin');                     //전송코인
+	let $calcPrice =  $('#calcPrice');                  //보낼코인의 가치확인
+	let $tradePrice = $('#tradePrice');                 //적용시세
+	let $totReqAmt = $('#totReqAmt');                   //입금금액(수수료방식 변경시)
 
 	let digts = 8;
 	if(coinType === 'KRW-XRP'){
@@ -205,21 +212,27 @@ function sendingCoinCalc(){
 	}
 
 	//전송방식에 따른 금액계산
-	amt = amt * 1;
+	let sendAmt = 0;
 	if(chargeCd == 'T'){
-		amt = amt  - chargeAmt * 1;
+		$('#totReqAmt').val(comma(reqAmt));
+		sendAmt = reqAmt - chargeAmt;
+	}else{
+		$('#totReqAmt').val(comma(reqAmt + chargeAmt));
+		sendAmt = reqAmt;
 	}
+
 
 
 	//시세 계산
-	let price = $('#tradePrice').val();
+	let price = uncomma($('#tradePrice').val());
 	let sendCoin = $('#sendCoin').val() * 1; //적용시세면 변동없음.
 	if(accType === 'N'){ //현제시세라면
 		price = nowCoinPrice[coinType] * 1;
-		sendCoin = amt / (price * 1);
+		//시세선택에 따른 적용 시세 변경
+		$('#tradePrice').val(comma(price));
 	}
 	//전송할 코인
-
+	sendCoin = sendAmt / (price * 1);
 	sendCoin = sendCoin.toFixed(digts);
 	$('#sendCoin').val(sendCoin);
 	$('#transCoin').val(sendCoin);
@@ -227,7 +240,8 @@ function sendingCoinCalc(){
 
 	//가치확인
 	sendCoin = Number(sendCoin);
-	let calcPrice = (sendCoin * price * 1).toFixed();
+	let calcPrice = ((sendCoin * 1) * (price * 1)).toFixed();
+
 	$('#calcPrice').val(`${comma(calcPrice)}원`); //현시세대비 가치만 리턴
 }
 
