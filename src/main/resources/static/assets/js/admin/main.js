@@ -128,13 +128,13 @@ const DataTableBasic = function(){
         ];
 
         let _columnDefs = [
-            // {
-            //     targets: 0,
-            //     className : 'column-title',
-            //     render: function(data, type, full) {
-            //
-            //     },
-            // },
+            {
+                targets: 1,
+                // className : 'column-title',
+                render: function(data, type, full) {
+                    return data.substring(data.indexOf("-")+1);
+                },
+            },
             {
                 targets: 2,
                 render: function(data, type, full) {

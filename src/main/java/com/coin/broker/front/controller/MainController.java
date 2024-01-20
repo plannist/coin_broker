@@ -107,6 +107,9 @@ public class MainController {
 
         try{
             transReqMasService.insert(param);
+
+
+            transReqMasService.telegramSendMessage(param);
             res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
             return ResponseEntity.ok(res);
         }catch(Exception e){
@@ -129,12 +132,26 @@ public class MainController {
     @GetMapping("/map")
     public ResponseEntity<?> map(AdminMas param){
 
-        param.setId("admin2");
-        param.setName("테스트관리자");
-        param.setAuth("관리자");
-        param.setPassword(encoder.encode("qwer1234"));
+//        param.setId("admin2");
+//        param.setName("테스트관리자");
+//        param.setAuth("관리자");
+//        param.setPassword(encoder.encode("qwer1234"));
+//
+//        adminService.insertAdmin(param);
 
-        adminService.insertAdmin(param);
+        TransReqMas transReqMas = new TransReqMas();
+        transReqMas.setDeposNm("테스터");
+        transReqMas.setPhoneNo("010-1234-1235");
+        transReqMas.setTotReqAmt("100000");
+        transReqMas.setCoinType("KRW-BTC");
+
+        try{
+            transReqMasService.telegramSendMessage(transReqMas);
+        }catch(Exception e){
+            log.error(e.getLocalizedMessage(), e);
+
+        }
+
 
 
         return ResponseEntity.ok("1234");

@@ -28,6 +28,7 @@ $('#transDtlModal').on('hidden.bs.modal', function(evt){
 /* main.js 에서 pooling 시 modal 떠있으면 호출 */
 function lookingForNowCoinPrice(){
 	// console.log("lookingForNowCoinPrice ..", nowCoinPrice[vo.coinType]);
+	// $('#nowPrice').val(comma(nowCoinPrice[$('#coinType').val()]));
 	$('#nowPrice').val(comma(nowCoinPrice[vo.coinType]));
 
 }
@@ -162,7 +163,7 @@ function draw(data){
 	$('#totReqAmt').val(comma(data.totReqAmt));
 	$('#deviceType').val(data.deviceType);
 	//현제시세 >> main.js >> function 호출
-	$('#tradePrice').val(data.tradePrice);
+	$('#tradePrice').val(comma(data.tradePrice));
 	$('#sendCoin').val(data.sendCoin);
 	sendingCoinCalc();
 	$('#toWalletAddr').val(data.toWalletAddr);

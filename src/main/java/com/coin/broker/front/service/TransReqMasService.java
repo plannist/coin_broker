@@ -23,4 +23,6 @@ public interface TransReqMasService {
     List<MmsFormatMas> findMmsFormats();
 
     int transPrcsCdUpdate(TransReqMas param);
+
+    void telegramSendMessage(TransReqMas param)throws Exception;
 }
