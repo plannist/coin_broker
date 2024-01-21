@@ -124,6 +124,23 @@
 			<if test="reqno != null and reqno != '' ">
 				AND reqno = #{reqno}
 			</if>
+			<if test="keyword != null and keyword != '' ">
+				<if test="keyword == 'deposNm' ">
+					AND depos_nm like concat('%' #{input}, '%')
+				</if>
+				<if test="keyword == 'phoneNo' ">
+					AND phone_no like concat('%' #{input}, '%')
+				</if>
+				<if test="keyword == 'coinType' ">
+					AND coin_type like concat('%' #{input}, '%')
+				</if>
+				<if test="keyword == 'clientIp' ">
+					AND client_ip like concat('%' #{input}, '%')
+				</if>
+				<if test="keyword == 'toWalletAddr' ">
+					AND to_wallet_addr like concat('%' #{input}, '%')
+				</if>
+			</if>
 		<if test="length &gt; 0">
 			ORDER BY reg_dttm DESC
 			limit #{length} offset #{start}
@@ -133,6 +150,24 @@
 
 	<select id="findAdminTransReqCnt" resultType="Integer">
 		SELECT count(1) FROM trans_req_mas
+		where 1=1
+		<if test="keyword != null and keyword != '' ">
+			<if test="keyword == 'deposNm' ">
+				AND depos_nm like concat('%' #{input}, '%')
+			</if>
+			<if test="keyword == 'phoneNo' ">
+				AND phone_no like concat('%' #{input}, '%')
+			</if>
+			<if test="keyword == 'coinType' ">
+				AND coin_type like concat('%' #{input}, '%')
+			</if>
+			<if test="keyword == 'clientIp' ">
+				AND client_ip like concat('%' #{input}, '%')
+			</if>
+			<if test="keyword == 'toWalletAddr' ">
+				AND to_wallet_addr like concat('%' #{input}, '%')
+			</if>
+		</if>
 	</select>
 
 	<select id="findNewRequest" resultType="Integer">

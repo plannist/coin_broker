@@ -105,29 +105,7 @@
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                             aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                           placeholder="Search for..." aria-label="Search"
-                                           aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
+
 
                     <!-- Nav Item - Alerts -->
                     <li class="nav-item dropdown no-arrow mx-1">
@@ -321,20 +299,68 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
 <!--                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>-->
-                            <!-- Topbar Search -->
-                            <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                           id="account-keyword"
-                                           placeholder="Search for..."
-                                           onkeypress="javascript:if(event.keyCode==13)account.fn.searchKeyword();">
-                                    <div class="input-group-append">
-                                        <div class="btn btn-primary" id="mainSearch">
-                                            <i class="fas fa-search fa-sm"></i>
+
+                            <!-- 추가 -->
+                            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                                <div class="col-5 mt-3">
+                                <select class="form-select mb-3" id="keyword" name="keyword" style="font-size: 0.8rem;">
+                                    <option style="background-color: white" value="" selected>전체</option>
+                                    <option style="background-color: white" value="deposNm" >입금자명</option>
+                                    <option style="background-color: white" value="phoneNo" >전화번호</option>
+                                    <option style="background-color: white" value="coinType">코인종류</option>
+                                    <option style="background-color: white" value="toWalletAddr" >지갑주소</option>
+                                    <option style="background-color: white" value="clientIp" >접속IP</option>
+
+                                </select>
+                                </div>
+
+                                <ul class="navbar-nav ml-auto">
+
+                                <!-- Nav Item - Search Dropdown (Visible Only XS) 입금자명, 입력내용, 전화번호,지갑주소,접속IP -->
+                                <li class="nav-item dropdown no-arrow d-sm-none">
+                                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-search fa-fw"></i>
+                                    </a>
+                                    <!-- Dropdown - Messages -->
+                                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                         aria-labelledby="searchDropdown">
+                                        <form class="form-inline mr-auto w-100 navbar-search">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-0 small"
+                                                       placeholder="Search for..." aria-label="Search"
+                                                       aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="button">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+                                </ul>
+
+                                <!-- Topbar Search -->
+                                <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                               id="searchContents"
+                                               placeholder="Search for..."
+                                               onkeydown="javascript:if(event.keyCode==13)search(true);">
+                                        <div class="input-group-append">
+                                            <div class="btn btn-primary" id="mainSearch" onclick="search(true);">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
+                            </nav>
+                            <!-- // -->
+
+
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -347,7 +373,7 @@
                                             <th>입금자명</th>
                                             <th>전화번호</th>
                                             <th>현재단계</th>
-                                            <th>등록일시</th>
+                                            <th>주문메모</th>
                                         </tr>
                                     </thead>
                                     <tbody>

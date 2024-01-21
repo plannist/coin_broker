@@ -40,6 +40,10 @@ public class TransReqMas extends Pagination {
     private Integer         prcsCd6Cnt; //거래완료 건수
     private String          lstRcptDttm; //최종거래완료 시각
 
+    //검색 파라미터
+    private String          keyword;
+    private String          input;
+
 
 
     /**

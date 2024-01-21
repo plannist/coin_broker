@@ -231,6 +231,10 @@ function sendingCoinCalc(){
 		//시세선택에 따른 적용 시세 변경
 		$('#tradePrice').val(comma(price));
 	}
+
+	//요청금액의 0.3프로 계산 >> 10000 -> 10030
+	sendAmt = (sendAmt * (100.3/100)).toFixed(8);
+	sendAmt = Number(sendAmt);
 	//전송할 코인
 	sendCoin = sendAmt / (price * 1);
 	sendCoin = sendCoin.toFixed(digts);

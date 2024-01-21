@@ -121,7 +121,7 @@ const DataTableBasic = function(){
             [
                 {data: 'reqno'}, //번호
                 {data: 'coinType'},
-                {data: 'reqAmt'},
+                {data: 'totReqAmt'},
                 {data: 'deposNm'},
                 {data: 'phoneNo'},
                 {data: 'prcsNm'},
@@ -183,6 +183,14 @@ const DataTableBasic = function(){
                 url : "/admin/transReqList",
                 data : function(param){
                     console.log("param >>", param);
+
+                    let keyword = $('#keyword :selected').val();
+                    if(keyword){
+                        param.keyword = keyword;
+                        param.input = $('#searchContents').val();
+                    }
+
+
                 },
                 type: 'POST',
                 global : global,
@@ -272,6 +280,7 @@ $(document).ready(function(){
 
 
     search();
+
 });
 
 function goDetail(reqNo){
@@ -285,3 +294,4 @@ function search(global){
     DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], length, global);
 
 }
+
