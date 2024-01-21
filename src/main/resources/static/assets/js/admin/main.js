@@ -45,7 +45,8 @@ function getCoinPrice(){
                     let audio = new Audio(src);
                     audio.play();
 
-                    DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10, false);
+                    search(false);
+                    // DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10, false);
                 }
 
                 // if(newRequestCnt < 0){
@@ -124,7 +125,7 @@ const DataTableBasic = function(){
                 {data: 'deposNm'},
                 {data: 'phoneNo'},
                 {data: 'prcsNm'},
-                {data: 'regDttm'},
+                {data: 'rsnCtnt'},
         ];
 
         let _columnDefs = [
@@ -141,6 +142,16 @@ const DataTableBasic = function(){
                     let reqno = full.reqno;
                     _data = `<a href="#" onclick='goDetail(${reqno})'><ins>` + comma(data) + `</ins></a>`;
                     return _data;
+                },
+            },
+            {
+                targets: 5,
+                render: function(data, type, full) {
+
+                    if(data === '신규신청'){
+                        return `<p class="text-danger"> ${data} </p>`;
+                    }
+                    return data;
                 },
             },
             // {
@@ -260,13 +271,17 @@ $(document).ready(function(){
     $('#sidebarToggleTop').click();
 
 
-    DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
-
-    // DataTableBasic.init('dataTable', null, 10);
+    search();
 });
 
 function goDetail(reqNo){
     console.log("reqNo: >>", reqNo);
     param.reqno = reqNo+"";
     $("#transDtlModal").modal('show');
+}
+
+function search(global){
+    let length = $('[name=dataTable_length]').val();
+    DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], length, global);
+
 }
