@@ -185,9 +185,15 @@ const DataTableBasic = function(){
                     console.log("param >>", param);
 
                     let keyword = $('#keyword :selected').val();
+                    let val = $('#searchContents').val();
                     if(keyword){
                         param.keyword = keyword;
-                        param.input = $('#searchContents').val();
+
+                        if(!val){
+                            val = $('#navSearchContents').val();
+                        }
+
+                        param.input = val;
                     }
 
 
