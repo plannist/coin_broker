@@ -92,16 +92,17 @@ const DataTableBasic = function(){
 
 $(document).ready(function(){
     $('#sidebarToggleTop').click();
+    $('.nav-item').removeClass('active');
+    $('.nav-item').eq(2).addClass('active');
     DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
 });
 
 function mmsSave(prcsCd, titleChangeYn){
     console.log("prcsCd : ", prcsCd);
-    let title = '';
 
-    if(titleChangeYn === 'Y'){
-        title = $('#title-'+prcsCd).val();
-    }
+    // if(titleChangeYn === 'Y'){
+    let title = $('#title-'+prcsCd).val();
+    // }
     let contents = $('#contents-'+prcsCd).val();
 
     let param = {prcsCd: prcsCd, mmsTitle:title, mmsContents: contents, titleChangeYn:titleChangeYn}

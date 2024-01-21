@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+<head th:insert="~{layout/head-admin :: head}"></head>
+
+<style>
+    .modal-body::-webkit-scrollbar{display: none}
+</style>
+
+<body id="page-top">
+<div th:insert="~{layout/loading :: loading}"></div>
+
+<div id="wrapper">
+    <!-- side -->
+    <ul th:replace="~{layout/side-admin :: side}"></ul>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Nav -->
+            <nav th:replace="~{layout/navi-admin :: nav}"></nav>
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-black-50 krFont">지갑주소 메모 설정</h1>
+
+
+                </div>
+
+
+
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="col-5 mt-3">
+                        <select class="form-select mb-3" id="keyword" name="keyword" style="font-size: 0.8rem;">
+                            <option style="background-color: white" value="" selected>전체</option>
+                            <option style="background-color: white" value="deposNm" >지갑주소</option>
+                            <option style="background-color: white" value="phoneNo" >메모</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small"
+                               id="navSearchContents"
+                               onkeydown="javascript:if(event.keyCode==13)search(true);"
+                               placeholder="Search for..." aria-label="Search"
+                               aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" onclick="search(true);">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>지갑주소</th>
+                            <th>메모</th>
+                            <th>삭제</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>
+                                    <input  type="text" class="form-control form-control-user" placeholder="지갑주소">
+                                </td>
+                                <td>
+                                    <input  type="text" class="form-control form-control-user" placeholder="메모">
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" id="" name="" type="button" onclick="">저장</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+
+
+            <!-- contents -->
+        </div>
+
+        <footer th:replace="~{layout/footer-admin :: footer}"></footer>
+
+
+
+
+    </div>
+</div>
+
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!--</body>-->
+
+<!-- Page level custom scripts -->
+<!-- Custom scripts for all pages-->
+<script th:src="@{/assets/js/common.js}"></script>
+<script th:src="@{/assets/js/sb-admin-2.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/assets/lib/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/assets/lib/datatables/dataTables.bootstrap4.js}"></script>
+
+
+<script th:src="@{/assets/js/admin/wallet.js}"></script>
+
+
+
+</body>
+</html>

@@ -1,185 +1,235 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-    <head th:insert="~{layout/head :: head}"></head>
-    <body id="page-top">
-    <div th:insert="~{layout/loading :: loading}"></div>
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+<head th:insert="~{layout/head-admin :: head}"></head>
 
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-        <div class="container">
-            <img class="navbar-brand fw-bold" src="/assets/image/old_logo.png" alt="..." style="height: 2.5rem"/>
+<style>
+    .modal-body::-webkit-scrollbar{display: none}
+</style>
+
+<body id="page-top">
+<div th:insert="~{layout/loading :: loading}"></div>
+
+<div id="wrapper">
+    <!-- side -->
+    <ul th:replace="~{layout/side-admin :: side}"></ul>
 
 
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">대행신청관리</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"  href="#" aria-disabled="true">기본정보관리</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" aria-disabled="true">서비스관리</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">사업관리</a>
-                </li>
-            </ul>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content" >
 
-            <button type="button" class="btn btn-primary rounded-pill px-3 mb-lg-0" onclick="location.href='/logout';">
-                        <span class="d-flex align-items-center">
-                            <i class="bi-chat-text-fill me-2"></i>
-                            <span class="xl-small" sec:authentication="name"></span>
-<!--                            <span class="x-small" sec:authentication="principal.authorities"> logout</span>-->
-                            <span class="x-small" > logout</span>
-                        </span>
-            </button>
+            <!-- Nav -->
+            <nav th:replace="~{layout/navi-admin :: nav}"></nav>
 
-        </div>
-    </nav>
-    <!-- Mashead header-->
-    <header class="masthead">
-        <div class="container px-5">
-            <div class="row gx-5 align-items-center">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h4 mb-0 text-black-50 krFont">시세정보</h1>
 
-                <div class="col-lg-6">
-                    <!-- Mashead text and app badges-->
-                    <div class="mb-5 mb-lg-0 text-center text-lg-start">
-<!--                        <h1 class="display-1 lh-1 mb-3">-->
 
-<!--                        </h1>-->
-                        <p class="lead fw-normal text-muted mb-5 krFont">
-                            리플(XRP), 이더리움(ETH), 비트코인(BTC) <br>
-                            암호화폐 구매 및 전송 소액 전문 대행 업체
-                        </p>
-
-                        <p class="l-small krFont">
-                            암호화폐 거래소 이용이 어렵거나, 지갑 이용이 어려워
-                            코인으로 사이트 결제를 하지 못하는 분들께
-                            대행을 통하여 도움을 드립니다.
-
-                        </p>
-
-                        <div class="d-flex flex-column flex-lg-row align-items-center">
-
-                        </div>
-                    </div>
                 </div>
 
-                <button class="btn btn-outline-dark py-3 px-4 rounded-pill krFont" onclick="contact();">구매대행 신청하기</button>
-                <div th:insert="~{layout/modal :: modal}"></div>
-            </div>
-        </div>
-    </header>
 
-    <!-- Quote/testimonial aside-->
-    <aside class="text-center bg-gradient-primary-to-secondary">
-<!--        <div class="container px-5">-->
-<!--            <div class="row gx-5 justify-content-start">-->
-<!--                <div class="col-xl-8">-->
-                <div class="container">
-<!--                    <a class="btn btn-outline-dark py-3 px-4 rounded-pill" href="https://startbootstrap.com/theme/new-age" target="_blank">구매대행 신청하기</a>-->
-<!--                    <div class="h2 fs-1 text-white mb-4">-->
-<!--                        리플(XRP), 이더리움(ETH), 비트코인(BTC) <br>-->
-<!--                        암호화폐 구매 및 전송 소액 전문 대행 업체-->
-<!--                    </div>-->
-<!--                    <p class="x-small text-white-50">-->
-<!--                        암호화폐 거래소 이용이 어렵거나, 지갑 이용이 어려워-->
-<!--                        코인으로 사이트 결제를 하지 못하는 분들께-->
-<!--                        대행을 통하여 도움을 드립니다.-->
-<!--                    </p>-->
+                <!-- Content Row -->
+                <div class="row">
 
-<!--                    <img src="/assets/image/tnw-logo.svg" alt="..." style="height: 3rem" />-->
-                    <div class="row text-center">
-                        <div class="col-md-4">
-                            <img src="/assets/image/ic/bitcoin_ic.png" style="height:70px;"></img>
-                            <h4 class="my-3">Bit-Coin</h4>
-                            <p class="text-muted text-white-50 krFont" id="KRW-BTC"> - 원</p>
+                    <!-- 비트코인 시세 -->
+                    <div class="col-4 col-md-4 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            비트코인 (KWR-BTC)</div>
+                                        <div class="x-small mb-0 font-weight-bold text-gray-800" id="KRW-BTC"></div>
+                                    </div>
+<!--                                    <div class="col-auto">-->
+<!--                                        <i class="fas fa-hand-holding fa-2x text-gray-300"></i>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="col-md-4 mt-4">
-                            <img src="/assets/image/ic/ethereum_ic.png" style="width:70px;">
-                            <h4 class="my-3">Ethereum</h4>
-                            <p class="text-muted text-white-50 krFont" id="KRW-ETH"> - 원</p>
-                        </div>
-
-                        <div class="col-md-4 mt-4">
-                            <img src="/assets/image/ic/ripple_ic.png" style="width:70px;">
-                            <h4 class="my-3">Ripple</h4>
-                            <p class="text-muted text-white-50 krFont" id="KRW-XRP"> - 원</p>
-                        </div>
-
                     </div>
+
+                    <!--이더리움 시세 -->
+                    <div class="col-4 col-md-4 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2" id="allSelect">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1" >
+                                            이더리움 (KWR-ETH)</div>
+                                        <div class="x-small mb-0 font-weight-bold text-gray-800" id="KRW-ETH"></div>
+                                    </div>
+<!--                                    <div class="col-auto">-->
+<!--                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!--리플 시세 -->
+                    <div class="col-4 col-md-4 mb-4">
+                        <div class="card border-left-danger shadow h-100 py-2" id="cashSelect">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            리플 (KWR-XRP)</div>
+                                        <div class="x-small mb-0 font-weight-bold text-gray-800" id="KRW-XRP"></div>
+                                    </div>
+<!--                                    <div class="col-auto">-->
+<!--                                        <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-<!--            </div>-->
-<!--        </div>-->
-    </aside>
 
 
-    <aside class="text-center bg-light">
+                <!-- Page Heading -->
+                <h1 class="h4 mb-0 text-black-50 krFont">대행주문목록</h1>
 
-        <div class="container px-5">
-            <div class="row gx-5 justify-content-center">
-                <table class="table table-borderless">
 
-                    <tbody>
-                    <tr>
-                        <th class=" text-start krFont" style="width:30%">카카오 오픈채팅</th>
-                        <td class="text-white-50 align-middle text-start" style="width:70%">
-                            <a class="text-break" href="https://open.kakao.com/o/sKFZumLb"> https://open.kakao.com/o/sKFZumLb </a>
-                        </td>
-                    </tr>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+<!--                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>-->
 
-                    <tr>
-                        <th class=" text-start krFont" style="width:30%">텔레그램 ID</th>
-                        <td class=" align-middle text-start" style="width:70%">
-                            <a class="" href="https://t.me/svcoin"> @svcoin </a>
-                        </td>
-                    </tr>
+                            <!-- 추가 -->
+                            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                                <div class="col-5 mt-3">
+                                <select class="form-select mb-3" id="keyword" name="keyword" style="font-size: 0.8rem;">
+                                    <option style="background-color: white" value="" selected>전체</option>
+                                    <option style="background-color: white" value="deposNm" >입금자명</option>
+                                    <option style="background-color: white" value="phoneNo" >전화번호</option>
+                                    <option style="background-color: white" value="coinType">코인종류</option>
+                                    <option style="background-color: white" value="toWalletAddr" >지갑주소</option>
+                                    <option style="background-color: white" value="clientIp" >접속IP</option>
 
-                    <tr>
-                        <th class="text-start krFont" style="width:30%">모바일</th>
-                        <td class="align-middle text-start" style="width:70%">
-                            <a class="" href="sms:010-9718-9766"> 010-9718-9766 </a>
-                        </td>
-                    </tr>
+                                </select>
+                                </div>
 
-                    <tr>
-                        <th class="text-start krFont" style="width:30%">이메일</th>
-                        <td class="align-middle text-start" style="width:70%">
-                            <a class="text-break" href="mailto:svcoin66@gmail.com"> svcoin66@gmail.com </a>
-                        </td>
-                    </tr>
+                                <ul class="navbar-nav ml-auto">
 
-                    </tbody>
+                                <!-- Nav Item - Search Dropdown (Visible Only XS) 입금자명, 입력내용, 전화번호,지갑주소,접속IP -->
+                                <li class="nav-item dropdown no-arrow d-sm-none">
+                                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-search fa-fw"></i>
+                                    </a>
+                                    <!-- Dropdown - Messages -->
+                                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                         aria-labelledby="searchDropdown">
+                                        <form class="form-inline mr-auto w-100 navbar-search">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-0 small"
+                                                       id="navSearchContents"
+                                                       onkeydown="javascript:if(event.keyCode==13)search(true);"
+                                                       placeholder="Search for..." aria-label="Search"
+                                                       aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="button" onclick="search(true);">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+                                </ul>
 
-                </table>
+                                <!-- Topbar Search -->
+                                <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                               id="searchContents"
+                                               placeholder="Search for..."
+                                               onkeydown="javascript:if(event.keyCode==13)search(true);">
+                                        <div class="input-group-append">
+                                            <div class="btn btn-primary" id="mainSearch" onclick="search(true);">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </nav>
+                            <!-- // -->
+
+
+
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>번호</th>
+                                            <th>코인</th>
+                                            <th>입금금액</th>
+                                            <th>입금자명</th>
+                                            <th>전화번호</th>
+                                            <th>현재단계</th>
+                                            <th>주문메모</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                <div th:insert="~{admin/transDtlModal :: transDtlModal}"></div>
             </div>
+
+
+
+            <!-- contents -->
+            </div>
+
+            <footer th:replace="~{layout/footer-admin :: footer}"></footer>
+
+
+
+
         </div>
+    </div>
 
 
 
-    </aside>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+<!--</body>-->
 
-    <!-- App features section-->
+<!-- Page level custom scripts -->
+<!-- Custom scripts for all pages-->
+<script th:src="@{/assets/js/common.js}"></script>
+<script th:src="@{/assets/js/sb-admin-2.js}"></script>
 
-    <!-- Basic features section-->
+<!-- Page level plugins -->
+<script th:src="@{/assets/lib/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{/assets/lib/datatables/dataTables.bootstrap4.js}"></script>
 
-    <!-- Call to action section-->
 
-    <!-- App badge section-->
+<script th:src="@{/assets/js/admin/main.js}"></script>
 
-    <!-- Footer-->
-    <footer th:insert="~{layout/footer :: footer}"></footer>
 
-    <!-- Core theme JS-->
-    <!--        <script src="js/scripts.js"></script>-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!-- * *                               SB Forms JS                               * *-->
-    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!--    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>-->
-    <script th:src="@{/assets/js/admin/main.js}"></script>
-    </body>
+
+</body>
 </html>

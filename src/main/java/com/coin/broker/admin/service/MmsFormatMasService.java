@@ -10,4 +10,6 @@ public interface MmsFormatMasService {
     List<MmsFormatMas> findMmsFormatList();
 
     int insert(MmsFormatMas param);
+
+    void update(MmsFormatMas param);
 }

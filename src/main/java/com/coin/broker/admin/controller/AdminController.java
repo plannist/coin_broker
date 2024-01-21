@@ -2,7 +2,9 @@ package com.coin.broker.admin.controller;
 
 import com.coin.broker.admin.model.AdminMas;
 import com.coin.broker.admin.model.MmsFormatMas;
+import com.coin.broker.admin.model.WltAddrMng;
 import com.coin.broker.admin.service.MmsFormatMasService;
+import com.coin.broker.admin.service.WalletService;
 import com.coin.broker.front.model.TransReqMas;
 import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.util.Response;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @Slf4j
@@ -27,9 +28,11 @@ public class AdminController {
 
     final MmsFormatMasService mmsFormatMasService;
 
+    final WalletService walletService;
+
     @GetMapping("/main")
     public ModelAndView main(@AuthenticationPrincipal AdminMas adminMas){
-        ModelAndView mv = new ModelAndView("admin/migration");
+        ModelAndView mv = new ModelAndView("admin/main");
 
 
         log.info("adminMas 관리자 접속정보:: >>{}", adminMas);
@@ -45,6 +48,37 @@ public class AdminController {
         log.info("service-mms 관리자 접속정보:: >>{}", adminMas);
 
         return mv;
+    }
+
+    @GetMapping("/service-wallet")
+    public ModelAndView wallet(){
+        return new ModelAndView("admin/wallet");
+    }
+
+    @PostMapping("/service-walletList")
+    @ResponseBody
+    public Response<?> walletList(WltAddrMng param){
+
+        Response<List<WltAddrMng>> res = new Response<>();
+
+        List<WltAddrMng> list = walletService.findWalletMemos(param);
+
+        res.setData(list);
+        return res;
+    }
+    @GetMapping("/service-front")
+    public ModelAndView frontManage(){
+        return new ModelAndView("admin/front");
+    }
+
+    @GetMapping("/basic-info")
+    public ModelAndView basicInfo(){
+        return new ModelAndView("admin/basic");
+    }
+
+    @GetMapping("/business")
+    public ModelAndView business(){
+        return new ModelAndView("admin/business");
     }
 
 
@@ -85,6 +119,7 @@ public class AdminController {
         param.setReqAmt(param.getReqAmt().replaceAll(",", ""));
         param.setChargeAmt(param.getChargeAmt().replaceAll(",", ""));
         param.setTotReqAmt(param.getTotReqAmt().replaceAll(",", ""));
+        param.setTradePrice(param.getTradePrice().replaceAll(",", ""));
         param.setPhoneNo(param.getPhoneNo().replaceAll("-", ""));
 
         transReqMasService.insert(param);
@@ -125,7 +160,8 @@ public class AdminController {
     public ResponseEntity<?> mmsFormatSave(MmsFormatMas param){
         Response<Object> res = new Response<>();
 
-        mmsFormatMasService.insert(param);
+//        mmsFormatMasService.insert(param);
+        mmsFormatMasService.update(param);
         res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
 
         return ResponseEntity.ok(res);

@@ -27,6 +27,17 @@
 			mod_dttm = now()
 	</insert>
 
+	<update id="update" parameterType="com.coin.broker.admin.model.MmsFormatMas">
+		update mms_format_mas set
+		  <if test="mmsTitle != null and mmsTitle != '' ">
+			  mms_title = #{mmsTitle},
+		  </if>
+			mms_contents = #{mmsContents},
+			mod_dttm = now()
+		where
+			prcs_cd = #{prcsCd}
+	</update>
+
 	<select id="findMmsFormatList" resultType="com.coin.broker.admin.model.MmsFormatMas">
 		select
 			*

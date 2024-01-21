@@ -12,4 +12,6 @@ public interface MmsFormatMasMapper {
     List<MmsFormatMas> findMmsFormatList();
 
     int insert(MmsFormatMas param);
+
+    void update(MmsFormatMas param);
 }

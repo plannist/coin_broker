@@ -22,4 +22,9 @@ public class MmsFormatMasServiceImpl implements MmsFormatMasService{
     public int insert(MmsFormatMas param) {
         return mmsFormatMasMapper.insert(param);
     }
+
+    @Override
+    public void update(MmsFormatMas param) {
+        mmsFormatMasMapper.update(param);
+    }
 }

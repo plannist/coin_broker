@@ -1,6 +1,7 @@
 package com.coin.broker.front.service;
 
 import com.coin.broker.admin.model.MmsFormatMas;
+import com.coin.broker.admin.model.WltAddrMng;
 import com.coin.broker.front.model.TransReqMas;
 
 import java.util.List;
@@ -25,4 +26,5 @@ public interface TransReqMasService {
     int transPrcsCdUpdate(TransReqMas param);
 
     void telegramSendMessage(TransReqMas param)throws Exception;
+
 }
