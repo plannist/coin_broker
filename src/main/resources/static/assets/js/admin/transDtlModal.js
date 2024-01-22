@@ -96,6 +96,7 @@ function createMms(el){
 		count = text.match(/{/g).filter(item => item !== '').length;
 	}
 
+	console.log("치환문자 갯수 확인: > ", count);
 	if(count > 0){
 
 		while(count > 0){
@@ -112,7 +113,7 @@ function createMms(el){
 function getChangeText(text){
 	let startIdx = text.indexOf("{");
 	let lastIdx = text.indexOf("}");
-	let start = text.substring(0, startIdx-1);
+	let start = text.substring(0, startIdx);
 	let idName = text.substring(startIdx+1, lastIdx);
 	let last = text.substring(lastIdx+1);
 
