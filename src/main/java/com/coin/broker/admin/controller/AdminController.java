@@ -61,11 +61,32 @@ public class AdminController {
 
         Response<List<WltAddrMng>> res = new Response<>();
 
-        List<WltAddrMng> list = walletService.findWalletMemos(param);
+        List<WltAddrMng> list = walletService.findAll(param);
 
         res.setData(list);
         return res;
     }
+
+    @PostMapping("/service-walletUpdate")
+    @ResponseBody
+    public Response<?> walletUpdate(WltAddrMng param){
+
+        Response<List<WltAddrMng>> res = new Response<>();
+
+        int cnt = 0;
+        if("I".equals(param.getType())){
+            cnt += walletService.insert(param);
+        }else{
+            cnt +=  walletService.delete(param);
+        }
+
+        if(cnt > 0){
+            res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+        }
+        return res;
+    }
+
+
     @GetMapping("/service-front")
     public ModelAndView frontManage(){
         return new ModelAndView("admin/front");

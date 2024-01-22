@@ -126,6 +126,7 @@ const DataTableBasic = function(){
                 {data: 'phoneNo'},
                 {data: 'prcsNm'},
                 {data: 'rsnCtnt'},
+                {data: 'regDttm'},
         ];
 
         let _columnDefs = [
@@ -154,6 +155,17 @@ const DataTableBasic = function(){
                     return data;
                 },
             },
+            {
+                targets: 6,
+                render: function(data, type, full) {
+                    let val = data;
+                    if(val.length > 5){
+                       val = val.substring(0, 5).concat("...");
+                    }
+                    return val;
+                },
+            },
+
             // {
             //     targets: 4,
             //     render: function(data, type, full) {

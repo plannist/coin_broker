@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coin.broker.admin.mapper.WalletMapper">
+
+
+
+	<insert id="insert" parameterType="com.coin.broker.admin.model.WltAddrMng">
+		insert into wlt_addr_mng(
+			wlt_addr,
+			memo,
+			reg_dttm,
+			mod_dttm
+		)values(
+		   	#{wltAddr},
+			#{memo},
+			now(),
+			now()
+	   )
+
+	</insert>
+
+	<delete id="delete" parameterType="com.coin.broker.admin.model.WltAddrMng">
+		delete from wlt_addr_mng
+		where
+			wlt_addr = #{wltAddr}
+	</delete>
+
+	<select id="findAll" resultType="com.coin.broker.admin.model.WltAddrMng">
+		select
+			'' wlt_addr, '' memo, now() reg_dttm
+		union all
+		select
+			wlt_addr, memo, reg_dttm
+		from
+			wlt_addr_mng
+		where 1=1
+		<if test="keyword != null and keyword != '' ">
+			<if test="keyword == 'walletAddr' ">
+				and wlt_addr = concat('%',#{input}, '%')
+			</if>
+			<if test="keyword == 'memo' ">
+				and memo = concat('%', #{input}, '%')
+			</if>
+		</if>
+		order by
+			reg_dttm desc
+	</select>
+
+</mapper>

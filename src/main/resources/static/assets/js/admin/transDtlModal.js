@@ -23,6 +23,11 @@ $('#transDtlModal').on('hidden.bs.modal', function(evt){
 	console.log("transDtlModal is hidden >", evt);
 
 	$('button[name=prcsCds]').removeClass('btn-primary').addClass('btn-light');
+
+
+	$('#transDtlForm')[0].reset();
+	$('#memoArea').hide();
+
 });
 
 /* main.js 에서 pooling 시 modal 떠있으면 호출 */
@@ -86,7 +91,11 @@ function createMms(el){
 	console.log("prcsCd: ", prcsCd);
 	console.log("list: ", list)
 	let text = list[prcsCd * 1 - 1].mmsContents;
-	let count = text.match(/{/g).filter(item => item !== '').length;
+	let count = 0;
+	if(text.indexOf("{") !== -1){
+		count = text.match(/{/g).filter(item => item !== '').length;
+	}
+
 	if(count > 0){
 
 		while(count > 0){
@@ -168,8 +177,9 @@ function draw(data){
 	sendingCoinCalc();
 	$('#toWalletAddr').val(data.toWalletAddr);
 	if(data.memo){
-		$('#memo').show();
+		$('#memoArea').show();
 		$('#memo').val(data.memo);
+		$('#memo').prop('disabled', true);
 	}
 	$('#dstntTag').val(data.dstntTag);
 	//트랜젝션아이디는 관리자 입력

@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$('#sidebarToggleTop').click();
 	$('.nav-item').removeClass('active');
 	$('.nav-item').eq(2).addClass('active');
-	DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
+	search();
 });
 
 const DataTableBasic = function(){
@@ -19,23 +19,37 @@ const DataTableBasic = function(){
 				targets: 0,
 				width : '200px',
 				render: function(data, type, full) {
-					if(full.titleChangeYn == 'Y'){
-						return `<input id="title-${full.prcsCd}" type="text" class="form-control form-control-user" placeholder="제목" value="${data != 'null' ? data : ""}">`;
+					if(!data ){
+						return `<input id="walletAddr" type="text" class="form-control form-control-user" placeholder="지갑주소 입력" >`;
+					}else{
+						return data;
 					}
-					return data;
+
 				},
 			},
 			{
 				targets: 1,
-				width : '500px',
+				width : '400px',
 				render: function(data, type, full) {
-					return `<textarea id="contents-${full.prcsCd}" class="form-control form-control-user" style="height: 350px;">${data != 'null' ? data : ''}</textarea>`
+					if(!data){
+						return `<textarea id="memo" class="form-control form-control-user" style="height: 100px;"</textarea>`
+					}else{
+						return data;
+					}
+
 				},
 			},
 			{
 				targets: 2,
 				render: function(data, type, full) {
-					return `<button class="btn btn-primary" id="${data}" name="${data}" type="button" onclick="mmsSave('${data}', '${full.titleChangeYn}');">저장</button>`;
+
+					if(data){
+						return `<button class="btn btn-primary" type="button" onclick="update('D', '${data}');">삭제</button>`;
+					}else{
+						return `<button class="btn btn-primary" type="button" onclick="update('I', null);">저장</button>`;
+					}
+
+
 				},
 			},
 		];
@@ -43,22 +57,34 @@ const DataTableBasic = function(){
 		const table = $('#'+id);
 
 		table.DataTable({
-			pagingType:'full_numbers',
-			autoWidth: false,
+			// pagingType:'full_numbers',
+			autoWidth: true,
 			responsive: true,
 			paging: false,
 			searching: false,
-			info: true,
+			info: false,
 			destroy: true,
 			processing: true,
 			serverSide: true,
 			ordering: false,
 			responsive: false,
-			lengthMenu: [[10, 20, 50, 100], ['10개', '20개', '50개', '100개']],
+			// lengthMenu: [[10, 20, 50, 100], ['10개', '20개', '50개', '100개']],
 
 			ajax: {
-				url : "/admin/walletList",
+				url : "/admin/service-walletList",
 				data : function(param){
+
+					let keyword = $('#keyword :selected').val();
+					let val = $('#navSearchContents').val();
+					if(keyword){
+						param.keyword = keyword;
+
+						if(!val){
+							val = $('#navSearchContents').val();
+						}
+
+						param.input = val;
+					}
 					console.log("param >>", param);
 				},
 				type: 'POST',
@@ -95,3 +121,31 @@ const DataTableBasic = function(){
 		}
 	}
 }();
+
+function update(type, walletAddr){
+	let param = {type: type }
+	if(!walletAddr){
+		param.wltAddr = $('#walletAddr').val();
+		param.memo = $('#memo').val();
+	}else{
+		param.wltAddr = walletAddr;
+	}
+
+
+	$.ajax({
+		url : "/admin/service-walletUpdate",
+		type: 'POST',
+		// contentType : 'application/json',
+		dataType: 'json',
+		data: param,
+		success : function(res){
+			console.log(" 상세주문조회 !! res >> ", res);
+			search();
+
+		}
+	})
+}
+
+function search(){
+	DataTableBasic.init('dataTable', [{colum: 'regDttm', dir:'desc'}], 10);
+}
