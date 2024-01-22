@@ -27,111 +27,154 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
 
+                <form id="frontForm">
 
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-black-50 krFont">영업시간 설정</h1>
+                    </div>
 
-                    <form id="frontForm">
 
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-black-50 krFont">영업시간 설정</h1>
+                    <div class="form-group row mb-3 mb-sm-0">
+                        <div class="col-sm-auto bg-gray-100 mb-1 rounded">
+                            <p>시작시간</p>
                         </div>
+                        <div class="col-sm-auto">
+                            <select class="form-select mb-3" id="openTime" name="openTime" style="font-size: 0.8rem;">
+                                <option style="background-color: white" value="">선택해주세요</option>
+                                <option style="background-color: white" value="0">00시</option>
+                                <option style="background-color: white" value="1">01시</option>
+                                <option style="background-color: white" value="2">02시</option>
+                                <option style="background-color: white" value="3">03시</option>
+                                <option style="background-color: white" value="4">04시</option>
+                                <option style="background-color: white" value="5">05시</option>
+                                <option style="background-color: white" value="6">06시</option>
+                                <option style="background-color: white" value="7">07시</option>
+                                <option style="background-color: white" value="8">08시</option>
+                                <option style="background-color: white" value="9">09시</option>
+                                <option style="background-color: white" value="10">10시</option>
+                                <option style="background-color: white" value="11">11시</option>
+                                <option style="background-color: white" value="12">12시</option>
+                                <option style="background-color: white" value="13">13시</option>
+                                <option style="background-color: white" value="14">14시</option>
+                                <option style="background-color: white" value="15">15시</option>
+                                <option style="background-color: white" value="16">16시</option>
+                                <option style="background-color: white" value="16">17시</option>
+                                <option style="background-color: white" value="16">18시</option>
+                                <option style="background-color: white" value="16">19시</option>
+                                <option style="background-color: white" value="16">20시</option>
+                                <option style="background-color: white" value="16">21시</option>
+                                <option style="background-color: white" value="16">22시</option>
+                                <option style="background-color: white" value="16">23시</option>
 
-
-                        <div class="form-group row mb-3 mb-sm-0">
-                            <div class="col-sm-auto bg-gray-100 mb-1 rounded">
-                                <p>시작시간</p>
-                            </div>
-                            <div class="col-sm-auto">
-                                <select class="form-select mb-3" id="openTime" name="openTime" style="font-size: 0.8rem;">
-                                    <option style="background-color: white" value="">선택해주세요</option>
-                                    <option style="background-color: white" value="0">00시</option>
-                                    <option style="background-color: white" value="1">01시</option>
-                                    <option style="background-color: white" value="2">02시</option>
-                                    <option style="background-color: white" value="3">03시</option>
-                                    <option style="background-color: white" value="4">04시</option>
-                                    <option style="background-color: white" value="5">05시</option>
-                                    <option style="background-color: white" value="6">06시</option>
-                                    <option style="background-color: white" value="7">07시</option>
-                                    <option style="background-color: white" value="8">08시</option>
-                                    <option style="background-color: white" value="9">09시</option>
-                                    <option style="background-color: white" value="10">10시</option>
-                                    <option style="background-color: white" value="11">11시</option>
-                                    <option style="background-color: white" value="12">12시</option>
-                                    <option style="background-color: white" value="13">13시</option>
-                                    <option style="background-color: white" value="14">14시</option>
-                                    <option style="background-color: white" value="15">15시</option>
-                                    <option style="background-color: white" value="16">16시</option>
-                                    <option style="background-color: white" value="16">17시</option>
-                                    <option style="background-color: white" value="16">18시</option>
-                                    <option style="background-color: white" value="16">19시</option>
-                                    <option style="background-color: white" value="16">20시</option>
-                                    <option style="background-color: white" value="16">21시</option>
-                                    <option style="background-color: white" value="16">22시</option>
-                                    <option style="background-color: white" value="16">23시</option>
-
-                                </select>
-
-                            </div>
-
-                            <div class="col-sm-auto bg-gray-100 mb-1 rounded">
-                                <p class="krFont">종료시간</p>
-                            </div>
-                            <div class="col-sm-auto">
-                                <select class="form-select mb-3" id="endTime" name="endTime" style="font-size: 0.8rem;">
-                                    <option style="background-color: white" value="">선택해주세요</option>
-                                    <option style="background-color: white" value="0">00시</option>
-                                    <option style="background-color: white" value="1">01시</option>
-                                    <option style="background-color: white" value="2">02시</option>
-                                    <option style="background-color: white" value="3">03시</option>
-                                    <option style="background-color: white" value="4">04시</option>
-                                    <option style="background-color: white" value="5">05시</option>
-                                    <option style="background-color: white" value="6">06시</option>
-                                    <option style="background-color: white" value="7">07시</option>
-                                    <option style="background-color: white" value="8">08시</option>
-                                    <option style="background-color: white" value="9">09시</option>
-                                    <option style="background-color: white" value="10">10시</option>
-                                    <option style="background-color: white" value="11">11시</option>
-                                    <option style="background-color: white" value="12">12시</option>
-                                    <option style="background-color: white" value="13">13시</option>
-                                    <option style="background-color: white" value="14">14시</option>
-                                    <option style="background-color: white" value="15">15시</option>
-                                    <option style="background-color: white" value="16">16시</option>
-                                    <option style="background-color: white" value="16">17시</option>
-                                    <option style="background-color: white" value="16">18시</option>
-                                    <option style="background-color: white" value="16">19시</option>
-                                    <option style="background-color: white" value="16">20시</option>
-                                    <option style="background-color: white" value="16">21시</option>
-                                    <option style="background-color: white" value="16">22시</option>
-                                    <option style="background-color: white" value="16">23시</option>
-                                </select>
-                            </div>
+                            </select>
 
                         </div>
 
-
-
-
-
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-black-50 krFont">사이트 차단 설정</h1>
+                        <div class="col-sm-auto bg-gray-100 mb-1 rounded">
+                            <p class="krFont">종료시간</p>
+                        </div>
+                        <div class="col-sm-auto">
+                            <select class="form-select mb-3" id="endTime" name="endTime" style="font-size: 0.8rem;">
+                                <option style="background-color: white" value="">선택해주세요</option>
+                                <option style="background-color: white" value="0">00시</option>
+                                <option style="background-color: white" value="1">01시</option>
+                                <option style="background-color: white" value="2">02시</option>
+                                <option style="background-color: white" value="3">03시</option>
+                                <option style="background-color: white" value="4">04시</option>
+                                <option style="background-color: white" value="5">05시</option>
+                                <option style="background-color: white" value="6">06시</option>
+                                <option style="background-color: white" value="7">07시</option>
+                                <option style="background-color: white" value="8">08시</option>
+                                <option style="background-color: white" value="9">09시</option>
+                                <option style="background-color: white" value="10">10시</option>
+                                <option style="background-color: white" value="11">11시</option>
+                                <option style="background-color: white" value="12">12시</option>
+                                <option style="background-color: white" value="13">13시</option>
+                                <option style="background-color: white" value="14">14시</option>
+                                <option style="background-color: white" value="15">15시</option>
+                                <option style="background-color: white" value="16">16시</option>
+                                <option style="background-color: white" value="16">17시</option>
+                                <option style="background-color: white" value="16">18시</option>
+                                <option style="background-color: white" value="16">19시</option>
+                                <option style="background-color: white" value="16">20시</option>
+                                <option style="background-color: white" value="16">21시</option>
+                                <option style="background-color: white" value="16">22시</option>
+                                <option style="background-color: white" value="16">23시</option>
+                            </select>
                         </div>
 
-                        <div class="form-group row mb-3 mb-sm-0">
-                            <div class="input-group">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="accType1" id="inlineRadio1" value="N">
-                                    <label class="form-check-label" for="inlineRadio1">현재시세</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="accType2" id="inlineRadio2" checked value="R">
-                                    <label class="form-check-label" for="inlineRadio2">적용시세</label>
-                                </div>
+                    </div>
+
+
+
+
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-black-50 krFont">사이트 차단 설정</h1>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="accType1" id="inlineRadio1" value="N">
+                                <label class="form-check-label" for="inlineRadio1">노출여부</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="accType2" id="inlineRadio2" checked value="R">
+                                <label class="form-check-label" for="inlineRadio2">시스템차단여부</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-auto bg-gray-100 mb-1 rounded">
+                            <p>주문메모</p>
+                        </div>
+                        <div class="col-sm-8">
+                            <textarea class="form-control form-control-user" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-black-50 krFont">메인페이지 팝업 설정</h1>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="accType1" id="inlineRadio3" value="N">
+                                <label class="form-check-label" for="inlineRadio3">노출여부</label>
                             </div>
                         </div>
 
+                        <div class="col-sm-auto bg-gray-100 mb-1 rounded">
+                            <input type="text" class="form-control form-control-user" id="transactionId" name="transactionId" placeholder="안내사항">
+                        </div>
+                        <div class="col-sm-8">
+                            <textarea class="form-control form-control-user" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
+                        </div>
+                    </div>
 
-                    </form>
-                </div>
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="accType1" id="inlineRadio3" value="N">
+                                <label class="form-check-label" for="inlineRadio3">노출여부</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-auto bg-gray-100 mb-1 rounded">
+                            <input type="text" class="form-control form-control-user" id="transactionId" name="transactionId" placeholder="안내사항">
+                        </div>
+                        <div class="col-sm-8">
+                            <textarea class="form-control form-control-user" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
+                        </div>
+                    </div>
+
+
+                </form>
 
 
 
