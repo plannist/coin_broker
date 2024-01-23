@@ -7,6 +7,7 @@ import com.coin.broker.admin.service.MmsFormatMasService;
 import com.coin.broker.admin.service.WalletService;
 import com.coin.broker.front.model.FrontMng;
 import com.coin.broker.front.model.TransReqMas;
+import com.coin.broker.front.service.FrontMngService;
 import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.util.Response;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,8 @@ public class AdminController {
     final MmsFormatMasService mmsFormatMasService;
 
     final WalletService walletService;
+
+    final FrontMngService frontMngService;
 
     @GetMapping("/main")
     public ModelAndView main(@AuthenticationPrincipal AdminMas adminMas){
@@ -100,8 +103,8 @@ public class AdminController {
         Response<Object> res = new Response<>();
 
 
-
-
+        frontMngService.save(param);
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
 
         return res;
     }

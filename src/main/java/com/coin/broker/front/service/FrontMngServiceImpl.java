@@ -14,4 +14,9 @@ public class FrontMngServiceImpl implements FrontMngService{
     public FrontMng findFrontMngInfo() {
         return frontMngMapper.findFrontMngInfo();
     }
+
+    @Override
+    public int save(FrontMng param) {
+        return frontMngMapper.save(param);
+    }
 }

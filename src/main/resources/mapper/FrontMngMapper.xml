@@ -28,7 +28,19 @@
 			, reg_dttm
 			, mod_dttm
 		) values (
-
+			#{openTime},
+			#{closeTime},
+			#{mtnYn},
+			#{mtnMsgYn},
+			#{mtnMsg, jdbcType=VARCHAR},
+			#{ntc1Title, jdbcType=VARCHAR},
+			#{ntc2Title, jdbcType=VARCHAR},
+			#{ntc1Msg, jdbcType=VARCHAR},
+			#{ntc2Msg, jdbcType=VARCHAR},
+			#{ntc1Yn},
+			#{ntc2Yn},
+			now(),
+			now()
 		)
 	</insert>
 

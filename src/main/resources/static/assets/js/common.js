@@ -390,6 +390,14 @@ function alertNotice(title, html, onClose){
     });
 }
 
+function alertMaintenance(title, html){
+	Swal.fire({
+		html: html,
+		title: title,
+		showCancelButton: false,
+	});
+}
+
 /*ajax promise*/
 function ajaxPromise  (url, data, cont)  {
     return new Promise(function(resolve, reject){

@@ -158,9 +158,10 @@ function frontMng(){
 
                     //점검팝업 노출여부
                     if(data.mtnMsgYn === 'Y'){
-                        alertNotice('점검중', data.mtnMsg, ()=>{
-                           return;
-                        })
+                        // alertNotice('점검중', data.mtnMsg, ()=>{
+                        //    return;
+                        // })
+                        alertMaintenance('점검중', data.mtnMsg);
                     }else{
                         if(data.ntc1Yn === 'Y'){
                             alertNotice(data.ntc1Title, data.ntc1Msg, ()=>{

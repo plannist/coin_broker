@@ -5,4 +5,6 @@ import com.coin.broker.front.model.FrontMng;
 public interface FrontMngService {
 
     FrontMng findFrontMngInfo();
+
+    int save(FrontMng param);
 }

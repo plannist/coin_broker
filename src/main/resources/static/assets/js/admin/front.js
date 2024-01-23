@@ -11,7 +11,7 @@ function frontMng(){
         // contentType : 'application/json',
         success : function(res){
             let data = res.data;
-
+            console.log("frontMng data >>>", data);
             $('#openTime').val(data.openTime);
             $('#closeTime').val(data.closeTime);
 
@@ -24,7 +24,7 @@ function frontMng(){
             if(data.mtnYn === 'Y'){
                 $('#mtnYn').prop('checked', true);
             }else{
-                $('#mtnMsgYn').prop('checked', false);
+                $('#mtnYn').prop('checked', false);
             }
 
             $('#mtnMsg').val(data.mtnMsg);
@@ -52,5 +52,43 @@ function frontMng(){
 }
 
 function save(){
+
+    if($('#mtnYn').is(':checked')){
+        $('input[name=mtnYn]').val('Y');
+    }else{
+        $('input[name=mtnYn]').val('N');
+    }
+
+    if($('#mtnMsgYn').is(':checked')){
+        $('input[name=mtnMsgYn]').val('Y');
+    }else{
+        $('input[name=mtnMsgYn]').val('N');
+    }
+
+    if($('#ntc1Yn').is(':checked')){
+        $('input[name=ntc1Yn]').val('Y');
+    }else{
+        $('input[name=ntc1Yn]').val('N');
+    }
+
+    if($('#ntc2Yn').is(':checked')){
+        $('input[name=ntc2Yn]').val('Y');
+    }else{
+        $('input[name=ntc2Yn]').val('N');
+    }
+
+
+    let form = $('#frontForm').serialize();
+    console.log("save!! form data: ", form);
+
+    $.ajax({
+        url : "/admin/front-save",
+        type: 'POST',
+        dataType : 'json',
+        data : form,
+        success : function(res){
+            frontMng();
+        }
+    });
 
 }
