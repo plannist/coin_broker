@@ -1,0 +1,18 @@
+package com.coin.broker.admin.service;
+
+import com.coin.broker.front.mapper.FrontMngMapper;
+import com.coin.broker.front.model.FrontMng;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class FrontMngServiceImpl implements FrontMngService{
+
+    final FrontMngMapper frontMngMapper;
+
+    @Override
+    public int save(FrontMng param) {
+        return frontMngMapper.save(param);
+    }
+}

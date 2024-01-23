@@ -74,7 +74,7 @@
                             <p class="krFont">종료시간</p>
                         </div>
                         <div class="col-sm-auto">
-                            <select class="form-select mb-3" id="endTime" name="endTime" style="font-size: 0.8rem;">
+                            <select class="form-select mb-3" id="closeTime" name="closeTime" style="font-size: 0.8rem;">
                                 <option style="background-color: white" value="">선택해주세요</option>
                                 <option style="background-color: white" value="0">00시</option>
                                 <option style="background-color: white" value="1">01시</option>
@@ -106,7 +106,7 @@
                     </div>
 
 
-
+                    <hr class="sidebar-divider">
 
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -116,60 +116,74 @@
                     <div class="row">
                         <div class="input-group">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="accType1" id="inlineRadio1" value="N">
-                                <label class="form-check-label" for="inlineRadio1">노출여부</label>
+                                <input class="form-check-input" type="checkbox" name="mtnMsgYn" id="mtnMsgYn" value="N">
+                                <label class="form-check-label" for="mtnMsgYn">노출여부</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="accType2" id="inlineRadio2" checked value="R">
-                                <label class="form-check-label" for="inlineRadio2">시스템차단여부</label>
+                                <input class="form-check-input" type="checkbox" name="mtnYn" id="mtnYn" checked value="N">
+                                <label class="form-check-label" for="mtnYn">시스템차단여부</label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-auto bg-gray-100 mb-1 rounded">
-                            <p>주문메모</p>
+
+
+                    <div class="row mt-2">
+                        <div class="bg-gray-100 mb-1 rounded col-3">
+                            <p>시스템 차단 문구</p>
                         </div>
                         <div class="col-sm-8">
-                            <textarea class="form-control form-control-user" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
+                            <textarea class="form-control form-control-user" id="mtnMsg" name="mtnMsg" placeholder="차단문구" style="height: 150px;"></textarea>
                         </div>
                     </div>
 
+                    <hr class="sidebar-divider">
 
-
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-2">
                         <h1 class="h3 mb-0 text-black-50 krFont">메인페이지 팝업 설정</h1>
                     </div>
 
                     <div class="row">
                         <div class="input-group">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="accType1" id="inlineRadio3" value="N">
-                                <label class="form-check-label" for="inlineRadio3">노출여부</label>
+                                <input class="form-check-input" type="checkbox" name="ntc1Yn" id="ntc1Yn" value="N">
+                                <label class="form-check-label" for="ntc1Yn">노출여부</label>
                             </div>
-                        </div>
-
-                        <div class="col-sm-auto bg-gray-100 mb-1 rounded">
-                            <input type="text" class="form-control form-control-user" id="transactionId" name="transactionId" placeholder="안내사항">
-                        </div>
-                        <div class="col-sm-8">
-                            <textarea class="form-control form-control-user" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="input-group">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="accType1" id="inlineRadio3" value="N">
-                                <label class="form-check-label" for="inlineRadio3">노출여부</label>
-                            </div>
-                        </div>
-
                         <div class="col-sm-auto bg-gray-100 mb-1 rounded">
-                            <input type="text" class="form-control form-control-user" id="transactionId" name="transactionId" placeholder="안내사항">
+                            <input type="text" class="form-control form-control-user" id="ntc1Title" name="ntc1Title" placeholder="공지2제목">
                         </div>
                         <div class="col-sm-8">
-                            <textarea class="form-control form-control-user" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
+                            <textarea class="form-control form-control-user" id="ntc1Msg" name="ntc1Msg" placeholder="공지1내용" style="height: 150px;"></textarea>
+                        </div>
+                    </div>
+
+                    <hr class="sidebar-divider">
+
+                    <div class="row mt-2">
+                        <div class="input-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="ntc2Yn" id="ntc2Yn" value="N">
+                                <label class="form-check-label" for="ntc2Yn">노출여부</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-auto bg-gray-100 mb-1 rounded">
+                            <input type="text" class="form-control form-control-user" id="ntc2Title" name="ntc2Title" placeholder="공지2제목">
+                        </div>
+                        <div class="col-sm-8">
+                            <textarea class="form-control form-control-user" id="ntc2Msg" name="ntc2Msg" placeholder="공지2내용" style="height: 150px;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="submit" type="button" onclick="save();">변경사항 저장하기</button>
                         </div>
                     </div>
 

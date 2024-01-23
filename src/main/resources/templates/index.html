@@ -12,7 +12,7 @@
             <img class="navbar-brand fw-bold" src="/assets/image/old_logo.png" alt="..." style="height: 2.5rem"/>
 
 
-            <button type="button" class="btn btn-primary rounded-pill px-3 mb-lg-0" onclick="contact();">
+            <button type="button" class="btn btn-primary rounded-pill px-3 mb-lg-0" id="contectUs1" onclick="contact();">
                         <span class="d-flex align-items-center">
                             <i class="bi-chat-text-fill me-2"></i>
                             <span class="xl-small">구매대행 신청하기</span>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-outline-dark py-3 px-4 rounded-pill krFont" onclick="contact();">구매대행 신청하기</button>
+                <button class="btn btn-outline-dark py-3 px-4 rounded-pill krFont" type="button" id="contectUs2" onclick="contact();">구매대행 신청하기</button>
                 <div th:insert="~{layout/modal :: modal}"></div>
             </div>
         </div>

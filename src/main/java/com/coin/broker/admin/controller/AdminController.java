@@ -5,6 +5,7 @@ import com.coin.broker.admin.model.MmsFormatMas;
 import com.coin.broker.admin.model.WltAddrMng;
 import com.coin.broker.admin.service.MmsFormatMasService;
 import com.coin.broker.admin.service.WalletService;
+import com.coin.broker.front.model.FrontMng;
 import com.coin.broker.front.model.TransReqMas;
 import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.util.Response;
@@ -91,6 +92,20 @@ public class AdminController {
     public ModelAndView frontManage(){
         return new ModelAndView("admin/front");
     }
+
+    @PostMapping("/front-save")
+    @ResponseBody
+    public Response<?> frontSave(FrontMng param){
+
+        Response<Object> res = new Response<>();
+
+
+
+
+
+        return res;
+    }
+
 
     @GetMapping("/basic-info")
     public ModelAndView basicInfo(){

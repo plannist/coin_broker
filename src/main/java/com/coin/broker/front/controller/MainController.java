@@ -56,13 +56,26 @@ public class MainController {
     @GetMapping("/")
     public ModelAndView index(){
         ModelAndView mv = new ModelAndView();
-        FrontMng frontMng = frontMngService.findFrontMngInfo();
-        if(frontMng != null && "1".equals(frontMng.getMtnYn())){
-            mv.setViewName("error");
-        }else{
-            mv.setViewName("index");
-        }
+
+        mv.setViewName("index");
+
+//        if(frontMng != null && "1".equals(frontMng.getMtnYn())){
+//            mv.setViewName("error");
+//        }else{
+//            mv.setViewName("index");
+//        }
         return mv;
+    }
+
+    @PostMapping("/api/front-mng")
+    public ResponseEntity<?> frontMng(){
+        String profile = env.getActiveProfiles()[0];
+        Response<FrontMng> res = new Response<>();
+        FrontMng frontMng = frontMngService.findFrontMngInfo();
+        frontMng.setProfile(profile);
+        res.setData(frontMng);
+        return ResponseEntity.ok(res);
+
     }
 
     @PostMapping("/transReq")
@@ -203,19 +216,31 @@ public class MainController {
     @ResponseBody
     public ResponseEntity<?> isOpeningTime(@AuthenticationPrincipal AdminMas admin){
         Response<Object> res = new Response<>();
+
         LocalTime time = LocalTime.now();
         int hour = time.getHour();
         log.info("hour: >>{}", hour);
-        if(Utils.isEmpty(admin)){
-            if(hour > 0 && hour < 8){
-                res.setStatusCode(Response.ResultCode.FAIL.getCode());
 
-            }else{
-                res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
-            }
+        FrontMng frontMng = frontMngService.findFrontMngInfo();
+
+        //ex) open : 8 , close : 1, hour : 15
+        if(hour > frontMng.getCloseTime()  && hour <  frontMng.getOpenTime() ){
+            res.setStatusCode(Response.ResultCode.FAIL.getCode());
         }else{
             res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
         }
+
+
+//        if(Utils.isEmpty(admin)){
+//            if(hour > 0 && hour < 8){
+//                res.setStatusCode(Response.ResultCode.FAIL.getCode());
+//
+//            }else{
+//                res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+//            }
+//        }else{
+//            res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+//        }
 
 
         return ResponseEntity.ok(res);

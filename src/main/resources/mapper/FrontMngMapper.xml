@@ -5,13 +5,31 @@
 	<select id="findFrontMngInfo" resultType="com.coin.broker.front.model.FrontMng">
 		/*점검관리정보 조회*/
 		SELECT
-			idx, title, contents, mtn_yn, reg_dttm
+			*
 		FROM
 			front_mng
-		WHERE
-			MTN_YN = '1'
-		order by idx DESC
-			limit 1
+		order by reg_dttm desc
+		limit 1
 	</select>
+
+	<insert id="save" parameterType="com.coin.broker.front.model.FrontMng">
+		insert into front_mng (
+			 open_time
+			, close_time
+			, mtn_yn
+			, mtn_msg_yn
+			, mtn_msg
+			, ntc_1_title
+			, ntc_2_title
+			, ntc_1_msg
+			, ntc_2_msg
+			, ntc_1_yn
+			, ntc_2_yn
+			, reg_dttm
+			, mod_dttm
+		) values (
+
+		)
+	</insert>
 
 </mapper>

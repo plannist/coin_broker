@@ -1,4 +1,8 @@
-let title = `공지사항`;
+let title1 = `공지사항`;
+
+let profile = '';
+
+let title2 = "";
 
 let notice1 = `코인 판매 또는 판매 대행 서비스는 제공하지 않습니다.
                 서비스 이용을 권유 또는 홍보하거나 타사이트와 협약을 맺지 않습니다.
@@ -39,13 +43,15 @@ $(document).ready(function(){
     console.log("REFERER_URL >", REFERER_URL);
     console.log("DEVICE_TYPE >", DEVICE_TYPE);
 
+    frontMng();
 
+    if(profile === 'dev'){
+        alertNotice(title1, notice1, ()=>{
+            alertNotice(title2, notice2);
 
+        });
+    }
 
-    alertNotice(title, notice1, ()=>{
-        alertNotice(title, notice2);
-
-    });
 
     getCoinPrice();
     pollingStart();
@@ -125,5 +131,61 @@ function pollingStart(){
 function pollingEnd(){
     clearInterval(timmer);
     // LOAD_YN = true;
+}
+
+function frontMng(){
+    $.ajax({
+        url : "/api/front-mng",
+        type: 'POST',
+        global: false,
+        dataType : 'json',
+        // contentType : 'application/json',
+        success : function(res){
+
+            if(res.statusCode === 'S001'){
+                let data = res.data;
+                console.log("frontMng res >>", res);
+                //TODO: 운영 배포시 주석 처리
+                profile = data.profile;
+                if(profile ==='local'){
+
+                    //시스템차단 여부
+                    if(data.mtnYn === 'Y'){
+                        $('#contectUs1, #contectUs2').off('click');
+                        $('#contectUs1, #contectUs2').prop('disabled', true);
+                    }
+
+                    //점검팝업 노출여부
+                    if(data.mtnMsgYn === 'Y'){
+                        alertNotice('점검중', data.mtnMsg, ()=>{
+                           return;
+                        })
+                    }else{
+                        if(data.ntc1Yn === 'Y'){
+                            alertNotice(data.ntc1Title, data.ntc1Msg, ()=>{
+                                if(data.ntc2Yn == 'Y'){
+                                    alertNotice(data.ntc2Title, data.ntc2Msg);
+                                }else{
+                                    return;
+                                }
+                            })
+                        }else{
+                            if(data.ntc2Yn == 'Y'){
+                                alertNotice(data.ntc2Title, data.ntc2Msg);
+                            }else{
+                                return;
+                            }
+                            return;
+                        }
+                    }
+
+
+                }
+            }
+        }
+        , error : function(res){
+
+        }
+    })
 }
 
