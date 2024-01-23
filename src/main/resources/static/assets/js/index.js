@@ -151,8 +151,9 @@ function frontMng(){
 
                     //시스템차단 여부
                     if(data.mtnYn === 'Y'){
-                        $('#contectUs1, #contectUs2').off('click');
-                        $('#contectUs1, #contectUs2').prop('disabled', true);
+                        $('#contactUs1, #contactUs2').off('click').prop('disabled', true);
+                    }else{
+                        $('#contactUs1, #contactUs2').on('click', contact);
                     }
 
                     //점검팝업 노출여부
