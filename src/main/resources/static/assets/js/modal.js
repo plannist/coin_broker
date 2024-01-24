@@ -309,9 +309,9 @@ function chargeCalculate(amt, chargeCd){
     let chargeAmt = 0; //수수료금액
     // debugger;
 
-    $('#chargeAmt').prop('disabled', false);
-    $('#totReqAmt').prop('disabled', false);
-    $('#sendCoin').prop('disabled', false);
+    // $('#chargeAmt').prop('disabled', false);
+    // $('#totReqAmt').prop('disabled', false);
+    // $('#sendCoin').prop('disabled', false);
 
     if(amt * 1 <= coinMngs[0].rangeIdx){ //최소금액입력시
         chargeAmt = Number(coinMngs[0].chargeAmt);
@@ -392,9 +392,9 @@ function sendingCoinCalc(amt, type, chargeCd, chargeAmt){
     $('#krwChange').text(`${comma(krwChange)}원`);
 
 
-    $('#chargeAmt').prop('disabled', true)
-    $('#totReqAmt').prop('disabled', true)
-    $('#sendCoin').prop('disabled', true)
+    // $('#chargeAmt').prop('disabled', true)
+    // $('#totReqAmt').prop('disabled', true)
+    // $('#sendCoin').prop('disabled', true)
 }
 
 function changeAddrListener(el){
