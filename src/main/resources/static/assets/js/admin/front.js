@@ -51,7 +51,7 @@ function frontMng(){
                 $('#mtnYn').prop('checked', false);
             }
 
-            $('#mtnMsg').val(data.mtnMsg);
+            // $('#mtnMsg').val(data.mtnMsg);
 
             if(data.ntc1Yn === 'Y'){
                 $('#ntc1Yn').prop('checked', true);
@@ -68,11 +68,15 @@ function frontMng(){
             $('#ntc1Title').val(data.ntc1Title);
             $('#ntc2Title').val(data.ntc2Title);
 
-            $('#ntc1Msg').val(data.ntc1Msg);
-            $('#ntc2Msg').val(data.ntc2Msg);
+            // $('#ntc1Msg').val(data.ntc1Msg);
+            // $('#ntc2Msg').val(data.ntc2Msg);
 
 
-            ckEditor.setData(data.ntc1Msg);
+            ckEditor1.setData(data.mtnMsg);
+
+            ckEditor2.setData(data.ntc1Msg);
+
+            ckEditor3.setData(data.ntc2Msg);
 
         }
     });
@@ -103,6 +107,10 @@ function save(){
     }else{
         $('input[name=ntc2Yn]').val('N');
     }
+
+    $('#mtnMsg').val(ckEditor1.getData())
+    $('#ntc1Msg').val(ckEditor2.getData());
+    $('#ntc2Msg').val(ckEditor3.getData());
 
 
     let form = $('#frontForm').serialize();

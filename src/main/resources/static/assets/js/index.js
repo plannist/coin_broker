@@ -145,9 +145,10 @@ function frontMng(){
             if(res.statusCode === 'S001'){
                 let data = res.data;
                 console.log("frontMng res >>", res);
+
                 //TODO: 운영 배포시 주석 처리
                 profile = data.profile;
-                if(profile ==='local'){
+                // if(profile ==='local'){
 
                     //시스템차단 여부
                     if(data.mtnYn === 'Y'){
@@ -158,10 +159,25 @@ function frontMng(){
 
                     //점검팝업 노출여부
                     if(data.mtnMsgYn === 'Y'){
-                        // alertNotice('점검중', data.mtnMsg, ()=>{
-                        //    return;
-                        // })
-                        alertMaintenance('점검중', data.mtnMsg);
+                        alertNotice('점검중', data.mtnMsg, ()=>{
+                            if(data.ntc1Yn === 'Y'){
+                                alertNotice(data.ntc1Title, data.ntc1Msg, ()=>{
+                                    if(data.ntc2Yn == 'Y'){
+                                        alertNotice(data.ntc2Title, data.ntc2Msg);
+                                    }else{
+                                        return;
+                                    }
+                                })
+                            }else{
+                                if(data.ntc2Yn == 'Y'){
+                                    alertNotice(data.ntc2Title, data.ntc2Msg);
+                                }else{
+                                    return;
+                                }
+                                return;
+                            }
+                        })
+
                     }else{
                         if(data.ntc1Yn === 'Y'){
                             alertNotice(data.ntc1Title, data.ntc1Msg, ()=>{
@@ -182,7 +198,7 @@ function frontMng(){
                     }
 
 
-                }
+                // }
             }
         }
         , error : function(res){

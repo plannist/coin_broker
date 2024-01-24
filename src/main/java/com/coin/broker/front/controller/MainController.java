@@ -223,7 +223,7 @@ public class MainController {
 
         FrontMng frontMng = frontMngService.findFrontMngInfo();
 
-        //ex) open : 8 , close : 1, hour : 15
+        //ex) open : 9 , close : 1, hour : 9
         if(hour > frontMng.getCloseTime()  && hour <  frontMng.getOpenTime() ){
             res.setStatusCode(Response.ResultCode.FAIL.getCode());
         }else{

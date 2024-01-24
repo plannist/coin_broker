@@ -164,7 +164,7 @@ function draw(data){
 	$('#regDttm').val(data.regDttm);
 	$('#clientIp').val(data.clientIp);
 	if(data.prcsCd6Cnt*1 > 0){
-		$('#prcsCd6Cnt').val(data.prcsCd6Cnt+"/ 최종완료시각: "+data.rcptDttm);
+		$('#prcsCd6Cnt').val(data.prcsCd6Cnt+" / "+data.todayCd6Cnt);
 	}
 	$('#refererUrl').val(data.refererUrl);
 	$('#reqAmt').val(comma(data.reqAmt));

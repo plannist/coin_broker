@@ -214,12 +214,20 @@
 	</select>
 
 	<select id="findCusTransCnt" resultType="com.coin.broker.front.model.TransReqMas">
+
 		select
-		    count(*) as prcs_cd6_cnt
-			, max(rcpt_dttm) as rcpt_dttm
+			count(*) prcs_cd6_cnt,
+			sum(
+				case
+					when date_format(reg_dttm, '%Y%m%d') = date_format(now(), '%Y%m%d')
+					then 1
+					else 0
+				end
+			) today_cd6_cnt
 		from trans_req_mas
 		where prcs_cd = '6' -- 거래완료
 		  and phone_no = #{phoneNo}
+
 	</select>
 
 	<select id="findMmsFormats" resultType="com.coin.broker.admin.model.MmsFormatMas">

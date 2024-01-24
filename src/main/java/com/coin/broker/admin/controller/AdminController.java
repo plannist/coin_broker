@@ -146,7 +146,7 @@ public class AdminController {
         TransReqMas cntInfo = transReqMasService.findCusTransCnt(result);
         List<MmsFormatMas> mmsFormatMasList = mmsFormatMasService.findMmsFormatList();
         result.setPrcsCd6Cnt(cntInfo.getPrcsCd6Cnt());
-        result.setLstRcptDttm(cntInfo.getLstRcptDttm());
+        result.setTodayCd6Cnt(cntInfo.getTodayCd6Cnt());
         result.setMmsFormatMasList(mmsFormatMasList);
         res.setData(result);
         return ResponseEntity.ok(res);
