@@ -6,7 +6,9 @@
 
 <style>
     .modal-body::-webkit-scrollbar{display: none}
+    .ck-editor__editable { height: 400px; }
 </style>
+
 
 <body id="page-top">
 <div th:insert="~{layout/loading :: loading}"></div>
@@ -176,12 +178,12 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" style="height: 450px">
                         <div class="col-sm-auto bg-gray-100 mb-1 rounded">
                             <input type="text" class="form-control form-control-user" id="ntc2Title" name="ntc2Title" placeholder="공지2제목">
                         </div>
                         <div class="col-sm-8">
-                            <textarea class="form-control form-control-user" id="ntc2Msg" name="ntc2Msg" placeholder="공지2내용" style="height: 150px;"></textarea>
+                            <textarea class="form-control form-control-user" id="ntc2Msg" name="ntc2Msg" placeholder="공지2내용"></textarea>
                         </div>
                     </div>
 
@@ -227,9 +229,11 @@
 <!-- Page level plugins -->
 <script th:src="@{/assets/lib/datatables/jquery.dataTables.js}"></script>
 <script th:src="@{/assets/lib/datatables/dataTables.bootstrap4.js}"></script>
+<script th:src="@{/assets/lib/ckeditor/build/ckeditor.js}"></script>
 
 
 <script th:src="@{/assets/js/admin/front.js}"></script>
+
 
 
 

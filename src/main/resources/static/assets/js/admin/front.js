@@ -1,6 +1,30 @@
+let ckEditor1;
+let ckEditor2;
+let ckEditor3;
 
 $(document).ready(function(){
+
+
+    ClassicEditor.create(document.querySelector('#mtnMsg'), {
+
+    }).then(newEditor => {
+        ckEditor1 = newEditor;
+    });
+
+    ClassicEditor.create(document.querySelector('#ntc1Msg'), {
+
+    }).then(newEditor => {
+        ckEditor2 = newEditor;
+    });
+
+    ClassicEditor.create(document.querySelector('#ntc2Msg'), {
+
+    }).then(newEditor => {
+        ckEditor3 = newEditor;
+    })
+
     frontMng();
+
 });
 
 function frontMng(){
@@ -46,6 +70,9 @@ function frontMng(){
 
             $('#ntc1Msg').val(data.ntc1Msg);
             $('#ntc2Msg').val(data.ntc2Msg);
+
+
+            ckEditor.setData(data.ntc1Msg);
 
         }
     });
