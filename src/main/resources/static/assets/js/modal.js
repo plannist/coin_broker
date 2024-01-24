@@ -243,6 +243,7 @@ function changeAmtListener(el){
     $(el).removeClass('is-invalid');
     $('#chargeAmt').val(null)
     $('#totReqAmt').val(null)
+    $('#sendCoin').val(null)
 
     //숫자만 입력가능
     let val = uncomma($(el).val());
@@ -307,6 +308,10 @@ function chargeCalculate(amt, chargeCd){
     let coinMngs = coinMas.chargeMngs;
     let chargeAmt = 0; //수수료금액
     // debugger;
+
+    $('#chargeAmt').prop('disabled', false);
+    $('#totReqAmt').prop('disabled', false);
+    $('#sendCoin').prop('disabled', false);
 
     if(amt * 1 <= coinMngs[0].rangeIdx){ //최소금액입력시
         chargeAmt = Number(coinMngs[0].chargeAmt);
@@ -385,6 +390,11 @@ function sendingCoinCalc(amt, type, chargeCd, chargeAmt){
     let numCoin = Number(strCoin);
     let krwChange = (numCoin * tradePrice[type] * 1).toFixed();
     $('#krwChange').text(`${comma(krwChange)}원`);
+
+
+    $('#chargeAmt').prop('disabled', true)
+    $('#totReqAmt').prop('disabled', true)
+    $('#sendCoin').prop('disabled', true)
 }
 
 function changeAddrListener(el){

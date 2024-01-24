@@ -80,6 +80,7 @@ server:
   servlet:
     session:
       timeout: 86400
+  address: 0.0.0.0
 #  forward-headers-strategy: native
 
 #Multipart
