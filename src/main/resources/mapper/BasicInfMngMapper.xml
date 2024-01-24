@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coin.broker.admin.mapper.BasicInfMngMapper">
+
+
+
+	<insert id="save" parameterType="com.coin.broker.admin.model.BasicInfMng">
+		insert into basic_inf_mng (
+		     idx,
+		     sal_name,
+		     sal_sno,
+		     meta_tag,
+		     kakao_open_url,
+		     phone_no,
+		     oder_name,
+			first_phone_no,
+			telegram_id,
+			email,
+		     bank_acc_1,
+		     bank_acc_2,
+		     bank_acc_3,
+		     bank_acc_4,
+		     admin_id,
+			reg_dttm
+		)
+		values (
+		      #{idx         },
+			  #{salName     },
+			  #{salSno      },
+			  #{metaTag     },
+			  #{kakaoOpenUrl},
+			  #{phoneNo     },
+			  #{oderName    },
+			  #{firstPhoneNo},
+			  #{telegramId  },
+			  #{email       },
+			  #{bankAcc1    },
+			  #{bankAcc2    },
+			  #{bankAcc3    },
+			  #{bankAcc4    },
+			  #{adminId     },
+			  now()
+	   )
+
+
+	</insert>
+
+
+</mapper>
