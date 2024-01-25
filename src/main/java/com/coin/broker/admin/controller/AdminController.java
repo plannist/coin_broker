@@ -51,10 +51,7 @@ public class AdminController {
     public ModelAndView main(@AuthenticationPrincipal AdminMas adminMas){
         ModelAndView mv = new ModelAndView("admin/main");
 
-        BasicInfMng info = basicInfMngService.findOne();
-
         log.info("adminMas 관리자 접속정보:: >>{}", adminMas);
-        mv.addObject("basic", info);
         return mv;
     }
 

@@ -62,28 +62,28 @@
                 <tr>
                     <th class="text-white-50 text-start" style="width:30%">카카오 오픈채팅</th>
                     <td class="text-white-50 align-middle text-start" style="width:70%">
-                        <a class="text-white text-break" href="https://open.kakao.com/o/sKFZumLb"> https://open.kakao.com/o/sKFZumLb </a>
+                        <a class="text-white text-break" th:href="${basic.kakaoOpenUrl}" th:text="${basic.kakaoOpenUrl}"></a>
                     </td>
                 </tr>
 
                 <tr>
                     <th class="text-white-50 text-start" style="width:30%">텔레그램 ID</th>
                     <td class="text-white-50 align-middle text-start" style="width:70%">
-                        <a class="text-white" href="https://t.me/svcoin"> @svcoin </a>
+                        <a class="text-white" href="https://t.me/svcoin" th:text="${basic.telegramId}"> </a>
                     </td>
                 </tr>
 
                 <tr>
                     <th class="text-white-50 text-start" style="width:30%">모바일</th>
                     <td class="text-white-50 align-middle text-start" style="width:70%">
-                        <a class="text-white" href="sms:010-9718-9766"> 010-9718-9766 </a>
+                        <a class="text-white" th:href="|sms:${basic.phoneNo}|" th:text="${basic.phoneNo}">  </a>
                     </td>
                 </tr>
 
                 <tr>
                     <th class="text-white-50 text-start" style="width:30%">이메일</th>
                     <td class="text-white-50 align-middle text-start" style="width:70%">
-                        <a class="text-white text-break" href="mailto:svcoin66@gmail.com"> svcoin66@gmail.com </a>
+                        <a class="text-white text-break" th:href="|mailto:${basic.email}|" th:text="${basic.email}">  </a>
                     </td>
                 </tr>
 
