@@ -25,16 +25,17 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-black-50 krFont">사업자 일반정보 설정</h1>
-                </div>
+
 
                 <form id="basicForm" class="row g-3">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-black-50 krFont">사업자 일반정보 설정</h1>
+                    </div>
 
                     <div class="col-12">
                         <label for="metaTag" class="form-label">사이트 소개</label>
-                        <input type="text" class="form-control" id="metaTag" name="metaTag" placeholder="1234 Main St">
+                        <input type="text" class="form-control" id="metaTag" name="metaTag" placeholder="사이트 소개">
                     </div>
 
 
@@ -42,24 +43,24 @@
                     <div class="row mt-3">
                         <div class="col">
                             <label class="form-label" for="salName">사업자명</label>
-                            <input class="form-control form-control-user" id="salName" name="salName" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="salName" name="salName" placeholder="사업자명" >
                         </div>
 
                         <div class="col">
                             <label class="form-label" for="oderName">대표자명</label>
-                            <input class="form-control form-control-user" id="oderName" name="oderName" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="oderName" name="oderName" placeholder="대표자명" >
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col">
                             <label class="form-label" for="salSno">사업자등록번호</label>
-                            <input class="form-control form-control-user" id="salSno" name="salSno" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="salSno" name="salSno" placeholder="사업자등록번호" >
                         </div>
 
                         <div class="col">
                             <label class="form-label" for="firstPhoneNo">대표 전화번호</label>
-                            <input class="form-control form-control-user" id="firstPhoneNo" name="firstPhoneNo" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="firstPhoneNo" name="firstPhoneNo" placeholder="대표 전화번호" >
                         </div>
                     </div>
 
@@ -67,56 +68,66 @@
                     <div class="row mt-3">
                         <div class="col">
                             <label class="form-label" for="kakaoOpenUrl">카카오 오픈채팅</label>
-                            <input class="form-control form-control-user" id="kakaoOpenUrl" name="kakaoOpenUrl" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="kakaoOpenUrl" name="kakaoOpenUrl" placeholder="카카오" >
                         </div>
 
                         <div class="col">
                             <label class="form-label" for="telegramId">텔레그램 ID</label>
-                            <input class="form-control form-control-user" id="telegramId" name="telegramId" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="telegramId" name="telegramId" placeholder="텔레그램" >
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col">
                             <label class="form-label" for="phoneNo">모바일</label>
-                            <input class="form-control form-control-user" id="phoneNo" name="phoneNo" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="phoneNo" name="phoneNo" placeholder="모바일" >
                         </div>
 
                         <div class="col">
                             <label class="form-label" for="email">이메일</label>
-                            <input class="form-control form-control-user" id="email" name="email" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="email" name="email" placeholder="이메일" >
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col">
                             <label class="form-label" for="bankAcc1">입금기업</label>
-                            <input class="form-control form-control-user" id="bankAcc1" name="bankAcc1" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="bankAcc1" name="bankAcc1" placeholder="입금기업" >
                         </div>
 
                         <div class="col">
                             <label class="form-label" for="bankAcc2">입금우리</label>
-                            <input class="form-control form-control-user" id="bankAcc2" name="bankAcc2" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="bankAcc2" name="bankAcc2" placeholder="입금우리" >
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col">
                             <label class="form-label" for="bankAcc3">입금농협</label>
-                            <input class="form-control form-control-user" id="bankAcc3" name="bankAcc3" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="bankAcc3" name="bankAcc3" placeholder="입금농협" >
                         </div>
 
                         <div class="col">
                             <label class="form-label" for="bankAcc4">계좌번호4</label>
-                            <input class="form-control form-control-user" id="bankAcc4" name="bankAcc4" placeholder="차단문구" >
+                            <input class="form-control form-control-user" id="bankAcc4" name="bankAcc4" placeholder="계좌번호4" >
                         </div>
                     </div>
 
+
+                    <hr class="sidebar-divider mt-4">
 
 
 
 
                 </form>
+
+
+
+
+
+
+
+
 
 
 
@@ -162,7 +173,7 @@
 <script th:src="@{/assets/lib/datatables/dataTables.bootstrap4.js}"></script>
 
 
-<script th:src="@{/assets/js/admin/mms.js}"></script>
+<script th:src="@{/assets/js/admin/basic.js}"></script>
 
 
 

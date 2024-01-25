@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BasicInfMngMapper {
     int save(BasicInfMng param);
+
+    BasicInfMng findOne();
 }

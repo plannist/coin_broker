@@ -367,6 +367,7 @@ function alertConfirm(title, html, confirmText, permission, onClose){
         confirmButtonText: confirmText,
         cancelButtonText: '취소',
         focusConfirm: false,
+        allowOutsideClick: false,
         // onClose: () => {
         //     onClose();
         // },
@@ -381,6 +382,7 @@ function alertNotice(title, html, onClose){
     Swal.fire({
         html: html,
         title: title,
+        allowOutsideClick: false,
         onClose: () => {
         	if(onClose){
 		        onClose();

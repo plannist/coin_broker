@@ -2,18 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coin.broker.admin.mapper.AdminMapper">
 
-
+	<update id="update" parameterType="com.coin.broker.admin.model.AdminMas">
+		update admin_mas set
+			id = #{id},
+			<if test="password != null and password != '' ">
+				password = #{password},
+			</if>
+			mod_dttm = now()
+		where
+		    id = #{id}
+	</update>
 
 	<insert id="insertAdmin" parameterType="com.coin.broker.admin.model.AdminMas">
 		INSERT INTO admin_mas
 			(id, password, name, auth, reg_dttm, mod_dttm)
-		VALUES(#{id}, #{password}, #{name}, #{auth}, now(), null);
-
-
+		VALUES(#{id}, #{password}, #{name}, #{auth}, now(), null)
 	</insert>
 
 	<select id="findById" resultType="com.coin.broker.admin.model.AdminMas">
 		SELECT * FROM admin_mas where id = #{id}
+	</select>
+
+
+	<select id="findAll" resultType="com.coin.broker.admin.model.AdminMas">
+		SELECT * FROM admin_mas order by reg_dttm asc
 	</select>
 
 </mapper>

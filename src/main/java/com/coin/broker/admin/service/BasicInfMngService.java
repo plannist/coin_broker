@@ -5,4 +5,6 @@ import com.coin.broker.admin.model.BasicInfMng;
 public interface BasicInfMngService {
 
     int save(BasicInfMng param);
+
+    BasicInfMng findOne();
 }

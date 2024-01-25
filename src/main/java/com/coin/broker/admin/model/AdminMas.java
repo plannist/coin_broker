@@ -17,6 +17,9 @@ public class AdminMas implements UserDetails {
     private String name;
     private String auth;
 
+    //parameter
+    private String beforeId;
+
     public enum UserRole{
         PRE_FIX("ROLE_"),
         CUSTOMER("고객"),

@@ -1,8 +1,11 @@
 package com.coin.broker.admin.controller;
 
 import com.coin.broker.admin.model.AdminMas;
+import com.coin.broker.admin.model.BasicInfMng;
 import com.coin.broker.admin.model.MmsFormatMas;
 import com.coin.broker.admin.model.WltAddrMng;
+import com.coin.broker.admin.service.AdminService;
+import com.coin.broker.admin.service.BasicInfMngService;
 import com.coin.broker.admin.service.MmsFormatMasService;
 import com.coin.broker.admin.service.WalletService;
 import com.coin.broker.front.model.FrontMng;
@@ -10,15 +13,20 @@ import com.coin.broker.front.model.TransReqMas;
 import com.coin.broker.front.service.FrontMngService;
 import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.util.Response;
+import com.coin.broker.util.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -34,13 +42,19 @@ public class AdminController {
 
     final FrontMngService frontMngService;
 
+    final BasicInfMngService basicInfMngService;
+
+    final AdminService adminService;
+
+
     @GetMapping("/main")
     public ModelAndView main(@AuthenticationPrincipal AdminMas adminMas){
         ModelAndView mv = new ModelAndView("admin/main");
 
+        BasicInfMng info = basicInfMngService.findOne();
 
         log.info("adminMas 관리자 접속정보:: >>{}", adminMas);
-
+        mv.addObject("basic", info);
         return mv;
     }
 
@@ -113,6 +127,56 @@ public class AdminController {
     @GetMapping("/basic-info")
     public ModelAndView basicInfo(){
         return new ModelAndView("admin/basic");
+    }
+
+    @PostMapping("/basic-info-find")
+    @ResponseBody
+    public Response<?> basicInfoFind(@AuthenticationPrincipal AdminMas admin){
+        Response<BasicInfMng> res = new Response<>();
+        BasicInfMng info = basicInfMngService.findOne();
+        List<AdminMas> adminList = adminService.findAll();
+        info.setAdminList(adminList);
+        res.setData(info);
+        return res;
+    }
+
+    @PostMapping("/basic-info-save")
+    @ResponseBody
+    public Response<?> basicInfoSave(@AuthenticationPrincipal AdminMas admin, @Validated BasicInfMng param, BindingResult bindingResult){
+        Response<Object> res = new Response<>();
+        if(bindingResult.hasErrors()){
+            res.setStatusCode(Response.ResultCode.FAIL.getCode());
+            return res;
+        }
+
+
+        //TODO: 로그인한 사용자 변경 사항 있을시 로그 아웃처리 필요
+        //아이디 변경 혹은 비밀번호 변경 사용자 확인
+        List<AdminMas> changeList = param.getAdminList().stream().filter(e-> !e.getId().equals(e.getBeforeId()) || Utils.isNotEmpty(e.getPassword()) ).toList();
+        //로그인한 사용자가 변경된 사용자 목록에 있는지
+        boolean flag = changeList.stream().anyMatch(e -> e.getBeforeId().equals(admin.getId()));
+        log.info("flag: >>{}", flag);
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("flag", flag);
+        res.setData(map);
+
+        int cnt = basicInfMngService.save(param);
+        cnt     += adminService.save(param.getAdminList());
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
+
+        return res;
+    }
+
+    @Deprecated
+    @PostMapping("/admin-info-save")
+    @ResponseBody
+    public Response<?> adminInfoSave(@AuthenticationPrincipal AdminMas admin, BasicInfMng param){
+        Response<BasicInfMng> res = new Response<>();
+
+//        int cnt = adminService.save(list);
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+        return res;
     }
 
     @GetMapping("/business")

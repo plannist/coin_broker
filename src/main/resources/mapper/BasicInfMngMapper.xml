@@ -45,5 +45,9 @@
 
 	</insert>
 
+	<select id="findOne" parameterType="com.coin.broker.admin.model.BasicInfMng">
+		select * from basic_inf_mng order by idx desc limit 1
+	</select>
+
 
 </mapper>
