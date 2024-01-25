@@ -10,7 +10,7 @@
 			</if>
 			mod_dttm = now()
 		where
-		    id = #{id}
+		    id = #{beforeId}
 	</update>
 
 	<insert id="insertAdmin" parameterType="com.coin.broker.admin.model.AdminMas">
