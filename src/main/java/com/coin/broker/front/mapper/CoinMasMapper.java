@@ -11,4 +11,14 @@ public interface CoinMasMapper {
     int coinMasUpdate(CoinMas param);
 
     int chargeMngMerge(CoinChargeMng param);
+
+    CoinMas getCoinInfoTemp(CoinMas param);
+
+    void coinMasUpdateTemp(CoinMas param);
+
+    void chargeMngMergeTemp(CoinChargeMng e);
+
+    int chargeMngDelete(CoinChargeMng param);
+
+    int chargeMngDeleteTemp(CoinChargeMng param);
 }

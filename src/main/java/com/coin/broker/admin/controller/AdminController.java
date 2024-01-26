@@ -202,14 +202,14 @@ public class AdminController {
     @PostMapping("/business-save")
     @ResponseBody
     public Response<?> businessSave(@RequestBody CoinMas param){
-        Response<BasicInfMng> res = new Response<>();
+        Response<Object> res = new Response<>();
 
         int maxAmt = param.getMaxAmt();
-        int maxRange = param.getChargeMngs().stream().mapToInt(CoinChargeMng::getRangeIdx).max().getAsInt();
+        int maxRange = param.getChargeMngs().stream().filter(e-> "F".equals(e.getNewRow())).mapToInt(CoinChargeMng::getRangeIdx).max().getAsInt();
         int newRowRange = param.getChargeMngs().stream().filter(e-> "T".equals(e.getNewRow())).mapToInt(CoinChargeMng :: getRangeIdx).findAny().getAsInt();
         log.info("maxAmt[{}], maxRange[{}], newRowRange[{}]", maxAmt, maxRange, newRowRange);
 
-        if(maxAmt == maxRange){
+        if(maxAmt == maxRange || maxAmt == newRowRange){
             if(newRowRange == 0 || newRowRange > maxRange){
                 int cnt = coinMasService.chargeMngAndCoinMasUpdate(param);
                 res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
@@ -223,6 +223,14 @@ public class AdminController {
             res.setStatusCode(Response.ResultCode.FAIL.getCode());
         }
 
+        return res;
+    }
+
+    @PostMapping("/business-delete")
+    @ResponseBody
+    public Response<?> businessDelete(CoinChargeMng param){
+        Response<Object> res = new Response<>();
+        coinMasService.chargeMngDelete(param);
         return res;
     }
 
