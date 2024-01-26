@@ -27,53 +27,88 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-black-50 krFont">문자 생성기 설정</h1>
-
-
+                    <h1 class="h3 mb-0 text-black-50 krFont">거래및 수수료 설정</h1>
                 </div>
 
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#BTC" type="button" role="tab" aria-controls="home" aria-selected="true">BTC</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#ETH" type="button" role="tab" aria-controls="profile" aria-selected="false">ETH</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#XRP" type="button" role="tab" aria-controls="contact" aria-selected="false">XRP</button>
+                    </li>
+                </ul>
+                <div class="tab-content mt-4" id="myTabContent">
+                    <input type="hidden" name="coinType" id="coinType">
+                    <div class="tab-pane fade show active"  id="BTC" role="tabpanel" aria-labelledby="home-tab">
 
-                <div class="badge-light  row">
-                    <div class="card-group col-sm-2">
-                        <a class="badge badge-primary" id="1" href="#" onclick="copyText(this)">{totReqAmt}</a>
-                        <label for="1" >입금금액</label>
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label" for="maxAmt">최대충전금액</label>
+                                <input class="form-control form-control-user" id="maxAmt" name="maxAmt" placeholder="최대충전금액" >
+                            </div>
+
+                            <div class="col">
+                                <label class="form-label" for="minTAmt">수수료포함 최소충전</label>
+                                <input class="form-control form-control-user" id="minTAmt" name="minTAmt" placeholder="수수료포함 최소충전" >
+                            </div>
+
+                            <div class="col">
+                                <label class="form-label" for="minIAmt">수수료별도 최소충전</label>
+                                <input class="form-control form-control-user" id="minIAmt" name="minIAmt" placeholder="수수료별도 최소충전" >
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="BTC-table" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>적용최소금액</th>
+                                    <th>적용최대금액</th>
+                                    <th>수수료</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    <div class="tab-pane fade"              id="ETH" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="ETH-table" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>적용최소금액</th>
+                                    <th>적용최대금액</th>
+                                    <th>수수료</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                    <div class="card-group col-sm-2">
-                        <a class="badge badge-primary" id="2" href="#" onclick="copyText(this)">{deposNm}</a>
-                        <label for="2" >신청자명</label>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    <div class="tab-pane fade"              id="XRP" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="XRP-table" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>적용최소금액</th>
+                                    <th>적용최대금액</th>
+                                    <th>수수료</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                    <div class="card-group col-sm-2">
-                        <a class="badge badge-primary" id="3" href="#" onclick="copyText(this)">{toWalletAddr}</a>
-                        <label for="3" >지갑주소</label>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-                    <div class="card-group col-sm-2">
-                        <a class="badge badge-primary" id="4" href="#" onclick="copyText(this)">{tradePrice}</a>
-                        <label for="4" >적용시세</label>
-                    </div>
-
-                    <div class="card-group col-sm-2">
-                        <a class="badge badge-primary" id="5" href="#" onclick="copyText(this)">{sendCoin}</a>
-                        <label for="4" >보낼코인양</label>
-                    </div>
-
-                    <div class="card-group col-sm-2">
-                        <a class="badge badge-primary" id="6" href="#" onclick="copyText(this)">{dstntTag}</a>
-                        <label for="4" >데스티네이션태그</label>
-                    </div>
-
-                    <div class="card-group col-sm-2">
-                        <a class="badge badge-primary" id="7" href="#" onclick="copyText(this)">{transactionId}</a>
-                        <label for="4" >트렌젝션아이디</label>
-                    </div>
-
-
-
-
-
-
                 </div>
 
 
@@ -81,21 +116,7 @@
 
                 </div>
 
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>순번</th>
-                            <th>제목</th>
-                            <th>문자내용</th>
-                            <th>저장</th>
-                        </tr>
-                        </thead>
-                        <tbody>
 
-                        </tbody>
-                    </table>
-                </div>
 
 
             </div>
@@ -131,7 +152,7 @@
 <script th:src="@{/assets/lib/datatables/dataTables.bootstrap4.js}"></script>
 
 
-<script th:src="@{/assets/js/admin/mms.js}"></script>
+<script th:src="@{/assets/js/admin/business.js}"></script>
 
 
 

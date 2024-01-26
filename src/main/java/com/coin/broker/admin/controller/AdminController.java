@@ -8,8 +8,11 @@ import com.coin.broker.admin.service.AdminService;
 import com.coin.broker.admin.service.BasicInfMngService;
 import com.coin.broker.admin.service.MmsFormatMasService;
 import com.coin.broker.admin.service.WalletService;
+import com.coin.broker.front.model.CoinChargeMng;
+import com.coin.broker.front.model.CoinMas;
 import com.coin.broker.front.model.FrontMng;
 import com.coin.broker.front.model.TransReqMas;
+import com.coin.broker.front.service.CoinMasService;
 import com.coin.broker.front.service.FrontMngService;
 import com.coin.broker.front.service.TransReqMasService;
 import com.coin.broker.util.Response;
@@ -45,6 +48,8 @@ public class AdminController {
     final BasicInfMngService basicInfMngService;
 
     final AdminService adminService;
+
+    final CoinMasService coinMasService;
 
 
     @GetMapping("/main")
@@ -179,6 +184,30 @@ public class AdminController {
     @GetMapping("/business")
     public ModelAndView business(){
         return new ModelAndView("admin/business");
+    }
+
+    @PostMapping("/business-find")
+    @ResponseBody
+    public Response<?> businessFind( CoinMas param){
+        Response<CoinMas> res = new Response<>();
+
+        CoinMas coinInfo = coinMasService.getCoinInfo(param);
+        coinInfo.getChargeMngs().add(new CoinChargeMng());
+        res.setData(coinInfo);
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
+        return res;
+    }
+
+    @PostMapping("/business-save")
+    @ResponseBody
+    public Response<?> businessSave( CoinMas param){
+        Response<BasicInfMng> res = new Response<>();
+
+        int cnt = coinMasService.chargeMngAndCoinMasUpdate(param);
+
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+        return res;
     }
 
 
