@@ -29,10 +29,11 @@ const DataTableBasic = function(){
                 width : '150px',
                 render: function(data, type, full) {
 
-                    if(data === 0 || full.maxId === 1){
-                        // console.log("data :", data );
-                        // console.log("full.maxId :", full.maxId);
+                    if(full.maxId === 1){
                         return `<input name="rangeIdx" type="text" class="form-control form-control-user" placeholder="까지 입력" value="${comma(data+'')}">`;
+                    }
+                    else if(data === 0 ){
+                        return `<input name="rangeIdx" id="newRow" type="text" class="form-control form-control-user" placeholder="까지 입력" value="${comma(data+'')}">`;
                     }else{
                         return `<input name="rangeIdx" type="text" class="form-control form-control-user" disabled value="${comma(data+'')}">  </input>`;
                     }
@@ -165,10 +166,30 @@ function save(){
     for(let i=0; i<len ; i++){
         let rangeIdx =  uncomma($('input[name=rangeIdx]').eq(i).val());
         let chargeAmt = uncomma($('input[name=chargeAmt]').eq(i).val());
-        vo.chargeMngs.push({rangeIdx:rangeIdx, chargeAmt:chargeAmt});
+        let newRow = $('input[name=rangeIdx]').eq(i).attr('id');
+        newRow = newRow ? 'T' : 'F';
+        vo.chargeMngs.push({coinType: coinType, rangeIdx:rangeIdx, chargeAmt:chargeAmt, newRow : newRow});
     }
 
     console.log("vo: ", vo);
+
+    $.ajax({
+        url : "/admin/business-save",
+        type: 'POST',
+        data : JSON.stringify(vo),
+        dataType : 'json',
+        contentType : 'application/json',
+        success : function(res){
+            console.log("res : ", res);
+            if(res.statusCode === 'S001'){
+                // search();
+            }else{
+                alertNotice('오류', res.statusMessage, ()=>{
+                    // search();
+                })
+            }
+        }
+    });
 
 
 }

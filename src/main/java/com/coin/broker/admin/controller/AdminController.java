@@ -201,12 +201,28 @@ public class AdminController {
 
     @PostMapping("/business-save")
     @ResponseBody
-    public Response<?> businessSave( CoinMas param){
+    public Response<?> businessSave(@RequestBody CoinMas param){
         Response<BasicInfMng> res = new Response<>();
 
-        int cnt = coinMasService.chargeMngAndCoinMasUpdate(param);
+        int maxAmt = param.getMaxAmt();
+        int maxRange = param.getChargeMngs().stream().mapToInt(CoinChargeMng::getRangeIdx).max().getAsInt();
+        int newRowRange = param.getChargeMngs().stream().filter(e-> "T".equals(e.getNewRow())).mapToInt(CoinChargeMng :: getRangeIdx).findAny().getAsInt();
+        log.info("maxAmt[{}], maxRange[{}], newRowRange[{}]", maxAmt, maxRange, newRowRange);
 
-        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+        if(maxAmt == maxRange){
+            if(newRowRange == 0 || newRowRange > maxRange){
+                int cnt = coinMasService.chargeMngAndCoinMasUpdate(param);
+                res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+            }else{
+                res.setStatusMessage("추가된 수수료 까지 금액이 기존 최대 금액보다 낮습니다.");
+                res.setStatusCode(Response.ResultCode.FAIL.getCode());
+            }
+
+        }else{
+            res.setStatusMessage("최대신청금액과 최대 수수료 까지 금액이 다릅니다.");
+            res.setStatusCode(Response.ResultCode.FAIL.getCode());
+        }
+
         return res;
     }
 

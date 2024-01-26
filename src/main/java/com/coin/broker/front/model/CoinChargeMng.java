@@ -12,4 +12,7 @@ public class CoinChargeMng {
     //view-data
     private int firstIdx;
     private int maxId;
+
+    //param data
+    private String newRow;
 }
