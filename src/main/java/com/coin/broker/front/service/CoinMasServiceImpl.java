@@ -58,12 +58,17 @@ public class CoinMasServiceImpl implements CoinMasService{
     }
 
     @Override
+    @Transactional
     public int chargeMngDelete(CoinChargeMng param) {
         String profile = env.getActiveProfiles()[0];
+        int cnt = 0;
         if("dev".equals(profile)){
-            return coinMasMapper.chargeMngDelete(param);
+            cnt += coinMasMapper.chargeMngDelete(param);
+            cnt += coinMasMapper.maxAmtUpdate(param);
         }else{
-            return coinMasMapper.chargeMngDeleteTemp(param);
+            cnt += coinMasMapper.chargeMngDeleteTemp(param);
+            cnt += coinMasMapper.maxAmtUpdateTemp(param);
         }
+        return cnt;
     }
 }

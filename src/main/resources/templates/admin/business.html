@@ -32,36 +32,35 @@
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#BTC" type="button" role="tab" aria-controls="home" aria-selected="true">BTC</button>
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#BTC" type="button" role="tab" aria-controls="home" aria-selected="true" onclick="search()">BTC</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#ETH" type="button" role="tab" aria-controls="profile" aria-selected="false">ETH</button>
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#ETH" type="button" role="tab" aria-controls="profile" aria-selected="false" onclick="search()">ETH</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#XRP" type="button" role="tab" aria-controls="contact" aria-selected="false">XRP</button>
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#XRP" type="button" role="tab" aria-controls="contact" aria-selected="false" onclick="search()">XRP</button>
                     </li>
                 </ul>
                 <div class="tab-content mt-4" id="myTabContent">
                     <input type="hidden" name="coinType" id="coinType">
-                    <div class="tab-pane fade show active"  id="BTC" role="tabpanel" aria-labelledby="home-tab">
-
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="maxAmt">최대충전금액</label>
-                                <input class="form-control form-control-user" id="maxAmt" name="maxAmt" placeholder="최대충전금액" >
-                            </div>
-
-                            <div class="col">
-                                <label class="form-label" for="minTAmt">수수료포함 최소충전</label>
-                                <input class="form-control form-control-user" id="minTAmt" name="minTAmt" placeholder="수수료포함 최소충전" >
-                            </div>
-
-                            <div class="col">
-                                <label class="form-label" for="minIAmt">수수료별도 최소충전</label>
-                                <input class="form-control form-control-user" id="minIAmt" name="minIAmt" placeholder="수수료별도 최소충전" >
-                            </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label" for="maxAmt">최대충전금액</label>
+                            <input class="form-control form-control-user" id="maxAmt" name="maxAmt" placeholder="최대충전금액" >
                         </div>
 
+                        <div class="col">
+                            <label class="form-label" for="minTAmt">수수료포함 최소충전</label>
+                            <input class="form-control form-control-user" id="minTAmt" name="minTAmt" placeholder="수수료포함 최소충전" >
+                        </div>
+
+                        <div class="col">
+                            <label class="form-label" for="minIAmt">수수료별도 최소충전</label>
+                            <input class="form-control form-control-user" id="minIAmt" name="minIAmt" placeholder="수수료별도 최소충전" >
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade show active"  id="BTC" role="tabpanel" aria-labelledby="home-tab">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="BTC-table" width="100%" cellspacing="0">
                                 <thead>

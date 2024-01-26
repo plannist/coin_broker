@@ -22,7 +22,7 @@ public class CustomCorsFilter  implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         String url = request.getRequestURI();
-        if(! url.startsWith("/image") && ! url.startsWith("/css") && ! url.startsWith("/js") && ! url.startsWith("/lib") && ! url.startsWith("/fontwesome")  ){
+        if(! url.startsWith("/assets")  || url.startsWith("/admin")){
             log.info("=================== CustomCorsFilter ==================");
             log.info("doFilter >>> {}", url);
             log.info("=================== ================ ==================");

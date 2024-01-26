@@ -21,4 +21,8 @@ public interface CoinMasMapper {
     int chargeMngDelete(CoinChargeMng param);
 
     int chargeMngDeleteTemp(CoinChargeMng param);
+
+    int maxAmtUpdate(CoinChargeMng param);
+
+    int maxAmtUpdateTemp(CoinChargeMng param);
 }

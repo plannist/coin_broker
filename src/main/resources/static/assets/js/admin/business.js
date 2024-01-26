@@ -1,4 +1,5 @@
-let coinType = "KRW-";
+let coinType = "";
+let tabId= "";
 
 
 $(document).ready(function(){
@@ -20,18 +21,18 @@ const DataTableBasic = function(){
         let _columnDefs = [
             {
                 targets: 0,
-                width : '150px',
+                // width : '150px',
                 render: function(data, type, full) {
                     return comma(data+'');
                 },
             },
             {
                 targets: 1,
-                width : '150px',
+                // width : '150px',
                 render: function(data, type, full) {
 
                     if(full.maxId === 1){
-                        return `<input name="rangeIdx" type="text" class="form-control form-control-user" placeholder="까지 입력" value="${comma(data+'')}">`;
+                        return `<input name="rangeIdx" id="maxId" type="text" class="form-control form-control-user" placeholder="까지 입력" value="${comma(data+'')}">`;
                     }
                     else if(data === 0 ){
                         return `<input name="rangeIdx" id="newRow" type="text" class="form-control form-control-user" placeholder="까지 입력" value="${comma(data+'')}">`;
@@ -43,7 +44,7 @@ const DataTableBasic = function(){
             },
             {
                 targets: 2,
-                width : '150px',
+                // width : '150px',
                 render: function(data, type, full) {
                     // console.log("chargeAmtData :", data);
                     return `<input name="chargeAmt" type="text" class="form-control form-control-user" placeholder="수수료 입력" value="${comma(data+'')}">`;
@@ -153,7 +154,8 @@ function search() {
 
     console.log("id: >>", id);
 
-    coinType = coinType+id.substring(1);
+    tabId = id.substring(1);
+    coinType = "KRW-"+tabId;
     console.log("coinType: >>", coinType);
 
     DataTableBasic.init(id+'-table', [{colum: 'regDttm', dir:'desc'}], 10);
@@ -173,15 +175,17 @@ function save(){
         chargeMngs : []
     }
 
-    let len = $('[name=rangeIdx]').length;
+    let $inputs = $('#'+tabId+' [name=rangeIdx]');
+
+    let len = $inputs.length;
 
     console.log("len :", len);
 
     for(let i=0; i<len ; i++){
-        let rangeIdx =  uncomma($('input[name=rangeIdx]').eq(i).val());
-        let chargeAmt = uncomma($('input[name=chargeAmt]').eq(i).val());
-        let newRow = $('input[name=rangeIdx]').eq(i).attr('id');
-        newRow = newRow ? 'T' : 'F';
+        let rangeIdx =  uncomma($inputs.eq(i).val());
+        let chargeAmt = uncomma($inputs.eq(i).val());
+        let newRow = $inputs.eq(i).attr('id');
+        newRow = newRow === 'newRow' ? 'T' : 'F';
         vo.chargeMngs.push({coinType: coinType, rangeIdx:rangeIdx, chargeAmt:chargeAmt, newRow : newRow});
     }
 
@@ -196,11 +200,9 @@ function save(){
         success : function(res){
             console.log("res : ", res);
             if(res.statusCode === 'S001'){
-                // search();
+                 search();
             }else{
-                alertNotice('오류', res.statusMessage, ()=>{
-                    // search();
-                })
+                alertNotice('오류', res.statusMessage)
             }
         }
     });
@@ -210,24 +212,31 @@ function save(){
 
 function del(rangeIdx){
 
+    console.log("delete : rangeIdx >> ", rangeIdx);
+    let changeVal = $('#'+tabId+' input[name=rangeIdx]:disabled').last().val();
 
-
-    $.ajax({
-        url : "/admin/business-delete",
-        type: 'POST',
-        data : {coinType : coinType, rangeIdx : rangeIdx},
-        dataType : 'json',
-        // contentType : 'application/json',
-        success : function(res){
-            console.log("res : ", res);
-            if(res.statusCode === 'S001'){
-                // search();
-            }else{
-                alertNotice('오류', res.statusMessage, ()=>{
-                    // search();
-                })
-            }
+    alertConfirm('주의', '최대충전금액이 자동으로 '+changeVal+'원으로 변경됩니다.', "삭제",(res)=>{
+        if(res.isConfirmed){
+            $.ajax({
+                url : "/admin/business-delete",
+                type: 'POST',
+                data : {coinType : coinType, rangeIdx : rangeIdx},
+                dataType : 'json',
+                // contentType : 'application/json',
+                success : function(res){
+                    console.log("res : ", res);
+                    if(res.statusCode === 'S001'){
+                        search();
+                    }else{
+                        alertNotice('오류', res.statusMessage, ()=>{
+                            search();
+                        })
+                    }
+                }
+            });
         }
-    });
+    }, ()=>{return false;})
+
+
 }
 

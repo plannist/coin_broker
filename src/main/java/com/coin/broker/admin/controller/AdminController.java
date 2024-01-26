@@ -209,19 +209,30 @@ public class AdminController {
         int newRowRange = param.getChargeMngs().stream().filter(e-> "T".equals(e.getNewRow())).mapToInt(CoinChargeMng :: getRangeIdx).findAny().getAsInt();
         log.info("maxAmt[{}], maxRange[{}], newRowRange[{}]", maxAmt, maxRange, newRowRange);
 
-        if(maxAmt == maxRange || maxAmt == newRowRange){
-            if(newRowRange == 0 || newRowRange > maxRange){
-                int cnt = coinMasService.chargeMngAndCoinMasUpdate(param);
-                res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
-            }else{
-                res.setStatusMessage("추가된 수수료 까지 금액이 기존 최대 금액보다 낮습니다.");
-                res.setStatusCode(Response.ResultCode.FAIL.getCode());
-            }
+        //신규 row 생성시 최대 충전금액 비교 validation
+        if(newRowRange > 0 && maxAmt != newRowRange){
+            res.setStatusMessage("추가된 수수료 까지 금액이 최대충전금액보다 낮습니다.");
+            res.setStatusCode(Response.ResultCode.FAIL.getCode());
+            return res;
+        }
 
-        }else{
+        //신규 row 생성시 마지막 값보다 큰지 비교
+        if(newRowRange >0 && newRowRange <= maxRange){
+            res.setStatusMessage("추가된 수수료 까지 금액이 기존 최대 까지 금액보다 낮습니다.");
+            res.setStatusCode(Response.ResultCode.FAIL.getCode());
+            return res;
+        }
+
+        //기존 row 수정시 최대 충전금액 비교 validation
+        if(newRowRange == 0 && maxAmt != maxRange){
             res.setStatusMessage("최대신청금액과 최대 수수료 까지 금액이 다릅니다.");
             res.setStatusCode(Response.ResultCode.FAIL.getCode());
+            return res;
         }
+
+        int cnt = coinMasService.chargeMngAndCoinMasUpdate(param);
+        res.setStatusCode(Response.ResultCode.SUCCESS.getCode());
+
 
         return res;
     }
@@ -230,7 +241,9 @@ public class AdminController {
     @ResponseBody
     public Response<?> businessDelete(CoinChargeMng param){
         Response<Object> res = new Response<>();
-        coinMasService.chargeMngDelete(param);
+        int cnt = coinMasService.chargeMngDelete(param);
+        log.info("cnt: {}",cnt);
+        res.setStatusCode(cnt == 2 ? Response.ResultCode.SUCCESS.getCode() : Response.ResultCode.FAIL.getCode());
         return res;
     }
 
