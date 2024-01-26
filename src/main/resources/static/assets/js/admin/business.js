@@ -13,7 +13,8 @@ const DataTableBasic = function(){
             [
                 {data: 'firstIdx'}, //부터
                 {data: 'rangeIdx'}, //까지
-                {data: 'chargeAmt'} //수수료
+                {data: 'chargeAmt'}, //수수료
+                {data: 'rangeIdx'}, //삭제버튼
             ];
 
         let _columnDefs = [
@@ -49,6 +50,19 @@ const DataTableBasic = function(){
 
                 },
             },
+            {
+                targets: 3,
+                render: function (data, type, full) {
+
+                    if (full.maxId === 1) {
+                        return `<button class="btn btn-primary" type="button" onclick="del('${data}');">삭제</button>`;
+                    } else {
+                        return '-';
+                    }
+
+
+                },
+            }
         ];
 
         const table = $(id);
@@ -192,5 +206,28 @@ function save(){
     });
 
 
+}
+
+function del(rangeIdx){
+
+
+
+    $.ajax({
+        url : "/admin/business-delete",
+        type: 'POST',
+        data : {coinType : coinType, rangeIdx : rangeIdx},
+        dataType : 'json',
+        // contentType : 'application/json',
+        success : function(res){
+            console.log("res : ", res);
+            if(res.statusCode === 'S001'){
+                // search();
+            }else{
+                alertNotice('오류', res.statusMessage, ()=>{
+                    // search();
+                })
+            }
+        }
+    });
 }
 
