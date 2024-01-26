@@ -15,4 +15,5 @@ public class CoinChargeMng {
 
     //param data
     private String newRow;
+    private int originIdx;
 }

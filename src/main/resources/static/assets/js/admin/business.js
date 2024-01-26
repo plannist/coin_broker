@@ -1,5 +1,6 @@
 let coinType = "";
 let tabId= "";
+let originIdx = 0;
 
 
 $(document).ready(function(){
@@ -32,6 +33,7 @@ const DataTableBasic = function(){
                 render: function(data, type, full) {
 
                     if(full.maxId === 1){
+                        originIdx = data;
                         return `<input name="rangeIdx" id="maxId" type="text" class="form-control form-control-user" placeholder="까지 입력" value="${comma(data+'')}">`;
                     }
                     else if(data === 0 ){
@@ -175,18 +177,23 @@ function save(){
         chargeMngs : []
     }
 
-    let $inputs = $('#'+tabId+' [name=rangeIdx]');
+    let $rangeInputs = $('#'+tabId+' [name=rangeIdx]');
+    let $chargeInputs = $('#'+tabId+' [name=chargeAmt]');
 
-    let len = $inputs.length;
+    let len = $rangeInputs.length;
 
     console.log("len :", len);
 
     for(let i=0; i<len ; i++){
-        let rangeIdx =  uncomma($inputs.eq(i).val());
-        let chargeAmt = uncomma($inputs.eq(i).val());
-        let newRow = $inputs.eq(i).attr('id');
+        let rangeIdx =  uncomma($rangeInputs.eq(i).val());
+        let chargeAmt = uncomma($chargeInputs.eq(i).val());
+        let newRow = $rangeInputs.eq(i).attr('id');
+        let lstOriginIdx = 0;
+        if(i === len-2){ //신규생성줄제외
+            lstOriginIdx = originIdx;
+        }
         newRow = newRow === 'newRow' ? 'T' : 'F';
-        vo.chargeMngs.push({coinType: coinType, rangeIdx:rangeIdx, chargeAmt:chargeAmt, newRow : newRow});
+        vo.chargeMngs.push({coinType: coinType, rangeIdx:rangeIdx, chargeAmt:chargeAmt, newRow : newRow, originIdx : lstOriginIdx});
     }
 
     console.log("vo: ", vo);

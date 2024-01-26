@@ -87,6 +87,14 @@ public class MainController {
         param.setTotReqAmt(param.getTotReqAmt().replaceAll(",", ""));
         param.setPhoneNo(param.getPhoneNo().replaceAll("-", ""));
 
+        //지갑주소 태그 트림
+        if(Utils.isNotEmpty(param.getToWalletAddr())){
+            param.setToWalletAddr(param.getToWalletAddr().trim());
+        }
+        if(Utils.isNotEmpty(param.getDstntTag())){
+            param.setDstntTag(param.getDstntTag().trim());
+        }
+
         int cnt = transReqMasService.findRecentReqList(param);
         if(cnt > 0){
             res.setStatusMessage("이미 처리중인 대행 신청건이 있습니다. 처리중인 신청건이 완료된 후 이용해주세요.");
@@ -219,12 +227,15 @@ public class MainController {
 
         LocalTime time = LocalTime.now();
         int hour = time.getHour();
-        log.info("hour: >>{}", hour);
+
 
         FrontMng frontMng = frontMngService.findFrontMngInfo();
+        log.info("hour:    >>{}", hour);
+        log.info("close:   >>{}", frontMng.getCloseTime());
+        log.info("opening: >>{}", frontMng.getOpenTime());
 
-        //ex) open : 9 , close : 1, hour : 9
-        if(hour > frontMng.getCloseTime()  && hour <  frontMng.getOpenTime() ){
+        //ex) open : 9 , close : 1, hour : 1
+        if(hour >= frontMng.getCloseTime()  && hour <  frontMng.getOpenTime() ){
             res.setStatusCode(Response.ResultCode.FAIL.getCode());
         }else{
             res.setStatusCode(Response.ResultCode.SUCCESS.getCode());

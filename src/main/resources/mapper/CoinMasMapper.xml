@@ -46,37 +46,43 @@
 	<update id="coinMasUpdate" parameterType="com.coin.broker.front.model.CoinMas">
 		update coin_mas
 		set
-		<if test="maxAmt != null and maxAmt != '' ">
-		max_amt = #{maxAmt},
-		</if>
-		<if test="minIAmt != null and minIAmt != '' ">
-		min_i_amt = #{minIAmt},
-		</if>
-		<if test="minTAmt != null and minTAmt != '' ">
-		min_t_amt = #{minTAmt},
-		</if>
-		mod_dttm = now()
+			<if test="maxAmt > 0 ">
+			max_amt = #{maxAmt},
+			</if>
+			<if test="minIAmt > 0 ">
+			min_i_amt = #{minIAmt},
+			</if>
+			<if test="minTAmt > 0 ">
+			min_t_amt = #{minTAmt},
+			</if>
+			mod_dttm = now()
 		where
-		coin_type = #{coinType}
+			coin_type = #{coinType}
 	</update>
 
 	<insert id="chargeMngMerge" parameterType="com.coin.broker.front.model.CoinChargeMng">
-		insert into coin_charge_mng
-		(
+		insert into coin_charge_mng(
 			coin_type,
 			range_idx,
 			charge_amt,
 			reg_dttm,
 			mod_dttm
-		)values
-	 	(
-		  #{coinType},
-		  #{rangeIdx},
-		  #{chargeAmt},
-	 	 now(),
-	 	 now()
-		 )
+		)values(
+			#{coinType},
+		<choose>
+			<when test="originIdx > 0">
+				#{originIdx},
+			</when>
+			<otherwise>
+				#{rangeIdx},
+			</otherwise>
+		</choose>
+			#{chargeAmt},
+			now(),
+			now()
+		)
 		ON DUPLICATE KEY UPDATE
+			range_idx = #{rangeIdx},
 			charge_amt = #{chargeAmt},
 			mod_dttm = now()
 	</insert>
@@ -129,12 +135,20 @@
 		)values
 			(
 				#{coinType},
-				#{rangeIdx},
+				<choose>
+					<when test="originIdx > 0">
+						#{originIdx},
+					</when>
+				<otherwise>
+					#{rangeIdx},
+				</otherwise>
+				</choose>
 				#{chargeAmt},
 				now(),
 				now()
 			)
 			ON DUPLICATE KEY UPDATE
+				 range_idx = #{rangeIdx},
 				 charge_amt = #{chargeAmt},
 				 mod_dttm = now()
 	</insert>
@@ -142,9 +156,15 @@
 	<update id="coinMasUpdateTemp" parameterType="com.coin.broker.front.model.CoinMas">
 		update coin_mas_temp
 		set
-			max_amt = #{maxAmt},
-			min_i_amt = #{minIAmt},
-			min_t_amt = #{minTAmt},
+			<if test="maxAmt > 0 ">
+				max_amt = #{maxAmt},
+			</if>
+			<if test="minIAmt > 0 ">
+				min_i_amt = #{minIAmt},
+			</if>
+			<if test="minTAmt > 0 ">
+				min_t_amt = #{minTAmt},
+			</if>
 			mod_dttm = now()
 		where
 			coin_type = #{coinType}
