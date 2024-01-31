@@ -1,0 +1,92 @@
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="calcModal">
+    <div class="modal fade" id="calcModal" tabindex="-1"  aria-labelledby="calcModalLabel" aria-hidden="true" role="dialog"  data-bs-backdrop='static' data-bs-keyboard="false" >
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+            <div class="modal-content w-100">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="accountDtlModalLabel"> 계산기</h5>
+                    <button class="close" type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" id="modalBody">
+                    <form id="calcForm">
+
+                        <div class="form-group row mb-3 mb-sm-0">
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>코인(종류)</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="form-select mb-3" id="coinTypeC" name="coinTypeC" style="font-size: 0.8rem;">
+                                    <option style="background-color: white" value="">선택해주세요</option>
+                                    <option style="background-color: white" value="KRW-BTC">비트코인(BTC)</option>
+                                    <option style="background-color: white" value="KRW-ETH">이더리움(ETH)</option>
+                                    <option style="background-color: white" value="KRW-XRP">리플(XRP)</option>
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group row">
+
+<!--                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">-->
+<!--                                <p>코인양</p>-->
+<!--                            </div>-->
+<!--                            <div class="col-sm-4">-->
+<!--                                <input type="text" class="form-control form-control-user" id="deposNm" name="deposNm" placeholder="코인양">-->
+<!--                            </div>-->
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>코인양</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                <input type="text" class="form-control form-control-user" id="coinC" name="coinC" placeholder="코인양" value="">
+                                <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="goCalc(this)">계산하기</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group row">
+
+                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
+                                <p>신청금액</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="reqAmtC" name="reqAmtC" placeholder="신청금액">
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </form>
+
+                    <div class="row">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary" id="prcs_cd_2" type="button" onclick="cancelCalc();">취소</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <script th:src="@{/assets/js/admin/calcModal.js}"></script>
+
+</div>
+</html>
