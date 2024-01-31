@@ -181,11 +181,16 @@ $('#submitButton').on('click', function(evt){
 function cointTypeSelect(el, type){
 
     $('#reqAmt').val(null);
+    $('#reqAmt').next().next().hide();
+    $('#reqAmt').removeClass('is-invalid');
     $('#chargeAmt').val(null);
     $('#totReqAmt').val(null);
     $('#sendCoin').val(null);
     $('#reqCoin').val(null);
     $('#reqCoin').next().next().hide();
+    $('#reqCoin').removeClass('is-invalid');
+
+
 
     let name= $(el).attr('name');
     $('button[name='+name+']').removeClass('btn-primary');
@@ -267,11 +272,13 @@ function chargeTypeSelect(){
         $('#sendCoin').val(null);
         $('#reqCoin').val(null);
         $('#reqCoin').next().next().hide();
+        $('#reqCoin').removeClass('is-invalid');
+
+        $('#reqAmt').val(null)
+        $('#reqAmt').next().next().hide();
+        $('#reqAmt').removeClass('is-invalid');
 
 
-        if($('#reqAmt').val()){
-            changeAmtListener($('#reqAmt'));
-        }
 
         if(chargeCd === 'C'){
             $('#sendCoin').parent('div').hide();
@@ -338,7 +345,7 @@ function changeAmtListener(el){
             $(el).removeClass('is-invalid');
             chargeCalculate(val, chargeCd);
         }
-
+        $(el).val(comma(val));
     }else if(chargeCd === 'T'){ //수수료포함
         if(val * 1 < coinMas.minTAmt * 1){
             $(el).addClass('is-invalid');
