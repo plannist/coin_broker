@@ -107,6 +107,8 @@ $('#submitButton').on('click', function(evt){
             flag = false;
             if($(el).attr("id") == 'dstntTag' && $('#coinType').val() != 'KRW-XRP'){
                 flag = true;
+            }else if($(el).attr('id') == 'reqCoin' && $('input[name=chargeCd]:checked').val() != 'C'){
+                flag = true;
             }
 
             console.log("el >>", el);
@@ -565,6 +567,27 @@ function showNotice(){
     alertNotice(title, html, ()=>{
         return;
     })
+}
+
+/* 수수료 정책 표시 */
+function showChargeRule(){
+    let coinType = $('#coinType').val();
+    let title = '';
+    if(coinType === 'KRW-BTC'){
+        title = '비트코인 신청금액 구간별 수수료'
+    }else if(coinType === 'KRW-ETH'){
+        title = '이더리움 신청금액 구간별 수수료'
+    }else{
+        title = '리플 신청금액 구간별 수수료'
+    }
+
+    let html = `<p class="text-start">`;
+    for(let obj of coinMas.chargeMngs){
+        html += `${comma(obj.firstIdx)}원 ~ ${comma(obj.rangeIdx)}원 : ${comma(obj.chargeAmt)}원 <br>`;
+    }
+    html += `</p>`;
+    alertNotice(title, html, ()=>{return false});
+
 }
 
 /**
