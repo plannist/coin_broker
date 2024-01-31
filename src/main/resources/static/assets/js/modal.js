@@ -105,8 +105,10 @@ $('#submitButton').on('click', function(evt){
             $(el).find('.invalid-feedback').show();
             $(el).focus();
             flag = false;
+            //리플이 아니라면 데스티네이션 테그 valid 제외
             if($(el).attr("id") == 'dstntTag' && $('#coinType').val() != 'KRW-XRP'){
                 flag = true;
+            // 코인입력방식이 아니라면 코인 입력창 valid 제외
             }else if($(el).attr('id') == 'reqCoin' && $('input[name=chargeCd]:checked').val() != 'C'){
                 flag = true;
             }
