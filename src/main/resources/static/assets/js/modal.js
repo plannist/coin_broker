@@ -38,6 +38,12 @@ $('#transReqModal').on('show.bs.modal', function(evt){
 
 $('#transReqModal').on('hidden.bs.modal', function(evt){
     console.log("transReqModal is hidden >", evt);
+    $('button[name=coinType]').removeClass('btn-primary');
+    $('button[name=coinType]').addClass('btn-light');
+    $('#reqCoin').parent('div').hide();
+    $('#reqCoin').next().next().hide();
+    $('#inputGroup').hide();
+    $('#coinType').val(null);
     pollingStart();
 });
 
@@ -363,6 +369,9 @@ function changeAmtListener(el){
         }
         $(el).val(comma(val));
     }else{ //코인 전송방식
+        if(!val){
+            val = $('#reqCoin').val();
+        }
         chargeCalculateForNewType(val * 1);
     }
 }
@@ -385,15 +394,15 @@ function chargeCalculateForNewType(amt){
 
     //요청금액 validation
     let response = {};
-    if(reqAmt < coinMas.minTAmt){
+    if(reqAmt < coinMas.minIAmt){
         console.log("최소금액이하");
         $('#reqCoin').addClass('is-invalid');
-        $('#reqCoin').next().next().text(`${coinMas.minTAmt} 이상 금액만 전송가능합니다.`).show();
+        $('#reqCoin').next().next().text(`${coinMas.minIAmt} 이상 금액만 전송가능합니다.`).show();
         $('#reqAmt').val(comma(reqAmt));
         return false;
     }else if(reqAmt > coinMas.maxAmt){
         $('#reqCoin').addClass('is-invalid');
-        $('#reqCoin').next().next().text(`신청 가능금액은 ${comma(coinMas.minTAmt)} 부터 ${comma(coinMas.maxAmt)} 원 까지입니다. 초과는 타업체 이용바랍니다.`).show();
+        $('#reqCoin').next().next().text(`신청 가능금액은 ${comma(coinMas.minIAmt)} 부터 ${comma(coinMas.maxAmt)} 원 까지입니다. 초과는 타업체 이용바랍니다.`).show();
         $('#reqAmt').val(comma(reqAmt));
         return false;
     }else{
@@ -408,6 +417,14 @@ function chargeCalculateForNewType(amt){
             chargeAmt = coinMngs[i].chargeAmt;
         }else if(reqAmt > coinMngs[i].rangeIdx){
             chargeAmt = coinMngs[i+1].chargeAmt;
+        }
+    }
+
+    if(chargeAmt == 0){
+        if(reqAmt <= coinMngs[0].rangeIdx){
+            chargeAmt = Number(coinMngs[0].chargeAmt);
+        }else if(reqAmt == coinMas.maxAmt){
+            chargeAmt = Number(coinMngs[coinMngs.length-1].chargeAmt);
         }
     }
 

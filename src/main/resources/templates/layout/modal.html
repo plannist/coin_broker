@@ -66,7 +66,7 @@
                     <div class="form-floating mb-3" style="display: none">
                         <input class="form-control" id="reqCoin" name="reqCoin" inputmode="numeric"
                                type="text" placeholder="신청코인을 입력해주세요."
-                               onpaste="changeAmtListener(this);", onkeyup="changeAmtListener(this);"
+                               oninput="changeAmtListener(this);"
                         />
                         <label for="reqCoin" class="krFont">신청코인을 입력해주세요.</label>
                         <div class="invalid-feedback" data-sb-feedback="name:required">신청금액은 필수값 입니다.</div>
