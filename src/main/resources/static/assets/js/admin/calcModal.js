@@ -1,42 +1,23 @@
-console.log("transDtlModal in >> ");
-let param = {reqno : "", length : 11, prcsCd : "5"}
+console.log("calcModal in >> ");
 
-let vo = {
+let nav = {
 	coinType : "",
 	chargeType : "",
 	requestCoinPrice : "",
 
 }
 
-let detailData = {};
-
-$('#transDtlModal').on('show.bs.modal', function(evt){
+$('#calcModal').on('show.bs.modal', function(evt){
 	console.log("transDtlModal is open >", evt);
-	isModalOpen = true;
-	getDetailTransInfo();
-
 
 });
 
-$('#transDtlModal').on('hidden.bs.modal', function(evt){
-	isModalOpen = false;
+$('#calcModal').on('hidden.bs.modal', function(evt){
 	console.log("transDtlModal is hidden >", evt);
 
-	$('button[name=prcsCds]').removeClass('btn-primary').addClass('btn-light');
-
-
-	$('#transDtlForm')[0].reset();
-	$('#memoArea').hide();
+	$('#calcForm')[0].reset();
 
 });
-
-/* main.js 에서 pooling 시 modal 떠있으면 호출 */
-function lookingForNowCoinPrice(){
-	// console.log("lookingForNowCoinPrice ..", nowCoinPrice[vo.coinType]);
-	// $('#nowPrice').val(comma(nowCoinPrice[$('#coinType').val()]));
-	$('#nowPrice').val(comma(nowCoinPrice[vo.coinType]));
-
-}
 
 
 
@@ -90,7 +71,37 @@ function save(){
 }
 
 /*취소*/
-function cancel(){
+function cancelCalc(){
 	$('#calcForm')[0].reset();
 	$('#calcModal').modal("hide");
+}
+
+/*계산*/
+function goCalc(el){
+	nav.coinType = $('input[name=coinType]:selected').val();
+	console.log("nav.coinType : ", nav.coinType);
+	$.ajax({
+		url : "/api/coinPrice",
+		type: 'POST',
+		// contentType : 'application/json',
+		global: false,
+		data: {coinType : 'ADMIN'},
+		dataType : 'json',
+		success : function(res){
+			console.log("res : ", res.data);
+			for(let data of res.data){
+				if(nav.coinType === data.coinType){
+					coinPrice = data.amt;
+					console.log("coinPrice: ", coinPrice);
+					resultCalc(coinPrice);
+				}
+			}
+
+		}
+	});
+
+}
+
+function resultCalc(coinPrice){
+	console.log("coinPrice: >>", coinPrice);
 }

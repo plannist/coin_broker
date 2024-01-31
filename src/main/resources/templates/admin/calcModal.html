@@ -47,8 +47,8 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="input-group">
-                                <input type="text" class="form-control form-control-user" id="phoneNo" name="phoneNo" placeholder="코인양" value="">
-                                <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">계산하기</button>
+                                <input type="text" class="form-control form-control-user" id="coin" name="coin" placeholder="코인양" value="">
+                                <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="goCalc(this)">계산하기</button>
                                 </div>
                             </div>
 
@@ -61,7 +61,7 @@
                                 <p>신청금액</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="deposNm" name="deposNm" placeholder="신청금액">
+                                <input type="text" class="form-control form-control-user" id="reqAmt" name="reqAmt" placeholder="신청금액">
                             </div>
 
 
@@ -74,7 +74,7 @@
 
                     <div class="row">
                         <div class="btn-group">
-                            <button class="btn btn-secondary" id="prcs_cd_2" type="button" onclick="cancel();">취소</button>
+                            <button class="btn btn-secondary" id="prcs_cd_2" type="button" onclick="cancelCalc();">취소</button>
                         </div>
                     </div>
 
