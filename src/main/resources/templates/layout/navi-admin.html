@@ -12,10 +12,35 @@
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="asd" role="button" onclick="calc();"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-calculator fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter" id="asd1">계산기</span>
+            </a>
 
+            <!-- Dropdown - User Information -->
+<!--            <div class="dropdown-menu dropdown-menu-right shadow animated&#45;&#45;grow-in"-->
+<!--                 aria-labelledby="asd">-->
+
+<!--                <div class="col-sm-2 bg-gray-100 mb-1 rounded">-->
+<!--                    <p class="krFont">코인선택</p>-->
+<!--                </div>-->
+<!--                <div class="col-sm-4">-->
+<!--                    <select class="form-select mb-3" id="chargeCd" name="chargeCd" style="font-size: 0.8rem;">-->
+<!--                        <option style="background-color: white" value="">BTC</option>-->
+<!--                        <option style="background-color: white" value="I">ETH</option>-->
+<!--                        <option style="background-color: white" value="T">XRP</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                -->
+<!--            </div>-->
+        </li>
 
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
+
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
@@ -124,5 +149,15 @@
 
     </ul>
 
+    <div th:insert="~{admin/calcModal :: calcModal}"></div>
+
+    <script>
+        function calc(){
+            $('#calcModal').modal('show');
+        }
+    </script>
+
 </nav>
+
+
 

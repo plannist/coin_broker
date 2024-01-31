@@ -72,7 +72,16 @@ $('#submitButton').on('click', function(evt){
         $('#toWalletAddr').focus();
         return false;
     }
-
+    // 데스티네이션 테그 선확인
+    // if($('#coinType').val() === 'KRW-XRP'){
+    //     val = $('#dstntTag').val();
+    //     if(!val){
+    //         $('#dstntTag').find('.invalid-feedback').show();
+    //         $('#dstntTag').addClass('is-invalid');
+    //         $('#dstntTag').focus();
+    //         return false;
+    //     }
+    // }
 
     // transVo.chargeCd = $('input[name=chargeCd]:checked').val();
     console.log("onSubmit >>DEVICE_TYPE >>", DEVICE_TYPE);
@@ -94,6 +103,7 @@ $('#submitButton').on('click', function(evt){
         if(!$(el).val() && !$(el).prop('disabled')){
             $(el).addClass('is-invalid');
             $(el).find('.invalid-feedback').show();
+            $(el).focus();
             flag = false;
             if($(el).attr("id") == 'dstntTag' && $('#coinType').val() != 'KRW-XRP'){
                 flag = true;
@@ -106,7 +116,9 @@ $('#submitButton').on('click', function(evt){
     if(flag){
         $('#chargeAmt').prop('disabled', false);
         $('#totReqAmt').prop('disabled', false);
+        // $('#sendCoin').show();
         $('#sendCoin').prop('disabled', false);
+        $('#reqAmt').prop('disabled', false);
 
         let form = $('#contactForm').serialize();
 
@@ -167,6 +179,9 @@ function cointTypeSelect(el, type){
     $('#reqAmt').val(null);
     $('#chargeAmt').val(null);
     $('#totReqAmt').val(null);
+    $('#sendCoin').val(null);
+    $('#reqCoin').val(null);
+    $('#reqCoin').next().next().hide();
 
     let name= $(el).attr('name');
     $('button[name='+name+']').removeClass('btn-primary');
@@ -176,6 +191,7 @@ function cointTypeSelect(el, type){
     $(el).removeClass('btn-light');
     $(el).addClass('btn-primary');
 
+    let chargeCd = $('input[name=chargeCd]:checked').val();
     let flag = !!$('input[name=chargeCd]:checked').val();
     if(flag){
         $('#inputGroup').show();
@@ -186,6 +202,20 @@ function cointTypeSelect(el, type){
             $('#repleShow1').hide();
             $('#repleShow2').hide();
             $('#dstntTag').val(null);
+        }
+
+        if(chargeCd === 'C'){
+            $('#sendCoin').parent('div').hide();
+            $('#reqCoin').parent('div').show();
+            $('#reqAmt').prop('disabled', true);
+            $('#reqAmt').attr('placeholder', "계산된 신청금액입니다.");
+            $('#reqAmt').next('label').text('계산된 신청금액입니다.');
+        }else{
+            $('#sendCoin').parent('div').show();
+            $('#reqCoin').parent('div').hide();
+            $('#reqAmt').prop('disabled', false);
+            $('#reqAmt').attr('placeholder', "신청금액을 입력해주세요.");
+            $('#reqAmt').next('label').text('신청금액을 입력해주세요.');
         }
     }
 
@@ -212,6 +242,7 @@ function cointTypeSelect(el, type){
  * 수수료 방식 선택
  * */
 function chargeTypeSelect(){
+    let chargeCd = $('input[name=chargeCd]:checked').val();
     let flag = !! $('#coinType').val();
     if(flag){
         $('#inputGroup').show();
@@ -229,9 +260,27 @@ function chargeTypeSelect(){
 
         $('#chargeAmt').val(null);
         $('#totReqAmt').val(null);
+        $('#sendCoin').val(null);
+        $('#reqCoin').val(null);
+        $('#reqCoin').next().next().hide();
+
 
         if($('#reqAmt').val()){
             changeAmtListener($('#reqAmt'));
+        }
+
+        if(chargeCd === 'C'){
+            $('#sendCoin').parent('div').hide();
+            $('#reqCoin').parent('div').show();
+            $('#reqAmt').prop('disabled', true);
+            $('#reqAmt').attr('placeholder', "계산된 신청금액입니다.");
+            $('#reqAmt').next('label').text('계산된 신청금액입니다.');
+        }else{
+            $('#sendCoin').parent('div').show();
+            $('#reqCoin').parent('div').hide();
+            $('#reqAmt').prop('disabled', false);
+            $('#reqAmt').attr('placeholder', "신청금액을 입력해주세요.");
+            $('#reqAmt').next('label').text('신청금액을 입력해주세요.');
         }
     }
 }
@@ -246,20 +295,26 @@ function changeAmtListener(el){
     $('#sendCoin').val(null)
 
     //숫자만 입력가능
-    let val = uncomma($(el).val());
+    // let val = uncomma($(el).val());
+    let val = $(el).val();
+    val = val.replaceAll(",", "");
+    console.log("val: ", val);
     if(isNaN(val)){
 
         $(el).addClass('is-invalid');
         $(el).next().next().text("숫자만 입력가능합니다.").show();
 
         $(el).val(null);
-       return false;
+        return false;
     }else{
         $(el).next().next().hide();
         $(el).removeClass('is-invalid');
     }
 
+
     let chargeCd = $('input[name=chargeCd]:checked').val();
+
+
 
     if(chargeCd === 'I'){ //수수료별도
 
@@ -268,7 +323,7 @@ function changeAmtListener(el){
 
             $(el).addClass('is-invalid');
             $(el).next().next().text(`${coinMas.minIAmt} 이상 금액만 전송가능합니다.`).show();
-
+            return false;
         }else if(val * 1 > coinMas.maxAmt * 1){ //11만원 초과 체크
             $(el).addClass('is-invalid');
             $(el).next().next().text(`신청 가능금액은 ${comma(coinMas.minIAmt)} 부터 ${comma(coinMas.maxAmt)} 원 까지입니다. 초과는 타업체 이용바랍니다.`).show();
@@ -280,10 +335,11 @@ function changeAmtListener(el){
             chargeCalculate(val, chargeCd);
         }
 
-    }else{ //수수료포함
+    }else if(chargeCd === 'T'){ //수수료포함
         if(val * 1 < coinMas.minTAmt * 1){
             $(el).addClass('is-invalid');
             $(el).next().next().text(`${coinMas.minTAmt} 이상 금액만 전송가능합니다.`).show();
+            return false;
         }else if(val * 1 > coinMas.maxAmt * 1){ //11만원 초과 체크
             $(el).addClass('is-invalid');
             $(el).next().next().text(`신청 가능금액은 ${comma(coinMas.minTAmt)} 부터 ${comma(coinMas.maxAmt)} 원 까지입니다. 초과는 타업체 이용바랍니다.`).show();
@@ -294,11 +350,65 @@ function changeAmtListener(el){
             $(el).removeClass('is-invalid');
             chargeCalculate(val, chargeCd);
         }
+        $(el).val(comma(val));
+    }else{ //코인 전송방식
+        chargeCalculateForNewType(val * 1);
+    }
+}
+
+//(코인전송방식 계산) 수수료, 입금금액 계산
+function chargeCalculateForNewType(amt){
+    let type = $('#coinType').val();
+    let coinMngs = coinMas.chargeMngs;
+    let chargeAmt = 0; //수수료금액
+    let reqAmt = 0; //요청금액
+    let digts = type !== 'KRW-XRP' ? 8 : 2;
+    let coin = _.ceil(amt, digts);
+    console.log("coin: ", coin, ", type :", type, ", coinMngs : ", coinMngs);
+
+    //올림변환수량 * 코인시세 = 신청금액(100원단위올림)
+    reqAmt = coin * tradePrice[type];
+    console.log("before > reqAmt: ", reqAmt);
+    reqAmt = _.ceil(reqAmt, -2);
+    console.log("after > reqAmt: ", reqAmt);
+
+    //요청금액 validation
+    let response = {};
+    if(reqAmt < coinMas.minTAmt){
+        console.log("최소금액이하");
+        $('#reqCoin').addClass('is-invalid');
+        $('#reqCoin').next().next().text(`${coinMas.minTAmt} 이상 금액만 전송가능합니다.`).show();
+        $('#reqAmt').val(comma(reqAmt));
+        return false;
+    }else if(reqAmt > coinMas.maxAmt){
+        $('#reqCoin').addClass('is-invalid');
+        $('#reqCoin').next().next().text(`신청 가능금액은 ${comma(coinMas.minTAmt)} 부터 ${comma(coinMas.maxAmt)} 원 까지입니다. 초과는 타업체 이용바랍니다.`).show();
+        $('#reqAmt').val(comma(reqAmt));
+        return false;
+    }else{
+        $('#reqCoin').removeClass('is-invalid');
+        $('#reqCoin').next().next().hide();
+        $('#reqAmt').val(comma(reqAmt));
     }
 
+    //수수료 측정
+    for(let i=0; i<coinMngs.length; i++){
+        if(reqAmt == coinMngs[i].rangeIdx){
+            chargeAmt = coinMngs[i].chargeAmt;
+        }else if(reqAmt > coinMngs[i].rangeIdx){
+            chargeAmt = coinMngs[i+1].chargeAmt;
+        }
+    }
 
-    $(el).val(comma(val));
+    $('#chargeAmt').val(comma(chargeAmt));
+    $('#totReqAmt').val(comma(chargeAmt + reqAmt));
 
+    //화면 표기
+
+    $('#sendCoin').val(coin);
+    $('#reqCoin').next().next().text(`전송코인: ${coin} (소숫점 ${digts}자리전송)`).show();
+
+    return response.code = 'S';
 
 }
 
@@ -375,7 +485,7 @@ function sendingCoinCalc(amt, type, chargeCd, chargeAmt){
         numAmt = amt * 1 - chargeAmt;
     }
     // 요청금액 의 0.3프로 계산 10000 > 10030
-    let ff = (numAmt * (100.3/100)).toFixed(8);
+    let ff = (numAmt * (100.1/100)).toFixed(8);
     // console.log("ff str >> " , ff);
     ff = Number(ff);
     // console.log("ff num >> " , ff);
@@ -428,7 +538,34 @@ function changePhoneListener(el){
     $(el).val(data.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
 }
 
+/* 수수료방식 예시 노출 */
+function showNotice(){
+    let title = '#수수료 계산방식 예시 (리플기준설명)';
+    let html = `<p class="text-start">
+          -수수료 별도 선택시 <br>
+              신청 금액 : 50,000원 <br>
+              수수료      :  6,000원 <br>
+              입금 금액 : 56,000원 <br>
+              전송코인 50,000원가치의 코인전송 <br>
+               (신청금액 가치의 코인전송)
+        <br>
+          -수수료 포함<br>
+             신청금액  : 50,000원 <br>
+             수수료      :  6,000원 <br>
+             입금금액  : 50,000원 <br>
+             전송코인 44,000원가치의 코인전송 <br>
+               (신청금액입금 수수료 뺀 금액가치의 코인전송) <br>
+        <br>
+          -코인수량입력신청 <br>
+             입력한 코인수량 전송 <br>
+             신청금액 수수료 입금금액 자동계산
+     </p>
+    `;
 
+    alertNotice(title, html, ()=>{
+        return;
+    })
+}
 
 /**
  * 수수료금액 입력

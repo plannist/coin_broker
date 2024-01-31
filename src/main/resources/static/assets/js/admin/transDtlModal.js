@@ -157,6 +157,10 @@ function draw(data){
 	//수수료 방식
 	$('#chargeCd').val(data.chargeCd).prop('selected', true);
 	vo.chargeCd = data.chargeCd;
+	if(vo.chargeCd === 'C'){
+		$('#chargeCd').prop('disabled', true);
+		$('#goCalc').prop('disabled', true);
+	}
 
 	$('#deposNm').val(data.deposNm);
 	// $('#phoneNo').val(data.phoneNo.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
@@ -243,7 +247,7 @@ function sendingCoinCalc(){
 	}
 
 	//요청금액의 0.3프로 계산 >> 10000 -> 10030
-	sendAmt = (sendAmt * (100.3/100)).toFixed(8);
+	sendAmt = (sendAmt * (100.1/100)).toFixed(8);
 	sendAmt = Number(sendAmt);
 	//전송할 코인
 	sendCoin = sendAmt / (price * 1);
@@ -294,6 +298,7 @@ function save(){
 	//trans_rcpt_mas merge 항목
 
 	$('#transDtlForm input, textarea').prop('disabled', false);
+	$('#chargeCd').prop('disabled', false);
 
 	//prcsCd6Cnt 만 예외
 	$('#prcsCd6Cnt').val(null);

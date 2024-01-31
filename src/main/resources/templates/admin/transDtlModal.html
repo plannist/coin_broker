@@ -43,6 +43,7 @@
                                     <option style="background-color: white" value="">선택해주세요</option>
                                     <option style="background-color: white" value="I">수수료별도</option>
                                     <option style="background-color: white" value="T">수수료포함</option>
+                                    <option style="background-color: white" value="C" disabled>코인수량신청</option>
                                 </select>
                             </div>
 
@@ -54,7 +55,7 @@
                                 <p>신청자명</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="deposNm" name="deposNm" placeholder="신청자명" disabled>
+                                <input type="text" class="form-control form-control-user" id="deposNm" name="deposNm" placeholder="신청자명">
                             </div>
 
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
@@ -62,7 +63,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="input-group">
-                                <input type="text" class="form-control form-control-user" id="phoneNo" name="phoneNo" placeholder="휴대폰번호" value="" disabled>
+                                <input type="text" class="form-control form-control-user" id="phoneNo" name="phoneNo" placeholder="휴대폰번호" value="">
                                 <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
                                 </div>
                             </div>
@@ -93,7 +94,7 @@
                                 <p>총 완료횟수 / 당일 완료횟수</p>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="prcsCd6Cnt" name="prcsCd6Cnt" disabled value="0">
+                                <input type="text" class="form-control form-control-user text-danger" id="prcsCd6Cnt" name="prcsCd6Cnt" disabled value="0">
                             </div>
 
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
@@ -167,7 +168,7 @@
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>변경하기</p>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" >
                                 <div class="input-group">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="accType" id="inlineRadio1" value="N">
@@ -177,7 +178,7 @@
                                         <input class="form-check-input" type="radio" name="accType" id="inlineRadio2" checked value="R">
                                         <label class="form-check-label" for="inlineRadio2">적용시세</label>
                                     </div>
-                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="sendingCoinCalc();">계산실행</button>
+                                    <button id="goCalc" name="" type="button" class="btn btn-primary custom-control-inline" onclick="sendingCoinCalc();">계산실행</button>
                                 </div>
                             </div>
 
@@ -199,11 +200,10 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-user" id="toWalletAddr" name="toWalletAddr" disabled placeholder="지갑주소">
+                                    <input type="text" class="form-control form-control-user" id="toWalletAddr" name="toWalletAddr" placeholder="지갑주소">
                                     <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="form-group row" id="memoArea" style="display: none">
@@ -212,7 +212,7 @@
                                 <p>메모</p>
                             </div>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control form-control-user" id="memo" name="memo" placeholder="메모">
+                                <input type="text" class="form-control form-control-user text-danger" id="memo" name="memo" placeholder="메모">
                             </div>
 
                         </div>
@@ -236,7 +236,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control form-control-user" id="transactionId" name="transactionId" placeholder="트랜젝션 ID">
+                                    <input type="text" class="form-control form-control-user" id="transactionId" name="transactionId" autocomplete="false" placeholder="트랜젝션 ID">
                                     <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
                                 </div>
                             </div>

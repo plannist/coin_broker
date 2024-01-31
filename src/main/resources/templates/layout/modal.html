@@ -39,12 +39,12 @@
 
                 <!-- 수수료방식 선택 -->
                 <div class="row mb-3">
-                    <p class="krFont">수수료 방식을 선택해주세요.&nbsp;&nbsp;<a href="#"> <span class="xl-small">수수료 방식 자세히보기</span></a></p>
+                    <p class="krFont">수수료 방식을 선택해주세요.&nbsp;&nbsp;
+                        <a href="#" onclick="showNotice();">
+                            <span class="xl-small">수수료 방식 자세히보기</span>
+                        </a>
+                    </p>
                     <div class="col-sm-10">
-    <!--                    <div class="form-check form-check-inline">-->
-    <!--                        <input class="form-check-input" type="radio" name="accType" id="inlineRadio1" value="" checked>-->
-    <!--                        <label class="form-check-label krFont" for="inlineRadio1">아래의 수수료 계산 방식을 선택해주세요.</label>-->
-    <!--                    </div>-->
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="chargeCd" id="inlineRadio2" value="I" onclick="chargeTypeSelect();">
                             <label class="form-check-label krFont" for="inlineRadio2">수수료 별도 (신청금액코인전송+수수료=입금금액) 방식</label>
@@ -53,14 +53,25 @@
                             <input class="form-check-input" type="radio" name="chargeCd" id="inlineRadio3" value="T" onclick="chargeTypeSelect();">
                             <label class="form-check-label krFont" for="inlineRadio3">수수료 포함 ((신청금액=입금금액)-수수료=전송코인) 방식</label>
                         </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="chargeCd" id="inlineRadio4" value="C" onclick="chargeTypeSelect();">
+                            <label class="form-check-label krFont" for="inlineRadio4">코인수량입력 방식(신청금액코인전송+수수료=입금금액)</label>
+                        </div>
                     </div>
                 </div>
 
 
-
-
-
                 <div id="inputGroup" style="display: none">
+                    <!-- 신청코인 -->
+                    <div class="form-floating mb-3" style="display: none">
+                        <input class="form-control" id="reqCoin" name="reqCoin" inputmode="numeric"
+                               type="text" placeholder="신청코인을 입력해주세요."
+                               onkeyup="changeAmtListener(this);"
+                        />
+                        <label for="reqCoin" class="krFont">신청코인을 입력해주세요.</label>
+                        <div class="invalid-feedback" data-sb-feedback="name:required">신청금액은 필수값 입니다.</div>
+                    </div>
+
                     <!-- 신청금액 -->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="reqAmt" name="reqAmt" inputmode="numeric"
@@ -124,7 +135,8 @@
                     <!-- 지갑주소 -->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="toWalletAddr" name="toWalletAddr" type="text"
-                               placeholder="" data-sb-validations="required" onkeyup="changeAddrListener(this);" />
+                               placeholder="" data-sb-validations="required" autocomplete="false"
+                               onkeyup="changeAddrListener(this);" />
                         <label for="toWalletAddr" class="krFont"></label>
                         <div class="invalid-feedback" data-sb-feedback="phone:required">[필수입력] 지갑주소 확인 후 입력하세요.</div>
                         <span class="krFont xl-small fst-italic" id="repleShow1" style="display:none">rNxp4h~~~ 리플지갑의 첫문자는 r 로 시작합니다.</span>
@@ -133,12 +145,12 @@
 
                     <!-- 데스티네이션 태그 -->
                     <div class="form-floating mb-3" id="repleShow2" style="display:none">
-                        <input class="form-control" id="dstntTag" name="dstntTag" type="text"
+                        <input class="form-control" id="dstntTag" name="dstntTag" type="text" autocomplete="false"
                                placeholder="" data-sb-validations="required" onkeyup="changeDstntListener(this);"/>
                         <label for="dstntTag" class="krFont">데스티네이션 태그(MEMO)를 입력해주세요.</label>
                         <div class="invalid-feedback" data-sb-feedback="phone:required">[필수입력]태그유무 반드시 확인후 없다면 없음 입력</div>
                         <span class="krFont xl-small fst-italic">
-                            ※ 리플은 지갑주소와 태그(숫자4~10자리)는 보통 지갑주소 바로 밑에 표시됩니다.
+                            ※ 리플은 지갑주소와 태그(숫자4~12자리)는 보통 지갑주소 바로 밑에 표시됩니다.
                             지갑주소만 있고 태그가 없는 경우는 “없음”으로 입력해주세요.
                         </span>
 
@@ -182,8 +194,8 @@
                         <br>
                         <div class="form-check form-check-inline row">
                             <div class="col-auto">
-                                <input class="form-check-input d-lg-inline-flex" type="checkbox" name="prcsCd" id="inlineRadio4" value="1" onclick="agreeAll(this);">
-                                <label class="form-check-label d-lg-inline-flex text-break krFont small" for="inlineRadio4">주의사항을 읽고 대행신청 및 진행에 대한 책임은 신청자 본인에게 있음을 동의합니다.</label>
+                                <input class="form-check-input d-lg-inline-flex" type="checkbox" name="prcsCd" id="inlineRadio5" value="1" onclick="agreeAll(this);">
+                                <label class="form-check-label d-lg-inline-flex text-break krFont small" for="inlineRadio5">주의사항을 읽고 대행신청 및 진행에 대한 책임은 신청자 본인에게 있음을 동의합니다.</label>
 
                             </div>
                         </div>
@@ -247,5 +259,8 @@
     </div>
 
 </div>
+
+
+
 
 

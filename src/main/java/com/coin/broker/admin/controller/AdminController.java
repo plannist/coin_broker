@@ -333,6 +333,17 @@ public class AdminController {
         return ResponseEntity.ok(res);
     }
 
+    @PostMapping("/calcCoin")
+    @ResponseBody
+    public ResponseEntity<?> calcCoin(){
+        Response<Object> res = new Response<>();
+
+
+
+        return ResponseEntity.ok(res);
+
+    }
+
 
 
 
