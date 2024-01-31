@@ -78,7 +78,7 @@ function cancelCalc(){
 
 /*계산*/
 function goCalc(el){
-	nav.coinType = $('input[name=coinType]:selected').val();
+	nav.coinType = $('#coinTypeC').val();
 	console.log("nav.coinType : ", nav.coinType);
 	$.ajax({
 		url : "/api/coinPrice",
@@ -104,4 +104,11 @@ function goCalc(el){
 
 function resultCalc(coinPrice){
 	console.log("coinPrice: >>", coinPrice);
+
+	let coin  = $('#coinC').val() * 1;
+
+	let reqAmt = coin * coinPrice ;
+
+	$('#reqAmtC').val(comma(reqAmt));
+
 }
