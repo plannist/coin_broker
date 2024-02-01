@@ -14,14 +14,14 @@
                 </div>
 
                 <div class="modal-body" id="modalBody">
-                    <form id="transDtlForm">
+                    <form id="transDtlForm" class="row g-3">
                         <input type="hidden" id="reqno"     name="reqno">
                         <input type="hidden" id="sendCoin"  name="sendCoin">
                         <input type="hidden" id="prcsCd"    name="prcsCd">
                         <input type="hidden" id="rcptDttm"  name="rcptDttm">
                         <input type="hidden" id="bankCd"    name="bankCd">
 
-                        <div class="form-group row mb-3 mb-sm-0">
+                        <div class="form-group row mb-3 mb-sm-0 mt-4">
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>코인(종류)</p>
                             </div>
@@ -49,229 +49,173 @@
 
                         </div>
 
-                        <div class="form-group row">
+                        <div class="row">
 
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>신청자명</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="deposNm" name="deposNm" placeholder="신청자명">
+                            <div class="col-sm-3">
+                                <label class="form-label" for="deposNm">신청자명</label>
+                                <input class="form-control form-control-user" id="deposNm" name="deposNm" placeholder="신청자명">
                             </div>
 
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>휴대폰번호</p>
-                            </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
+                                <label class="form-label" for="phoneNo">휴대폰번호</label>
                                 <div class="input-group">
-                                <input type="text" class="form-control form-control-user" id="phoneNo" name="phoneNo" placeholder="휴대폰번호" value="">
-                                <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
+                                    <input type="text" class="form-control form-control-user" id="phoneNo" name="phoneNo" placeholder="휴대폰번호" value="">
+                                    <button  type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="form-group row">
-
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>신청시간</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="regDttm" name="regDttm" placeholder="신청시간">
-                            </div>
-
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>접속기록</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="clientIp" name="clientIp" placeholder="접속기록">
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row">
-
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>총 완료횟수 / 당일 완료횟수</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user text-danger" id="prcsCd6Cnt" name="prcsCd6Cnt" disabled value="0">
-                            </div>
-
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>레퍼러</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="refererUrl" name="refererUrl" placeholder="접속경로">
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row">
-
-                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
-                                <p>신청금액</p>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control form-control-user" id="reqAmt" name="reqAmt" placeholder="금액">
-                            </div>
-
-                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
-                                <p>수수료</p>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control form-control-user" id="chargeAmt" name="chargeAmt" placeholder="수수료">
-                            </div>
-
-                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
-                                <p>입금금액</p>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control form-control-user" id="totReqAmt" name="totReqAmt" placeholder="입금금액">
-                            </div>
-
-                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
-                                <p>접속기기</p>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control form-control-user" id="deviceType" name="deviceType" placeholder="접속경로">
+                            <div class="col-sm-3">
+                                <label class="form-label" for="regDttm">신청시간</label>
+                                <input type="text" class="form-control" id="regDttm" name="regDttm" placeholder="신청시간">
                             </div>
 
                         </div>
 
 
-                        <div class="form-group row">
-
-                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
-                                <p>현재시세</p>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label class="form-label" for="clientIp">접속기록</label>
+                                <input type="text" class="form-control" id="clientIp" name="clientIp" placeholder="접속기록">
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col">
+                               <label class="form-label" for="deviceType">접속기기</label>
+                               <input type="text" class="form-control" id="deviceType" name="deviceType" placeholder="접속경로" >
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-sm-4">
+                                <label class="form-label" for="prcsCd6Cnt">총 완료횟수 / 당일 완료횟수</label>
+                                <input type="text" class="form-control text-danger" id="prcsCd6Cnt" name="prcsCd6Cnt" disabled value="0">
+                            </div>
+
+                            <div class="col-sm-8">
+                                <label class="form-label" for="refererUrl">레퍼러</label>
+                                <input type="text" class="form-control" id="refererUrl" name="refererUrl" placeholder="접속경로">
+                            </div>
+                        </div>
+
+<!--                        <div class="row mt-3">-->
+<!--                            <div class="col">-->
+<!--                                <label class="form-label" for="refererUrl">레퍼러</label>-->
+<!--                                <input type="text" class="form-control" id="refererUrl" name="refererUrl" placeholder="접속경로">-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                        <div class="row mt-3">
+
+                            <div class="col">
+                                <label class="form-label" for="reqAmt">신청금액</label>
+                                <input type="text" class="form-control" id="reqAmt" name="reqAmt" placeholder="금액">
+                            </div>
+
+                            <div class="col">
+                                <label class="form-label" for="chargeAmt">수수료</label>
+                                <input type="text" class="form-control" id="chargeAmt" name="chargeAmt" placeholder="수수료" >
+                            </div>
+
+                            <div class="col">
+                                <label class="form-label" for="totReqAmt">입금금액</label>
+                                <input type="text" class="form-control" id="totReqAmt" name="totReqAmt" placeholder="입금금액" >
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label class="form-label" for="nowPrice">현재시세</label>
                                 <input type="text" class="form-control form-control-user" id="nowPrice" name="nowPrice" placeholder="지금코인시세">
                             </div>
-
-                            <div class="col-sm-1 bg-gray-100 mb-1 rounded">
-                                <p>적용시세</p> <!-- 요청당시 코인시세금액 -->
-                            </div>
-                            <div class="col-sm-2">
+                            <div class="col">
+                                <label class="form-label" for="tradePrice">적용시세</label>
                                 <input type="text" class="form-control form-control-user" id="tradePrice" name="tradePrice" placeholder="요청당시시세">
                             </div>
+                        </div>
 
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>보낼코인양 가치확인</p>
+                        <!-- 변경하기 -->
+                        <div class="row mt-3">
+                            <div class="input-group">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="accType" id="inlineRadio1" value="N">
+                                    <label class="form-check-label" for="inlineRadio1">현재시세</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="accType" id="inlineRadio2" checked value="R">
+                                    <label class="form-check-label" for="inlineRadio2">적용시세</label>
+                                </div>
+                                <button id="goCalc" name="" type="button" class="btn btn-primary custom-control-inline" onclick="sendingCoinCalc();">계산실행</button>
                             </div>
-                            <div class="col-sm-4">
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col" style="margin-right: -20px;">
+                                <label class="form-label" for="transCoin">보낼코인양</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="transCoin" name="transCoin" placeholder="보낼코인양">
+                                    <button type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <label class="form-label" for="calcPrice">가치확인</label>
                                 <input type="text" class="form-control form-control-user" id="calcPrice" name="calcPrice" placeholder="">
                             </div>
-
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>변경하기</p>
-                            </div>
-                            <div class="col-sm-4" >
-                                <div class="input-group">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="accType" id="inlineRadio1" value="N">
-                                        <label class="form-check-label" for="inlineRadio1">현재시세</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="accType" id="inlineRadio2" checked value="R">
-                                        <label class="form-check-label" for="inlineRadio2">적용시세</label>
-                                    </div>
-                                    <button id="goCalc" name="" type="button" class="btn btn-primary custom-control-inline" onclick="sendingCoinCalc();">계산실행</button>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>보낼코인양</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="input-group">
-                                    <input type="text" class="form-control form-control-user" id="transCoin" name="transCoin" placeholder="보낼코인양">
-                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
-                                </div>
+                        <div class="row mt-3">
+                            <label class="form-label" for="toWalletAddr">지갑주소</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="toWalletAddr" name="toWalletAddr" placeholder="지갑주소">
+                                <button type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
                             </div>
 
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>지갑주소</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control form-control-user" id="toWalletAddr" name="toWalletAddr" placeholder="지갑주소">
-                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
-                                </div>
-                            </div>
+
+                        <div class="row mt-3" id="memoArea" style="display: none">
+                            <label class="form-label" for="memo">메모</label>
+                            <input type="text" class="form-control text-danger" id="memo" name="memo" placeholder="메모">
+
                         </div>
 
-                        <div class="form-group row" id="memoArea" style="display: none">
 
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>메모</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control form-control-user text-danger" id="memo" name="memo" placeholder="메모">
+                        <div class="row mt-3">
+                            <label class="form-label" for="dstntTag">데스티네이션 태그</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="dstntTag" name="dstntTag" placeholder="데스티네이션 태그">
+                                <button type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
                             </div>
 
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>데스티네이션 태그</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control form-control-user" id="dstntTag" name="dstntTag" placeholder="데스티네이션 태그">
-                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
-                                </div>
+                        <div class="row mt-3">
+                            <label class="form-label" for="transactionId">트랜젝션 ID</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="transactionId" name="transactionId" autocomplete="off" placeholder="트랜젝션 ID">
+                                <button type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
                             </div>
 
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>트랜젝션 ID</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control form-control-user" id="transactionId" name="transactionId" autocomplete="off" placeholder="트랜젝션 ID">
-                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
-                                </div>
-                            </div>
+                        <div class="row mt-3">
+                            <label class="form-label" for="rsnCtnt">주문메모</label>
+                            <textarea class="form-control" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
 
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>주문메모</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <textarea class="form-control form-control-user" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
-                            </div>
+<!--                        <div class="row mt-3">-->
+<!--                            <label class="form-label" for="memo">현재단계</label>-->
+<!--                            <input type="text" class="form-control form-control-user" id="prcsNm" placeholder="현재단계">-->
+<!--                        </div>-->
 
+                        <div class="row mt-3">
+                            <label class="form-label" for="modDttm">처리시각</label>
+                            <input type="text" class="form-control" id="modDttm" name="modDttm" placeholder="처리시각">
                         </div>
 
-                        <div class="form-group row">
 
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>현재단계</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="prcsNm" placeholder="현재단계">
-                            </div>
 
-                            <div class="col-sm-2 bg-gray-100 mb-1 rounded">
-                                <p>처리시각</p>
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="modDttm" name="modDttm" placeholder="처리시각">
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row">
+                        <div class="form-group row mt-3">
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>업무처리</p>
                             </div>
@@ -291,7 +235,7 @@
 
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mt-3">
                             <div class="col-sm-2 bg-gray-100 mb-1 rounded">
                                 <p>문자생성</p>
                             </div>
@@ -311,33 +255,13 @@
                                 <div class="col-sm-10">
                                     <div class="input-group-append">
                                         <textarea class="form-control form-control-user" style="height: 150px" id="mmsContents" name="mmsContents" placeholder="문자내용"></textarea>
-                                        <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
+                                        <button type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
                                     </div>
 
                                 </div>
 
                             </div>
 
-                            <!-- 테스트 -->
-<!--                            <div class="input-group row">-->
-<!--                                <div class="form-floating mb-3">-->
-<!--                                    <input class="form-control" id="toWalletAddr2" name="toWalletAddr2" type="text" placeholder="" />-->
-<!--                                    <label for="toWalletAddr2" class="krFont" style="left:10px">라벨확인</label>-->
-<!--                                </div>-->
-
-<!--                                <div class="form-floating mb-3">-->
-<!--                                    <input class="form-control" id="toWalletAddr3" name="toWalletAddr3" type="text" placeholder="" />-->
-<!--                                    <label for="toWalletAddr3" class="krFont" style="left:10px">워워워</label>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="form-group row">-->
-<!--                                <div class="form-floating mb-3">-->
-<!--                                    <input class="form-control" id="toWalletAddr1" name="toWalletAddr1" type="text" placeholder="" />-->
-<!--                                    <label for="toWalletAddr1" class="" style="left:10px">라벨확인</label>-->
-<!--                                </div>-->
-<!--                            </div>-->
-                            <!-- // -->
 
 
                         </div>
@@ -348,7 +272,7 @@
                     <div class="row">
                         <div class="btn-group">
                             <button class="btn btn-primary" id="submit" type="button" onclick="save();">변경사항 저장하기</button>
-                            <button class="btn btn-secondary" id="prcs_cd_2" type="button" onclick="cancel();">취소</button>
+                            <button class="btn btn-secondary" type="button" onclick="cancel();">취소</button>
                         </div>
                     </div>
 

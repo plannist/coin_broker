@@ -32,9 +32,12 @@ function getCoinPrice(){
                 for(let data of res.data){
                     $('#'+data.coinType).text(comma(data.amt));
                     nowCoinPrice[data.coinType] = data.amt;
-                    if(isModalOpen){
-                        lookingForNowCoinPrice();
-                    }
+
+                }
+
+                if(isModalOpen){
+                    console.log("모달이오픈")
+                    lookingForNowCoinPrice();
                 }
 
                 if(res.totalCount * 1 > 0){
