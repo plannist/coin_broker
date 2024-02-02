@@ -78,8 +78,8 @@
                                 <input type="text" class="form-control" id="clientIp" name="clientIp" placeholder="접속기록">
                             </div>
                             <div class="col">
-                               <label class="form-label" for="deviceType">접속기기</label>
-                               <input type="text" class="form-control" id="deviceType" name="deviceType" placeholder="접속경로" >
+                                <label class="form-label" for="deviceType">접속기기</label>
+                                <input type="text" class="form-control" id="deviceType" name="deviceType" placeholder="접속경로" >
                             </div>
                         </div>
 
@@ -95,12 +95,12 @@
                             </div>
                         </div>
 
-<!--                        <div class="row mt-3">-->
-<!--                            <div class="col">-->
-<!--                                <label class="form-label" for="refererUrl">레퍼러</label>-->
-<!--                                <input type="text" class="form-control" id="refererUrl" name="refererUrl" placeholder="접속경로">-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                        <div class="row mt-3">-->
+                        <!--                            <div class="col">-->
+                        <!--                                <label class="form-label" for="refererUrl">레퍼러</label>-->
+                        <!--                                <input type="text" class="form-control" id="refererUrl" name="refererUrl" placeholder="접속경로">-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
 
                         <div class="row mt-3">
 
@@ -148,7 +148,12 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col" style="margin-right: -20px;">
+                            <div class="col">
+                                <label class="form-label" for="calcPrice">가치확인</label>
+                                <input type="text" class="form-control form-control-user" id="calcPrice" name="calcPrice" placeholder="">
+                            </div>
+
+                            <div class="col" style="min-width: 65%;">
                                 <label class="form-label" for="transCoin">보낼코인양</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="transCoin" name="transCoin" placeholder="보낼코인양">
@@ -156,10 +161,7 @@
                                 </div>
                             </div>
 
-                            <div class="col">
-                                <label class="form-label" for="calcPrice">가치확인</label>
-                                <input type="text" class="form-control form-control-user" id="calcPrice" name="calcPrice" placeholder="">
-                            </div>
+
                         </div>
 
                         <div class="row mt-3">
@@ -203,10 +205,10 @@
 
                         </div>
 
-<!--                        <div class="row mt-3">-->
-<!--                            <label class="form-label" for="memo">현재단계</label>-->
-<!--                            <input type="text" class="form-control form-control-user" id="prcsNm" placeholder="현재단계">-->
-<!--                        </div>-->
+                        <!--                        <div class="row mt-3">-->
+                        <!--                            <label class="form-label" for="memo">현재단계</label>-->
+                        <!--                            <input type="text" class="form-control form-control-user" id="prcsNm" placeholder="현재단계">-->
+                        <!--                        </div>-->
 
                         <div class="row mt-3">
                             <label class="form-label" for="modDttm">처리시각</label>
@@ -220,17 +222,17 @@
                                 <p>업무처리</p>
                             </div>
                             <div class="col-sm-10">
-                               <div class="btn-group">
-                                   <button class="btn btn-light" id="prcs_cd_1" name="prcsCds" type="button" >신규신청</button>
-                                   <button class="btn btn-light" id="prcs_cd_2" name="prcsCds" type="button" >입금기업</button>
-                                   <button class="btn btn-light" id="prcs_cd_3" name="prcsCds" type="button" >입금우리</button>
-                                   <button class="btn btn-light" id="prcs_cd_4" name="prcsCds" type="button" >입금농협</button>
-                                   <button class="btn btn-light" id="prcs_cd_5" name="prcsCds" type="button" >코인전송</button>
-                                   <button class="btn btn-light" id="prcs_cd_6" name="prcsCds" type="button" >처리완료</button>
-                                   <button class="btn btn-light" id="prcs_cd_7" name="prcsCds" type="button" >취소완료</button>
-                                   <button class="btn btn-light" id="prcs_cd_8" name="prcsCds" type="button" >TXID</button>
-                                   <button class="btn btn-light" id="prcs_cd_9" name="prcsCds" type="button" >인증요구</button>
-                               </div>
+                                <div class="btn-group">
+                                    <button class="btn btn-light" id="prcs_cd_1" name="prcsCds" type="button" >신규신청</button>
+                                    <button class="btn btn-light" id="prcs_cd_2" name="prcsCds" type="button" >입금기업</button>
+                                    <button class="btn btn-light" id="prcs_cd_3" name="prcsCds" type="button" >입금우리</button>
+                                    <button class="btn btn-light" id="prcs_cd_4" name="prcsCds" type="button" >입금농협</button>
+                                    <button class="btn btn-light" id="prcs_cd_5" name="prcsCds" type="button" >코인전송</button>
+                                    <button class="btn btn-light" id="prcs_cd_6" name="prcsCds" type="button" >처리완료</button>
+                                    <button class="btn btn-light" id="prcs_cd_7" name="prcsCds" type="button" >취소완료</button>
+                                    <button class="btn btn-light" id="prcs_cd_8" name="prcsCds" type="button" >TXID</button>
+                                    <button class="btn btn-light" id="prcs_cd_9" name="prcsCds" type="button" >인증요구</button>
+                                </div>
                             </div>
 
                         </div>
@@ -241,10 +243,10 @@
                             </div>
                             <div class="col-sm-10">
                                 <div class="btn-group">
-                                <select class="form-select mb-3" id="mmsFormat" name="mmsFormat" style="font-size: 0.8rem;">
-                                    <option style="background-color: white" value="" selected>현재단계</option>
-                                </select>
-                                <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="createMms(this)">생성하기</button>
+                                    <select class="form-select mb-3" id="mmsFormat" name="mmsFormat" style="font-size: 0.8rem;">
+                                        <option style="background-color: white" value="" selected>현재단계</option>
+                                    </select>
+                                    <button id="" name="" type="button" class="btn btn-primary custom-control-inline" onclick="createMms(this)">생성하기</button>
                                 </div>
                             </div>
 

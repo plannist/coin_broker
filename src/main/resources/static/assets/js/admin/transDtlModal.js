@@ -198,7 +198,7 @@ function draw(data){
 	//문자생성 셀렉트 박스 생성
 	$('#mmsFormat option').eq(0).val(data.prcsCd);
 	for(let obj of data.mmsFormatMasList)
-	$('#mmsFormat').append(`<option style="background-color: white" value="${obj.prcsCd}">${obj.mmsTitle}</option>`);
+		$('#mmsFormat').append(`<option style="background-color: white" value="${obj.prcsCd}">${obj.mmsTitle}</option>`);
 
 }
 
@@ -293,7 +293,7 @@ function sendingCoinCalc(){
 function save(){
 
 	//trans_req_mas 업데이트 항목
-	// prcsCd, modDttm, coinType, charge_cd, charge_amt, 
+	// prcsCd, modDttm, coinType, charge_cd, charge_amt,
 
 	//trans_rcpt_mas merge 항목
 
@@ -317,7 +317,7 @@ function save(){
 			console.log("res >>", res);
 			if (res.statusCode == 'S001') {
 				// alertNotice(null, '대행 신청이 정상 수정되었습니다.', () => {
-					location.href = "/admin/main";
+				location.href = "/admin/main";
 				// })
 			} else {
 				alertNotice(null, res.statusMessage, () => {
