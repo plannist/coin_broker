@@ -109,6 +109,6 @@ function resultCalc(coinPrice){
 
 	let reqAmt = coin * coinPrice ;
 
-	$('#reqAmtC').val(comma(reqAmt));
+	$('#reqAmtC').val(comma(reqAmt.toFixed()));
 
 }

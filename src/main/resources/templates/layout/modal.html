@@ -101,7 +101,7 @@
                                 disabled
                         />
                         <label for="totReqAmt" class="krFont">입금하셔야할 금액입니다.</label>
-                        <span class="krFont xl-small text-bg-primary fst-italic">※ 수수료 별도시 신청금액과  입금해야할 금액은 다르므로 꼭 확인해주세요.</span>
+                        <span class="krFont xl-small text-bg-primary fst-italic">※ 신청금액, 수수료, 입금금액, 전송코인원화가치 등 꼭 확인하세요.</span>
                     </div>
 
 
@@ -165,9 +165,9 @@
                     <div class="form-floating mb-3">
                         <input class="form-control" id="deposNm" name="deposNm" type="text"
                                placeholder="" data-sb-validations="required" onkeyup="changeNameListener(this);"/>
-                        <label for="deposNm" class="krFont">입금자명을 입력해주세요.</label>
+                        <label for="deposNm" class="krFont">입금자명을 입력해주세요.(가명신청불가)</label>
                         <div class="invalid-feedback" data-sb-feedback="phone:required">입금자명은 필수입력값입니다.</div>
-                        <span class="krFont xl-small fst-italic">※ 계좌이체시 명의인과 입금자명이 동일해야합니다.</span>
+                        <span class="krFont xl-small fst-italic">※ 예금주와 입금자명 동일 해야합니다.( 가명신청후 입금자명변경시 처리불가)</span>
                     </div>
 
                     <!-- 휴대폰번호 maxlength="11" -->
