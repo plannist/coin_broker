@@ -53,7 +53,7 @@
 
                             <div class="col-sm-3">
                                 <label class="form-label" for="deposNm">신청자명</label>
-                                <input class="form-control form-control-user" id="deposNm" name="deposNm" placeholder="신청자명">
+                                <input class="form-control form-control-user font-weight-bold" id="deposNm" name="deposNm" placeholder="신청자명">
                             </div>
 
                             <div class="col-sm-6">
@@ -116,7 +116,7 @@
 
                             <div class="col">
                                 <label class="form-label" for="totReqAmt">입금금액</label>
-                                <input type="text" class="form-control" id="totReqAmt" name="totReqAmt" placeholder="입금금액" >
+                                <input type="text" class="form-control font-weight-bold" id="totReqAmt" name="totReqAmt" placeholder="입금금액" >
                             </div>
 
                         </div>
@@ -192,16 +192,12 @@
 
                         <div class="row mt-3">
                             <label class="form-label" for="transactionId">트랜젝션 ID</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="transactionId" name="transactionId" autocomplete="off" placeholder="트랜젝션 ID">
-                                <button type="button" class="btn btn-primary custom-control-inline" onclick="copyText(this)">복사하기</button>
-                            </div>
-
+                            <input type="text" class="form-control" id="transactionId" name="transactionId" autocomplete="off" placeholder="트랜젝션 ID">
                         </div>
 
                         <div class="row mt-3">
                             <label class="form-label" for="rsnCtnt">주문메모</label>
-                            <textarea class="form-control" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
+                            <textarea class="form-control text-danger" id="rsnCtnt" name="rsnCtnt" placeholder="주문메모"></textarea>
 
                         </div>
 
