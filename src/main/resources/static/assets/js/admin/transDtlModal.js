@@ -246,18 +246,26 @@ function sendingCoinCalc(){
 		$('#tradePrice').val(comma(price));
 	}
 
-	//요청금액의 0.3프로 계산 >> 10000 -> 10030
+	//요청금액의 0.1프로 계산 >> 10000 -> 10010
 	sendAmt = (sendAmt * (100.1/100)).toFixed(8);
 	sendAmt = Number(sendAmt);
-	//전송할 코인
-	sendCoin = sendAmt / (price * 1);
-	sendCoin = sendCoin.toFixed(digts);
+
+
+
+
+	//TODO: 2024-02-15 코인수량 전송일 경우 100.1% 미적용 추가
+	if(chargeCd !== 'C'){
+		//전송할 코인
+		sendCoin = sendAmt / (price * 1);
+		sendCoin = sendCoin.toFixed(digts);
+		sendCoin = Number(sendCoin);
+	}
+
 	$('#sendCoin').val(sendCoin);
 	$('#transCoin').val(sendCoin);
 
 
 	//가치확인
-	sendCoin = Number(sendCoin);
 	let calcPrice = ((sendCoin * 1) * (price * 1)).toFixed();
 
 	$('#calcPrice').val(`${comma(calcPrice)}원`); //현시세대비 가치만 리턴
