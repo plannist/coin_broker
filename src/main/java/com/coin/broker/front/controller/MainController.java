@@ -106,22 +106,21 @@ public class MainController {
         String firstIp = request.getHeader("X-FORWARDED-FOR");
         String proxyIp = request.getHeader("Proxy-Client-IP");
         String proxyIp2 = request.getHeader("WL-Proxy-Client-IP");
+        String remoteIp = request.getRemoteAddr() ;
         log.info("firstIp :: >>>> {}", firstIp);
         log.info("proxyIp :: >>>> {}", proxyIp);
         log.info("proxyIp2 :: >>> {}", proxyIp2);
+        log.info("remoteIp :: >>> {}", remoteIp);
 
         //proxy 환경일 경우
-        if (Utils.isEmpty(firstIp)) {
+        if (!Utils.isEmpty(firstIp)) {
+            ip = firstIp;
+        }else if (!Utils.isEmpty(proxyIp)) { //웹로직 서버일 경우
             ip = proxyIp;
-        }
-
-        //웹로직 서버일 경우
-        if (Utils.isEmpty(proxyIp)) {
+        } else if (!Utils.isEmpty(proxyIp2)) {
             ip = proxyIp2;
-        }
-
-        if (Utils.isEmpty(proxyIp2)) {
-            ip = request.getRemoteAddr() ;
+        }else{
+            ip = remoteIp;
         }
         log.info("final ip :: >>> {}", ip);
         param.setClientIp(ip);
@@ -151,7 +150,16 @@ public class MainController {
 
 
     @GetMapping("/map")
-    public ResponseEntity<?> map(AdminMas param){
+    public ResponseEntity<?> map(HttpServletRequest request, AdminMas param){
+
+        String firstIp = request.getHeader("X-FORWARDED-FOR");
+        String proxyIp = request.getHeader("Proxy-Client-IP");
+        String proxyIp2 = request.getHeader("WL-Proxy-Client-IP");
+        String remoteIp = request.getRemoteAddr() ;
+        log.info("firstIp :: >>>> {}", firstIp);
+        log.info("proxyIp :: >>>> {}", proxyIp);
+        log.info("proxyIp2 :: >>> {}", proxyIp2);
+        log.info("remoteIp :: >>> {}", remoteIp);
 
 //        param.setId("admin2");
 //        param.setName("테스트관리자");
@@ -160,19 +168,21 @@ public class MainController {
 //
 //        adminService.insertAdmin(param);
 
-        TransReqMas transReqMas = new TransReqMas();
-        transReqMas.setDeposNm("테스터");
-        transReqMas.setPhoneNo("01012341235");
-        transReqMas.setReqAmt("100000");
-        transReqMas.setCoinType("KRW-BTC");
-
-        try{
-            transReqMasService.telegramSendMessage(transReqMas);
-        }catch(Exception e){
-            log.error(e.getLocalizedMessage(), e);
-
-        }
-
+//        TransReqMas transReqMas = new TransReqMas();
+//        transReqMas.setDeposNm("테스터");
+//        transReqMas.setPhoneNo("01012341235");
+//        transReqMas.setReqAmt("100000");
+//        transReqMas.setCoinType("KRW-BTC");
+//
+//        try{
+//            transReqMasService.telegramSendMessage(transReqMas);
+//        }catch(Exception e){
+//            log.error(e.getLocalizedMessage(), e);
+//
+//        }
+//
+//
+//
 
 
         return ResponseEntity.ok("1234");
