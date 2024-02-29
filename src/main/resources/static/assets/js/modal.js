@@ -467,7 +467,7 @@ function chargeCalculate(amt, chargeCd){
         if(chargeCd === 'I') { //수수료별도
             $('#totReqAmt').val(comma(amt * 1 + chargeAmt))
         }else{
-            $('#chargeAmt').val(comma(chargeAmt));
+            $('#totReqAmt').val(comma(amt));
         }
         sendingCoinCalc(amt, type, chargeCd, chargeAmt);
         return false;

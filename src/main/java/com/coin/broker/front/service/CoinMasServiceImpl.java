@@ -24,6 +24,7 @@ public class CoinMasServiceImpl implements CoinMasService{
         if("dev".equals(profile)){
             return coinMasMapper.getCoinInfo(param);
         }else{
+            //return coinMasMapper.getCoinInfo(param);
             return coinMasMapper.getCoinInfoTemp(param);
         }
 
