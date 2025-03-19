@@ -21,13 +21,14 @@ public class CustomCorsFilter  implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
+        /*
         String url = request.getRequestURI();
         if(! url.startsWith("/assets")  || url.startsWith("/admin")){
             log.info("=================== CustomCorsFilter ==================");
             log.info("doFilter >>> {}", url);
             log.info("=================== ================ ==================");
         }
-
+        */
 
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("X-Frame-Options", "ALLOW-ALL");
