@@ -125,7 +125,7 @@ function pollingStart(){
     // LOAD_YN = false;
     timmer = setInterval(()=>{
         getCoinPrice();
-    }, 10000);
+    }, 15000);
 }
 
 function pollingEnd(){

@@ -72,7 +72,10 @@ public class SecurityConfiguration  {
 
             })
             .cors(withDefaults())
-            .exceptionHandling(e-> e.accessDeniedPage("/"))
+            .exceptionHandling(e-> {
+                log.info("accessDenied ::: {}", e);
+                e.accessDeniedPage("/");
+            })
         ;
 
         return http.build();

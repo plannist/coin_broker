@@ -17,10 +17,7 @@ public class AuthenticationEntryPointer implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         log.error("AuthenticationEntryPoint[401] >>>>", authException);
         log.error("Request Uri: {}", request.getRequestURI());
-
-        response.sendRedirect("/");
-
-
-
+        request.setAttribute("javax.servlet.error.status_code", HttpServletResponse.SC_UNAUTHORIZED);
+        request.getRequestDispatcher("/error").forward(request, response);
     }
 }

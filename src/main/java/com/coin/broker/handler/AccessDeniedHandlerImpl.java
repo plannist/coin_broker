@@ -19,8 +19,10 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler{
 
         log.error("accessDenied[403] >>>>", accessDeniedException);
         log.error("Request Uri: {}", request.getRequestURI());
-
-        response.sendRedirect("/");
+        request.setAttribute("javax.servlet.error.status_code", HttpServletResponse.SC_FORBIDDEN);
+        request.getRequestDispatcher("/error").forward(request, response);
+//        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+//        response.sendRedirect("/error");
 
 
     }

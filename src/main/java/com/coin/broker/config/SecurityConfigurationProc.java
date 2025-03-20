@@ -49,11 +49,18 @@ public class SecurityConfigurationProc {
                 })
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
+
                     auth
-//                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login", "/api/**", "/assets/**").permitAll()
-//                    .requestMatchers("/admin/**", "/hidden").authenticated()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/admin/**", "/hidden").authenticated()
+                        .anyRequest().permitAll()
+
+
+
+//                    auth
+////                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+//                        .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login", "/api/**", "/assets/**").permitAll()
+////                    .requestMatchers("/admin/**", "/hidden").authenticated()
+//                        .anyRequest().authenticated()
                     ;
                 })
                 .formLogin(login -> {
@@ -79,10 +86,13 @@ public class SecurityConfigurationProc {
 
                 })
                 .cors(withDefaults())
-                .exceptionHandling(error->
-                        error
-                                .accessDeniedHandler(accessDeniedHandler) //403
-                                .authenticationEntryPoint(authenticationEntryPointer) //401
+                .exceptionHandling(error->{
+                    log.info("accessDenied ::: {}", error);
+                    error
+                            .accessDeniedHandler(accessDeniedHandler) //403
+                            .authenticationEntryPoint(authenticationEntryPointer) ;//401
+                        }
+
                 )
 
 
