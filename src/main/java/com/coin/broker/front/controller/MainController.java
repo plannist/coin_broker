@@ -67,6 +67,12 @@ public class MainController {
         return mv;
     }
 
+    @GetMapping(value = "/robots.txt", produces = "text/plain")
+    public ResponseEntity<String> getRobotsTxt() {
+        String robotsTxt = "User-agent: *\nDisallow:";
+        return ResponseEntity.ok(robotsTxt);
+    }
+
     @PostMapping("/api/front-mng")
     public ResponseEntity<?> frontMng(){
         String profile = env.getActiveProfiles()[0];

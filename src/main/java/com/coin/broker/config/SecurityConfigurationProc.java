@@ -51,7 +51,7 @@ public class SecurityConfigurationProc {
                 .authorizeHttpRequests(auth -> {
                     auth
 //                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login", "/api/**", "/assets/**").permitAll()
+                        .requestMatchers("/", "/error","map", "/hidden", "/transReq", "/login", "/api/**", "/assets/**", "robots.txt", "/favicon.ico").permitAll()
 //                    .requestMatchers("/admin/**", "/hidden").authenticated()
                         .anyRequest().authenticated()
                     ;
