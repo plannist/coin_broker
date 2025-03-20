@@ -1,5 +1,6 @@
 package com.coin.broker.handler;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,8 +21,8 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler{
         log.error("accessDenied[403] >>>>", accessDeniedException);
         log.error("Request Uri: {}", request.getRequestURI());
 
-        response.sendRedirect("/");
-
-
+        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpServletResponse.SC_UNAUTHORIZED);
+        request.getRequestDispatcher("/error").forward(request, response);
+//        response.sendRedirect("/");
     }
 }

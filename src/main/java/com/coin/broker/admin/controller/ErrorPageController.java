@@ -25,21 +25,11 @@ public class ErrorPageController implements ErrorController{
     @RequestMapping(produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
         String status = String.valueOf(request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
-
         String message = switch (status) {
-            case "404" -> "페이지를 찾을 수 없습니다.";
             case "403" -> "접근권한이 없습니다.";
-            default -> String.valueOf(request.getAttribute(RequestDispatcher.ERROR_MESSAGE));
+            default -> "페이지를 찾을 수 없습니다.";
         };
         message = message.length() > 100 ? message.substring(0, 100) : message;
-
-/*        Enumeration<String> list =  request.getAttributeNames();
-        while(list.hasMoreElements()){
-            String key = list.nextElement();
-            String value = String.valueOf(request.getAttribute(key));
-
-            log.info("key[{}], value:{}", key, value);
-        }*/
 
         log.info("status: {}, message: {}", status, message);
         log.error(message);
